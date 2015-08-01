@@ -12,16 +12,6 @@ use MonoKit\View\View;
 Class MonoKitApplication extends Foundation
 {
     /**
-     * @param string $appNamespace
-     * @return MonoKitApplication
-     */
-    public function setAppNamespace( $appNamespace )
-    {
-        $this->AppRegistry( "APPLICATION_NAMESPACE" , $appNamespace );
-        return $this;
-    }
-
-    /**
      * @param string|null $fileView
      * @param mixed|null $data
      * @return mixed
