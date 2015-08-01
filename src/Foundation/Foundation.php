@@ -22,6 +22,8 @@ Abstract Class Foundation
         return Registry::getInstance();
     }
 
+
+
     /**
      * @return int
      */
