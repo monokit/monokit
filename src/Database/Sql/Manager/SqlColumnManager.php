@@ -2,11 +2,11 @@
 
 namespace MonoKit\Database\Sql\Manager;
 
-use MonoKit\Foundation\StringableInterface;
 use MonoKit\Database\Manager\ColumnManager;
 use MonoKit\Database\Sql\Manager\Entity\SqlColumn;
+use MonoKit\Foundation\Stringable;
 
-class SqlColumnManager extends ColumnManager implements StringableInterface
+class SqlColumnManager extends ColumnManager implements Stringable
 {
     public function toString()
     {

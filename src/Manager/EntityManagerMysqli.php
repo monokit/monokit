@@ -26,7 +26,7 @@ Abstract Class EntityManagerMysqli extends EntityManager
      */
 	public function __construct( \Mysqli $mysqli = null )
 	{
-		$this->mysqli = ( !is_null( $mysqli ) ) ? $mysqli : $this->ServiceRegistry( "MYSQLI" );
+		$this->mysqli = ( !is_null( $mysqli ) ) ? $mysqli : $this->AppService( "MYSQLI" );
 
         if ( !$this->mysqli )
             throw new FoundationException( "Aucune connexion Mysqli trouvée..." , $this );
