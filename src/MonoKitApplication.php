@@ -26,7 +26,7 @@ Class MonoKitApplication extends Foundation
         $UrlRequest->autoDetect();
 
         $RouteManager = new RouteManager();
-        $RouteManager->set( $this->RouteRegistry()->toArray() );
+        $RouteManager->set( $this->AppRoute()->toArray() );
 
         $Dispatcher = new Dispatcher( $UrlRequest , $RouteManager );
 

@@ -56,7 +56,7 @@ Class Controller extends Entity
     public function redirectByRouteName( $routeName )
     {
         $routeManager = new RouteManager();
-        $routeManager->set( $this->RouteRegistry()->toArray() );
+        $routeManager->set( $this->AppRoute()->toArray() );
 
         if ( !$route = $routeManager->getRouteByName( $routeName ) )
             throw new ControllerException( ControllerException::ERROR_ROUTE , $this , $routeName );
