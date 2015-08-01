@@ -131,8 +131,8 @@ Abstract Class Foundation
 
     define( "__ROOT__" , ( !empty( $_SERVER["QUERY_STRING"] ) ) ? substr( $_SERVER["REQUEST_URI"] , 0, -(strlen( $_SERVER["QUERY_STRING"] ) ) ) : $_SERVER["REQUEST_URI"] );
 
-    define( "MONOKIT_APPLICATION_DIRECTORY_VIEW"        , "view" );
-    define( "MONOKIT_APPLICATION_DIRECTORY_CONTROLLER"  , "controller" );
+    define( "MONOKIT_APPLICATION_DIRECTORY_VIEW"        , "View" );
+    define( "MONOKIT_APPLICATION_DIRECTORY_CONTROLLER"  , "Controller" );
     define( "MONOKIT_APPLICATION_ROUTE_SEPARATOR"       , ":" );
 
 ?>
