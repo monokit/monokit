@@ -8,21 +8,8 @@ use MonoKit\Foundation\Foundation;
 
 class Registry extends Foundation implements RegistryInterface
 {
-    /** @var Registry */
-    private static $_instance;
     /** @var array */
     protected $data = array();
-
-    /**
-     * @return Registry
-     */
-    public static function getInstance()
-    {
-        if( is_null( self::$_instance ) )
-            self::$_instance = new self();
-
-        return self::$_instance;
-    }
 
     /**
      * @param string $key

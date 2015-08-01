@@ -6,23 +6,27 @@ use MonoKit\Registry\Registry;
 
 Abstract Class Foundation
 {
+    /** @var Registry */
+    private static $AppRegistry_instance;
+
     /**
      * @param string|null $key
      * @param mixed|null $value
      * @return mixed|Registry
      * @throws \MonoKit\Registry\RegistryException
      */
-    public function AppRegistry( $key = null , $value = null )
+    public static function AppRegistry( $key = null , $value = null )
     {
+        if( is_null( self::$AppRegistry_instance ) )
+            self::$AppRegistry_instance = new Registry();
+
         if ( !is_null($key) && is_null($value) )
-            return Registry::getInstance()->get( $key );
+            return self::$AppRegistry_instance->get( $key );
         elseif ( !is_null($key) )
-            return Registry::getInstance()->set( $key , $value );
+            return self::$AppRegistry_instance->set( $key , $value );
 
-        return Registry::getInstance();
+        return self::$AppRegistry_instance;
     }
-
-
 
     /**
      * @return int
