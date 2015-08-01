@@ -2,9 +2,9 @@
 
 namespace MonoKit\Database\Sql\Manager\Entity;
 
-use MonoKit\Foundation\StringableInterface;
+use MonoKit\Foundation\Stringable;
 
-class SqlJoinTable extends SqlTable implements StringableInterface
+class SqlJoinTable extends SqlTable implements Stringable
 {
     /**
      * @param array $columnsName

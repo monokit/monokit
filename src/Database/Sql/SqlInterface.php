@@ -2,6 +2,6 @@
 
 namespace MonoKit\Database\Sql;
 
-use MonoKit\Foundation\StringableInterface;
+use MonoKit\Foundation\Stringable;
 
-Interface SqlInterface extends StringableInterface {}
+Interface SqlInterface extends Stringable {}

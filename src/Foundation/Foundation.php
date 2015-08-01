@@ -8,6 +8,10 @@ Abstract Class Foundation
 {
     /** @var Registry */
     private static $AppRegistry_instance;
+    /** @var Registry */
+    private static $AppRoute_instance;
+    /** @var Registry */
+    private static $AppService_instance;
 
     /**
      * @param string|null $key
@@ -26,6 +30,44 @@ Abstract Class Foundation
             return self::$AppRegistry_instance->set( $key , $value );
 
         return self::$AppRegistry_instance;
+    }
+
+    /**
+     * @param string|null $key
+     * @param mixed|null $value
+     * @return mixed|Registry
+     * @throws \MonoKit\Registry\RegistryException
+     */
+    public static function AppRoute( $key = null , $value = null )
+    {
+        if( is_null( self::$AppRoute_instance ) )
+            self::$AppRoute_instance = new Registry();
+
+        if ( !is_null($key) && is_null($value) )
+            return self::$AppRoute_instance->get( $key );
+        elseif ( !is_null($key) )
+            return self::$AppRoute_instance->set( $key , $value );
+
+        return self::$AppRoute_instance;
+    }
+
+    /**
+     * @param string|null $key
+     * @param mixed|null $value
+     * @return mixed|Registry
+     * @throws \MonoKit\Registry\RegistryException
+     */
+    public static function AppService( $key = null , $value = null )
+    {
+        if( is_null( self::$AppService_instance ) )
+            self::$AppService_instance = new Registry();
+
+        if ( !is_null($key) && is_null($value) )
+            return self::$AppService_instance->get( $key );
+        elseif ( !is_null($key) )
+            return self::$AppService_instance->set( $key , $value );
+
+        return self::$AppService_instance;
     }
 
     /**

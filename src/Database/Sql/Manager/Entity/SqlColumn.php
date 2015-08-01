@@ -3,9 +3,9 @@
 namespace MonoKit\Database\Sql\Manager\Entity;
 
 use MonoKit\Database\Manager\Entity\Column;
-use MonoKit\Foundation\StringableInterface;
+use MonoKit\Foundation\Stringable;
 
-class SqlColumn extends Column implements StringableInterface
+class SqlColumn extends Column implements Stringable
 {
     /** @var string */
     protected $alias;
