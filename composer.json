@@ -1,0 +1,17 @@
+{
+  "name": "monokit/monokit",
+  "type": "library",
+  "description": "MonoKit PHP Library",
+  "authors": [
+    {
+      "name": "Micka Van Haren",
+      "email": "micka@azulis.be"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "psr-4" : { "MonoKit\\" : "src"}
+  }
+}
