@@ -25,6 +25,9 @@ Abstract Class Entity extends Foundation implements EntityInterface
      */
     final public function setProperty( $property , $value )
     {
+        if ( empty($value) || is_null( $value ) )
+            return $this;
+
         if ( strpos( $property , "." ) )
         {
             list( $instanceName , $instanceProperty ) = explode( '.' , $property , 2 );
