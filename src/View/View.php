@@ -14,6 +14,16 @@ Class View extends Foundation
     protected $data;
 
     /**
+     * @param string|null $fileName
+     * @param string|null $data
+     */
+    public function __construct( $fileName = null , $data = null )
+    {
+        if ( !is_null( $fileName ))
+            $this->render( $fileName , $data );
+    }
+
+    /**
      * @param File $file
      * @return View
      * @throws FileException
