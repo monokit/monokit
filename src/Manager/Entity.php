@@ -25,7 +25,7 @@ Abstract Class Entity extends Foundation implements EntityInterface
      */
     final public function setProperty( $property , $value )
     {
-        if ( empty($value) || is_null( $value ) )
+        if ( empty( $value ) || is_null( $value ) )
             return $this;
 
         if ( strpos( $property , "." ) )
@@ -38,7 +38,7 @@ Abstract Class Entity extends Foundation implements EntityInterface
                 if ( !method_exists( $this , $method = "create".ucfirst( $instanceName ) ) )
                     return $this;
 
-                return $this->$method();
+                $instance = $this->$method();
             }
 
             $instance->setProperty( $instanceProperty , $value );

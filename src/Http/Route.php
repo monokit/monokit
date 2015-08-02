@@ -54,10 +54,9 @@ Class Route extends Entity
         $patterns[] = '#{[\w+]+:string}#';
 
         $replaces = array();
-        $replaces[] = '[\w\+_-]+';
+        $replaces[] = '[\w\+_-]+'; //(.*)
         $replaces[] = '[\d]+';
         $replaces[] = '[\D]+';
-
 
         $this->pattern = "#^".preg_replace( $patterns , $replaces , $pattern )."$#";
         return $this;
