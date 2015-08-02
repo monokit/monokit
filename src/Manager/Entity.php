@@ -30,7 +30,13 @@ Abstract Class Entity extends Foundation implements EntityInterface
             list( $instanceName , $instanceProperty ) = explode( '.' , $property , 2 );
 
             if ( !method_exists( $this , $method = "set".ucfirst( $instanceName ) ) || !$instance = $this->getProperty( $instanceName ) )
-                return $this;
+            {
+                // Vérification d'une méthode [createXXXX]
+                if ( !method_exists( $this , $method = "create".ucfirst( $instanceName ) ) )
+                    return $this;
+
+                return $this->$method();
+            }
 
             $instance->setProperty( $instanceProperty , $value );
 
