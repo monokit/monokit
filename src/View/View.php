@@ -11,13 +11,13 @@ Class View extends Foundation
     /** @var File */
     protected $file;
     /** @var mixed */
-    protected $data;
+    protected $data = array();
 
     /**
      * @param string|null $fileName
-     * @param string|null $data
+     * @param mixed|null $data
      */
-    public function __construct( $fileName = null , $data = null )
+    public function __construct( $fileName = null , $data = array() )
     {
         if ( !is_null( $fileName ))
             $this->render( $fileName , $data );
@@ -80,7 +80,7 @@ Class View extends Foundation
      * @param mixed $data
      * @return string ViewFile content
      */
-    public function render( $filename , $data = null )
+    public function render( $filename , $data = array() )
     {
         $this->setFileFromString( $filename );
         $this->setData( $data );

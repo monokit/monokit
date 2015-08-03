@@ -48,17 +48,20 @@ Class Route extends Entity
     {
         $this->UrlRequest->setUrl( $pattern );
 
+        $pattern = strtolower( $pattern );
+
         $patterns = array();
         $patterns[] = '#{[\w+]+}#';
         $patterns[] = '#{[\w+]+:int}#';
         $patterns[] = '#{[\w+]+:string}#';
 
         $replaces = array();
-        $replaces[] = '[\w\+_-]+'; //(.*)
+        $replaces[] = '[\w]+'; //(.*)
         $replaces[] = '[\d]+';
         $replaces[] = '[\D]+';
 
         $this->pattern = "#^".preg_replace( $patterns , $replaces , $pattern )."$#";
+
         return $this;
     }
 
