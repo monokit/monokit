@@ -1,2 +1,0 @@
-# MonoKit
-MonoKit PHP Library

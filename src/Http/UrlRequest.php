@@ -34,6 +34,7 @@ Class UrlRequest extends Entity
     public function setUrl( $url )
     {
         $this->url = ( $url != "/" ) ? rtrim( $url , "/" ) : $url; // Supprime le dernier "/"
+        $this->url = strtolower( $this->url );
         return $this;
     }
 
@@ -46,8 +47,6 @@ Class UrlRequest extends Entity
     }
 
 	/**
-	* Définit l'action
-	*
 	* @param string $method
 	* @return UrlRequest
 	*/
@@ -72,8 +71,6 @@ Class UrlRequest extends Entity
 	}
 
 	/**
-	* Récupère la méthode
-	*
 	* @return string
 	*/
     public function getMethod()
