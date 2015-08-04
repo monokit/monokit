@@ -2,11 +2,12 @@
 
 namespace MonoKit\Http\Response;
 
-class ResponseHtml extends Response
+class ResponseXml extends Response
 {
     public function __construct( $content )
     {
-        header('Content-type: text/html');
+        header('Content-type: application/xml');
         parent::__construct( $content );
     }
+
 }
