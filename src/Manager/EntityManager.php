@@ -3,8 +3,9 @@
 namespace MonoKit\Manager;
 
 use MonoKit\Foundation\Foundation;
+use MonoKit\Foundation\Arrayable;
 
-Abstract class EntityManager extends Foundation implements \Iterator, \Countable
+Abstract class EntityManager extends Foundation implements \Iterator, \Countable, Arrayable
 {
     /** @var int */
     private $index = 0;
@@ -38,7 +39,7 @@ Abstract class EntityManager extends Foundation implements \Iterator, \Countable
      * @param array $entities
      * @return EntityManager
      */
-    public function set( array $entities )
+    public function set( array $entities = array() )
     {
         foreach( $entities as $entity )
             $this->add( $entity );
