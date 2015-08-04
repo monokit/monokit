@@ -24,7 +24,7 @@ Class Controller extends Entity
      * @param mixed|null $data
      * @return mixed
      */
-    public function render( $viewFile , $data = null )
+    protected function render( $viewFile , $data = null )
     {
         $view = new View();
 
@@ -50,7 +50,7 @@ Class Controller extends Entity
     /**
      * @param string $url
      */
-    public function redirect( $url )
+    protected function redirect( $url )
     {
         header("Location: $url");
     }
@@ -58,7 +58,7 @@ Class Controller extends Entity
     /**
      * @param Route $route
      */
-    public function redirectByRoute( Route $route )
+    protected function redirectByRoute( Route $route )
     {
         $this->redirect( __ROOT__.$route->getUrlRequest()->getUrl() );
     }
@@ -67,7 +67,7 @@ Class Controller extends Entity
      * @param $routeName
      * @throws ControllerException
      */
-    public function redirectByRouteName( $routeName )
+    protected function redirectByRouteName( $routeName )
     {
         $routeManager = new RouteManager();
         $routeManager->set( $this->AppRoute()->toArray() );
