@@ -39,7 +39,7 @@ Abstract Class EntityManagerMysqli extends EntityManager
     /**
      * @param SqlInterface $sql
      * @param EntityInterface|null $entity
-     * @return $this|EntityManagerMysqli
+     * @return EntityManagerMysqli
      * @throws SqlException
      */
 	protected function query( SqlInterface $sql , EntityInterface $entity = null )
