@@ -7,7 +7,7 @@ Abstract Class UrlModel extends AbstractModel
     /** @var string */
     protected $url;
 
-    public function __construct( $url )
+    public function __construct( $url = null )
     {
         $this->setUrl( $url );
     }
