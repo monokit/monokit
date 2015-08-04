@@ -3,7 +3,7 @@ namespace MonoKit\Manager;
 
 use MonoKit\Database\Sql\SqlInterface;
 use MonoKit\Database\Sql\SqlException;
-use MonoKit\Foundation\FoundationException;
+use MonoKit\Database\DatabaseException;
 
 /**
  * Support de classe [xxxxManager]
@@ -13,7 +13,7 @@ use MonoKit\Foundation\FoundationException;
  */
 Abstract Class EntityManagerMysqli extends EntityManager
 {
-    /** @var SqlInterface */
+    /** @var string */
 	private $sql;
 	/** @var \Mysqli */
     private $mysqli;
@@ -22,14 +22,14 @@ Abstract Class EntityManagerMysqli extends EntityManager
 
     /**
      * @param \Mysqli|null $mysqli
-     * @throws FoundationException
+     * @throws DatabaseException
      */
 	public function __construct( \Mysqli $mysqli = null )
 	{
 		$this->mysqli = ( !is_null( $mysqli ) ) ? $mysqli : $this->AppService( "MYSQLI" );
 
         if ( !$this->mysqli )
-            throw new FoundationException( "Aucune connexion Mysqli trouvée..." , $this );
+            throw new DatabaseException( DatabaseException::ERROR_ACCESS_MYSQLI , $this );
 
         $this->mysqli->set_charset( "UTF8" );
 
@@ -37,17 +37,7 @@ Abstract Class EntityManagerMysqli extends EntityManager
 	}
 
     /**
-     * @param SqlInterface $sql
-     * @return EntityManagerMysqli
-     */
-    protected function setSql( SqlInterface $sql )
-    {
-        $this->sql = $sql;
-        return $this;
-    }
-
-    /**
-     * @return SqlInterface
+     * @return string
      */
     protected function getSql()
     {
@@ -61,10 +51,10 @@ Abstract Class EntityManagerMysqli extends EntityManager
      */
 	protected function query( SqlInterface $sql )
 	{
-        $this->setSql( $sql );
+        $this->sql = $sql->toString();
 
-		if ( !$this->mysqli_result = $this->mysqli->query( $this->getSql()->toString() ) )
-			throw new SqlException( SqlException::ERROR_SQL , $this , $this->getSql()->toString() );
+		if ( !$this->mysqli_result = $this->mysqli->query( $this->sql ) )
+			throw new SqlException( SqlException::ERROR_SQL , $this , $this->sql );
 
 		return $this;
 	}
