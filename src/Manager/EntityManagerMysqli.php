@@ -63,7 +63,7 @@ Abstract Class EntityManagerMysqli extends EntityManager
      * @param string $entityClass
      * @return EntityManagerMysqli
      */
-    protected function fetchAll( $entityClass )
+    protected function fetch( $entityClass )
     {
         $this->removeAll();
 
