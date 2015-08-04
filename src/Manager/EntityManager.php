@@ -22,16 +22,11 @@ Abstract class EntityManager extends Foundation implements \Iterator, \Countable
 
     /**
      * @param EntityInterface $entity
-     * @param array|null $properties
-     * @return EntityManagerMysqli
+     * @return $this
      */
-    public function add( EntityInterface $entity , array $properties = null )
+    public function add( EntityInterface $entity )
     {
-        if ( $properties )
-            $entity->setProperties( $properties );
-
         $this->source[] = $entity;
-
         return $this;
     }
 

@@ -46,24 +46,28 @@ Abstract Class EntityManagerMysqli extends EntityManager
 
     /**
      * @param SqlInterface $sql
-     * @return EntityManagerMysqli
+     * @param EntityInterface|null $entity
+     * @return $this|EntityManagerMysqli
      * @throws SqlException
      */
-	protected function query( SqlInterface $sql )
+	protected function query( SqlInterface $sql , EntityInterface $entity = null )
 	{
         $this->sql = $sql->toString();
 
 		if ( !$this->mysqli_result = $this->mysqli->query( $this->sql ) )
 			throw new SqlException( SqlException::ERROR_SQL , $this , $this->sql );
 
+        if ( $entity )
+            return $this->fetch( $entity );
+
 		return $this;
 	}
 
     /**
-     * @param string $entityClass
-     * @return EntityManagerMysqli
+     * @param EntityInterface $entity
+     * @return $this
      */
-    protected function fetch( $entityClass )
+    protected function fetch( EntityInterface $entity )
     {
         $this->removeAll();
 
@@ -71,7 +75,7 @@ Abstract Class EntityManagerMysqli extends EntityManager
             return $this;
 
         while( $data = $this->mysqli_result->fetch_assoc() )
-            $this->add( new $entityClass() , $data );
+            $this->add( $entity->setProperties( $data ) );
 
         return $this;
     }
