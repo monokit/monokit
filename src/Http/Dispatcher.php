@@ -5,6 +5,7 @@ namespace MonoKit\Http;
 use MonoKit\Foundation\Foundation;
 use MonoKit\Controller\Controller;
 use MonoKit\Controller\ControllerException;
+use MonoKit\Http\Response\Response;
 
 Class Dispatcher extends Foundation
 {
@@ -122,7 +123,7 @@ Class Dispatcher extends Foundation
     }
 
     /**
-     * @return mixed
+     * @return Response
      */
     public function getResponse()
     {
@@ -132,14 +133,20 @@ Class Dispatcher extends Foundation
             $this->setControllerFromString( "AppController" );
             $this->setAction( "error404" );
 
-            return call_user_func( array( $this->getController() , $this->getAction() ) );
+            $content = call_user_func( array( $this->getController() , $this->getAction() ) );
+        } else {
+            //http_response_code(200);
+            $this->setControllerFromString( $route->getControllerName() );
+            $this->setAction( $route->getActionName() );
+
+            $content = call_user_func_array( array( $this->getController() , $this->getAction() ) , $route->getUrlRequest()->getParametersValue( $this->getUrlRequest() ) );
         }
 
-        //http_response_code(200);
-        $this->setControllerFromString( $route->getControllerName() );
-        $this->setAction( $route->getActionName() );
+        if ( $content instanceof Response )
+            return $content;
 
-        return call_user_func_array( array( $this->getController() , $this->getAction() ) , $route->getUrlRequest()->getParametersValue( $this->getUrlRequest() ) );
+        return new Response( $content );
+
     }
 
 }

@@ -3,6 +3,8 @@
 namespace MonoKit;
 
 use MonoKit\Foundation\Foundation;
+use MonoKit\Http\Response\Response;
+use MonoKit\Http\Response\ResponseHtml;
 use MonoKit\Registry\RegistryException;
 use MonoKit\Http\Dispatcher;
 use MonoKit\Http\RouteManager;
@@ -14,7 +16,7 @@ Class MonoKitApplication extends Foundation
     /**
      * @param string|null $fileView
      * @param mixed|null $data
-     * @return mixed
+     * @return Response|null
      * @throws RegistryException
      */
     public function render( $fileView = null , $data = null )
@@ -29,17 +31,18 @@ Class MonoKitApplication extends Foundation
         $RouteManager->set( $this->AppRoute()->toArray() );
 
         $Dispatcher = new Dispatcher( $UrlRequest , $RouteManager );
+        $Response = $Dispatcher->getResponse();
 
-        if ( $fileView )
+        if ( $Response instanceof ResponseHtml && $fileView )
         {
-            define( "HTML_CONTENT" , $Dispatcher->getResponse() );
+            define( "HTML_CONTENT" , $Response->getContent() );
 
-            $view = new View();
-            return $view->render( $fileView , $data );
+            return new View( $fileView , $data );
         }
 
-        return $Dispatcher->getResponse();
+        echo $Response->getContent();
 
+        return $Response->getContent();
     }
 }
 

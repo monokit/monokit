@@ -2,16 +2,21 @@
 
 namespace MonoKit\Controller;
 
-use MonoKit\Http\Route;
-use MonoKit\Http\RouteManager;
+use MonoKit\Http\Response\ResponseJson;
 use MonoKit\Manager\Entity;
 use MonoKit\View\View;
+use MonoKit\Http\Route;
+use MonoKit\Http\RouteManager;
+use MonoKit\Http\Response\ResponseHtml;
 
 Class Controller extends Entity
 {
+    /**
+     * @return ResponseHtml
+     */
     public function indexAction()
     {
-        echo "<H1>It works!!!</H1><H2>{$this}</H2>";
+        return new ResponseHtml( "<H1>It works!!!</H1><H2>{$this}</H2>" );
     }
 
     /**
@@ -30,7 +35,16 @@ Class Controller extends Entity
 
         ob_end_clean();
 
-        return $content;
+        return new ResponseHtml( $content );
+    }
+
+    /**
+     * @param mixed $data
+     * @return ResponseJson
+     */
+    protected function renderJson( $data )
+    {
+        return new ResponseJson( $data );
     }
 
     /**
