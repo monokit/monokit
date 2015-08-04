@@ -130,6 +130,7 @@ Class Dispatcher extends Foundation
         //http_response_code(404);
         if ( !$route = $this->getRouteManager()->getRouteByUrlRequest( $this->getUrlRequest() ) )
         {
+            header("HTTP/1.0 404 Not Found");
             $this->setControllerFromString( "AppController" );
             $this->setAction( "error404" );
 
