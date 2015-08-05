@@ -2,6 +2,7 @@
 
 namespace MonoKit\Database\Sql\Command;
 
+use MonoKit\Database\Sql\Manager\Entity\SqlInnerJoinTable;
 use MonoKit\Foundation\Foundation;
 use MonoKit\Database\Sql\SqlInterface;
 use MonoKit\Database\Sql\Manager\SqlTableManager;
@@ -33,6 +34,23 @@ class SqlSelect extends Foundation implements SqlInterface
     public function setColumns($columns)
     {
         $this->table->setColumns(explode(",", $columns));
+        return $this;
+    }
+
+    /**
+     * @param string $tableName
+     * @param string $columns
+     * @param string $condition
+     * @return SqlSelect
+     */
+    public function setInnerJoin($tableName, $columns, $condition)
+    {
+        $Table = new SqlInnerJoinTable($tableName);
+        $Table->setColumns(explode(",", $columns));
+        $Table->setCondition($condition);
+
+        $this->JoinTableManager->add($Table);
+
         return $this;
     }
 
