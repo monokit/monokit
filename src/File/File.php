@@ -3,7 +3,7 @@
 namespace MonoKit\File;
 
 use MonoKit\Manager\Entity;
-use MonoKit\Exception\Exception;
+use MonoKit\Foundation\Exception\Exception;
 
 /**
  * Cette classe gère un fichier sélectionné sur le serveur.

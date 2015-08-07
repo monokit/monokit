@@ -45,7 +45,7 @@ Class View extends Foundation
      */
     protected function setFileFromString( $filename )
     {
-        $file = new File( "../" . MONOKIT_APPLICATION_DIRECTORY_VIEW . "/" . $filename );
+        $file = new File( "../" . MONOKIT_APPLICATION_VIEW_DIRECTORY . "/" . $filename );
         return $this->setFile( $file );
     }
 

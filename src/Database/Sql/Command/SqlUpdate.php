@@ -6,8 +6,6 @@ use MonoKit\Foundation\Foundation;
 use MonoKit\Database\Sql\SqlInterface;
 use MonoKit\Database\Sql\Manager\SqlTableManager;
 use MonoKit\Database\Sql\Manager\Entity\SqlTable;
-use MonoKit\Database\Sql\Manager\Entity\SqlLeftJoinTable;
-use MonoKit\Database\Sql\Manager\Entity\SqlRightJoinTable;
 
 class SqlUpdate extends Foundation implements SqlInterface
 {
@@ -50,19 +48,18 @@ class SqlUpdate extends Foundation implements SqlInterface
         return $this;
     }
 
-
     /**
      * @return string
      */
     public function toString()
     {
-        $columValue = array();
+        $columnValue = array();
 
         foreach( $this->table->getColumnManager() as $column )
-            $columValue[] = (is_null( $column->getValue() )) ? "{$column->getField()} = NULL" : "{$column->getField()} = {$column->getValue()}";
+            $columnValue[] = (is_null( $column->getValue() )) ? "{$column->getField()} = NULL" : "{$column->getField()} = {$column->getValue()}";
 
         return sprintf("UPDATE %s SET %s %s",    $this->table->toString(),
-                                                 implode( ", " , $columValue ) ,
+                                                 implode( ", " , $columnValue ) ,
                                                  $this->table->getCondition() );
 
     }

@@ -27,7 +27,7 @@ class Access extends Entity
 
     /**
      * @param string $host
-     * @return DatabaseAccess
+     * @return Access
      */
     public function setHost($host)
     {
@@ -45,7 +45,7 @@ class Access extends Entity
 
     /**
      * @param string $login
-     * @return DatabaseAccess
+     * @return Access
      */
     public function setLogin($login)
     {
@@ -63,7 +63,7 @@ class Access extends Entity
 
     /**
      * @param string $passwd
-     * @return DatabaseAccess
+     * @return Access
      */
     public function setPasswd($passwd)
     {
@@ -81,7 +81,7 @@ class Access extends Entity
 
     /**
      * @param string $dbname
-     * @return DatabaseAccess
+     * @return Access
      */
     public function setDbname($dbname)
     {
@@ -99,7 +99,7 @@ class Access extends Entity
 
     /**
      * @param string $charset
-     * @return DatabaseAccess
+     * @return Access
      */
     public function setCharset($charset)
     {

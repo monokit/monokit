@@ -16,6 +16,8 @@ class SqlTable extends Table implements Stringable
     protected $order;
     /** @var string */
     protected $orderType = "ASC";
+    /** @var SqlColumnManager */
+    protected $ColumnManager;
 
     /**
      * @param string $name
@@ -129,12 +131,19 @@ class SqlTable extends Table implements Stringable
         return $this->orderType;
     }
 
+    /**
+     * @param string $columnName
+     * @param null $value
+     * @return SqlTable
+     */
     public function setColumnValue( $columnName , $value = null )
     {
         $Column = new SqlColumn( $this->getAlias().__DOT__.$columnName );
         $Column->setValue( $value );
 
         $this->getColumnManager()->addColumn( $Column );
+
+        return $this;
     }
 
     /**

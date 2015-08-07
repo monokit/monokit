@@ -40,5 +40,3 @@ namespace
 
     set_exception_handler( 'MonoKitException' );
 }
-
-?>

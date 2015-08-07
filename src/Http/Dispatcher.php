@@ -81,7 +81,7 @@ Class Dispatcher extends Foundation
      */
     protected function setControllerFromString( $controllerName )
     {
-        $controller = $this->AppRegistry( "APPLICATION.NAMESPACE" ) . "\\" . MONOKIT_APPLICATION_DIRECTORY_CONTROLLER . "\\" . $controllerName;
+        $controller = $this->AppRegistry( "APPLICATION.NAMESPACE" ) . "\\" . MONOKIT_APPLICATION_CONTROLLER_DIRECTORY. "\\" . $controllerName;
 
         if ( !class_exists( $controller ) )
             throw new ControllerException( ControllerException::ERROR_CONTROLLER , $this , $controller );

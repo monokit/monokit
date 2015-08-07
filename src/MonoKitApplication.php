@@ -14,6 +14,33 @@ use MonoKit\View\View;
 Class MonoKitApplication extends Foundation
 {
     /**
+     * @param string $mode
+     */
+    public function __construct( $mode = 'DEV' )
+    {
+        $this->setMode( $mode );
+    }
+
+    /**
+     * @param string $mode
+     * @return MonoKitApplication
+     */
+    public function setMode( $mode = 'DEV' )
+    {
+        switch( $mode )
+        {
+            case 'DEV':
+                error_reporting(-1);
+                break;
+
+            default:
+                error_reporting(0);
+        }
+
+        return $this;
+    }
+
+    /**
      * @param string|null $fileView
      * @param mixed|null $data
      * @return Response|null
@@ -45,7 +72,5 @@ Class MonoKitApplication extends Foundation
         return $Response->getContent();
     }
 }
-
-
 
 ?>
