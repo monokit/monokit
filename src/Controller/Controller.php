@@ -2,12 +2,11 @@
 
 namespace MonoKit\Controller;
 
-use MonoKit\Http\Response\ResponseJson;
 use MonoKit\Manager\Entity;
 use MonoKit\View\View;
 use MonoKit\Http\Route;
-use MonoKit\Http\RouteManager;
 use MonoKit\Http\Response\ResponseHtml;
+use MonoKit\Http\Response\ResponseJson;
 
 Class Controller extends Entity
 {
@@ -69,10 +68,7 @@ Class Controller extends Entity
      */
     protected function redirectByRouteName( $routeName )
     {
-        $routeManager = new RouteManager();
-        $routeManager->set( $this->AppRoute()->toArray() );
-
-        if ( !$route = $routeManager->getRouteByName( $routeName ) )
+        if ( !$route = $this->AppRouter()->getRouteByName( $routeName ) )
             throw new ControllerException( ControllerException::ERROR_ROUTE , $this , $routeName );
 
         $this->redirectByRoute( $route );

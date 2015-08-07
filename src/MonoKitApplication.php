@@ -7,7 +7,6 @@ use MonoKit\Http\Response\Response;
 use MonoKit\Http\Response\ResponseHtml;
 use MonoKit\Registry\RegistryException;
 use MonoKit\Http\Dispatcher;
-use MonoKit\Http\RouteManager;
 use MonoKit\Http\UrlRequest;
 use MonoKit\View\View;
 
@@ -54,10 +53,7 @@ Class MonoKitApplication extends Foundation
         $UrlRequest = new UrlRequest();
         $UrlRequest->autoDetect();
 
-        $RouteManager = new RouteManager();
-        $RouteManager->set( $this->AppRoute()->toArray() );
-
-        $Dispatcher = new Dispatcher( $UrlRequest , $RouteManager );
+        $Dispatcher = new Dispatcher( $UrlRequest );
         $Response = $Dispatcher->getResponse();
 
         if ( $Response instanceof ResponseHtml && $fileView )

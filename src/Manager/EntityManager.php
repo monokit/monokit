@@ -34,7 +34,7 @@ Abstract class EntityManager extends Foundation implements \Iterator, \Countable
      * @param array $entities
      * @return EntityManager
      */
-    public function set( array $entities = array() )
+    protected function set( array $entities = array() )
     {
         foreach( $entities as $entity )
             $this->add( $entity );
@@ -50,7 +50,7 @@ Abstract class EntityManager extends Foundation implements \Iterator, \Countable
      * @param mixed $value
      * @return array|null
      */
-    public function find( $entityProperty , $value )
+    protected function find( $entityProperty , $value )
     {
         $output = array();
 
@@ -83,7 +83,7 @@ Abstract class EntityManager extends Foundation implements \Iterator, \Countable
     /**
      * @return EntityInterface
      */
-    public function first()
+    protected function first()
     {
         return $this->source[0];
     }

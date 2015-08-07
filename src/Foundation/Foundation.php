@@ -2,14 +2,16 @@
 
 namespace MonoKit\Foundation;
 
+use MonoKit\Http\Route;
+use MonoKit\Http\RouteManager;
 use MonoKit\Registry\Registry;
 
 Abstract Class Foundation
 {
     /** @var Registry */
     private static $AppRegistry_instance;
-    /** @var Registry */
-    private static $AppRoute_instance;
+    /** @var RouteManager */
+    private static $AppRouter_instance;
     /** @var Registry */
     private static $AppService_instance;
 
@@ -33,22 +35,21 @@ Abstract Class Foundation
     }
 
     /**
-     * @param string|null $key
-     * @param mixed|null $value
-     * @return mixed|Registry
-     * @throws \MonoKit\Registry\RegistryException
+     * @param string|null $routeName
+     * @param Route|null $route
+     * @return RouteManager
      */
-    public static function AppRoute( $key = null , $value = null )
+    public static function AppRouter( $routeName = null , Route $route = null )
     {
-        if( is_null( self::$AppRoute_instance ) )
-            self::$AppRoute_instance = new Registry();
+        if( is_null( self::$AppRouter_instance ) )
+            self::$AppRouter_instance = new RouteManager();
 
-        if ( !is_null($key) && is_null($value) )
-            return self::$AppRoute_instance->get( $key );
-        elseif ( !is_null($key) )
-            return self::$AppRoute_instance->set( $key , $value );
+        if ( !is_null($routeName) && is_null($route) )
+            return self::$AppRouter_instance->getRouteByName( $routeName );
+        elseif ( !is_null($routeName) )
+            return self::$AppRouter_instance->addRoute( $route );
 
-        return self::$AppRoute_instance;
+        return self::$AppRouter_instance;
     }
 
     /**

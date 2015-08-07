@@ -2,6 +2,8 @@
 
 namespace MonoKit\Http;
 
+use MonoKit\File\File;
+use MonoKit\File\FileException;
 use MonoKit\Manager\EntityManager;
 
 Class RouteManager extends EntityManager
@@ -16,20 +18,23 @@ Class RouteManager extends EntityManager
     }
 
     /**
-     * @param array $array
+     * @param string $iniFile
      * @return RouteManager
+     * @throws FileException
      */
-    public function set( array $array = array() )
+    public function setFromIniFile( $iniFile )
     {
-        $this->removeAll();
+        $file = new File( $iniFile );
 
-        foreach( $array AS $routeName => $routeArray )
+        if ( !$file->isFile() )
+            throw new FileException( FileException::ERROR_LOADING_FILE , $this , $file );
+
+        foreach( parse_ini_file( $file->getFile() , true ) AS $routeName => $routeArray )
         {
-            $route = new Route();
-            $route->setName( $routeName );
+            $route = new Route( $routeName );
             $route->setProperties( $routeArray );
 
-            $this->add( $route );
+            $this->addRoute( $route );
         }
 
         return $this;

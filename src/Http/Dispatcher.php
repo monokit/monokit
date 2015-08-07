@@ -9,8 +9,6 @@ use MonoKit\Http\Response\Response;
 
 Class Dispatcher extends Foundation
 {
-    /** @var RouteManager */
-    protected $routeManager;
     /** @var UrlRequest */
     protected $urlRequest;
     /** @var Controller */
@@ -20,30 +18,10 @@ Class Dispatcher extends Foundation
 
     /**
      * @param RouteManager $routeManager
-     * @param UrlRequest $urlRequest
      */
-    public function __construct( UrlRequest $urlRequest , RouteManager $routeManager )
+    public function __construct( UrlRequest $urlRequest )
     {
         $this->setUrlRequest( $urlRequest );
-        $this->setRouteManager( $routeManager );
-    }
-
-    /**
-     * @param RouteManager $routeManager
-     * @return Dispatcher
-     */
-    public function setRouteManager( RouteManager $routeManager )
-    {
-        $this->routeManager = $routeManager;
-        return $this;
-    }
-
-    /**
-     * @return RouteManager
-     */
-    public function getRouteManager()
-    {
-        return $this->routeManager;
     }
 
     /**
@@ -128,7 +106,7 @@ Class Dispatcher extends Foundation
     public function getResponse()
     {
         //http_response_code(404);
-        if ( !$route = $this->getRouteManager()->getRouteByUrlRequest( $this->getUrlRequest() ) )
+        if ( !$route = $this->AppRouter()->getRouteByUrlRequest( $this->getUrlRequest() ) )
         {
             header("HTTP/1.0 404 Not Found");
             $this->setControllerFromString( "AppController" );
