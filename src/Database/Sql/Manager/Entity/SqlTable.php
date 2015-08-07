@@ -2,9 +2,9 @@
 
 namespace MonoKit\Database\Sql\Manager\Entity;
 
+use MonoKit\Foundation\Stringable;
 use MonoKit\Database\Manager\Entity\Table;
 use MonoKit\Database\Sql\Manager\SqlColumnManager;
-use MonoKit\Foundation\Stringable;
 
 class SqlTable extends Table implements Stringable
 {
@@ -134,7 +134,7 @@ class SqlTable extends Table implements Stringable
         $Column = new SqlColumn( $this->getAlias().__DOT__.$columnName );
         $Column->setValue( $value );
 
-        $this->getColumnManager()->add( $Column );
+        $this->getColumnManager()->addColumn( $Column );
     }
 
     /**
@@ -147,7 +147,7 @@ class SqlTable extends Table implements Stringable
         {
             $Column = new SqlColumn( $this->getAlias().__DOT__.$columnName );
 
-            $this->getColumnManager()->add( $Column );
+            $this->getColumnManager()->addColumn( $Column );
         }
 
         return $this;

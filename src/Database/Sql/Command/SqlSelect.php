@@ -2,13 +2,13 @@
 
 namespace MonoKit\Database\Sql\Command;
 
-use MonoKit\Database\Sql\Manager\Entity\SqlInnerJoinTable;
 use MonoKit\Foundation\Foundation;
 use MonoKit\Database\Sql\SqlInterface;
 use MonoKit\Database\Sql\Manager\SqlTableManager;
 use MonoKit\Database\Sql\Manager\Entity\SqlTable;
 use MonoKit\Database\Sql\Manager\Entity\SqlLeftJoinTable;
 use MonoKit\Database\Sql\Manager\Entity\SqlRightJoinTable;
+use MonoKit\Database\Sql\Manager\Entity\SqlInnerJoinTable;
 
 class SqlSelect extends Foundation implements SqlInterface
 {
@@ -49,7 +49,7 @@ class SqlSelect extends Foundation implements SqlInterface
         $Table->setColumns(explode(",", $columns));
         $Table->setCondition($condition);
 
-        $this->JoinTableManager->add($Table);
+        $this->JoinTableManager->addTable($Table);
 
         return $this;
     }
@@ -66,7 +66,7 @@ class SqlSelect extends Foundation implements SqlInterface
         $Table->setColumns(explode(",", $columns));
         $Table->setCondition($condition);
 
-        $this->JoinTableManager->add($Table);
+        $this->JoinTableManager->addTable($Table);
 
         return $this;
     }
@@ -83,7 +83,7 @@ class SqlSelect extends Foundation implements SqlInterface
         $Table->setColumns(explode(",", $columns));
         $Table->setCondition($condition);
 
-        $this->JoinTableManager->add($Table);
+        $this->JoinTableManager->addTable($Table);
 
         return $this;
     }
@@ -118,7 +118,8 @@ class SqlSelect extends Foundation implements SqlInterface
 
         $columnArray[] = $this->table->getColumnManager()->toString();
 
-        foreach ($this->JoinTableManager as $joinTable) {
+        foreach ( $this->JoinTableManager as $joinTable )
+        {
             $joinTableArray[] = $joinTable->toString();
             $columnArray[] = $joinTable->getColumnManager()->toString();
         }

@@ -2,12 +2,24 @@
 
 namespace MonoKit\Database\Sql\Manager;
 
-use MonoKit\Database\Manager\ColumnManager;
-use MonoKit\Database\Sql\Manager\Entity\SqlColumn;
+use MonoKit\Manager\EntityManager;
 use MonoKit\Foundation\Stringable;
+use MonoKit\Database\Sql\Manager\Entity\SqlColumn;
 
-class SqlColumnManager extends ColumnManager implements Stringable
+class SqlColumnManager extends EntityManager implements Stringable
 {
+    /**
+     * @param SqlColumn $sqlColumn
+     * @return SqlColumnManager
+     */
+    public function addColumn( SqlColumn $sqlColumn )
+    {
+        return parent::add( $sqlColumn );
+    }
+
+    /**
+     * @return string
+     */
     public function toString()
     {
         $arrColumnsName = array();
@@ -25,4 +37,6 @@ class SqlColumnManager extends ColumnManager implements Stringable
     {
         return parent::current();
     }
+
+
 }

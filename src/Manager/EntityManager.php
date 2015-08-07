@@ -22,9 +22,9 @@ Abstract class EntityManager extends Foundation implements \Iterator, \Countable
 
     /**
      * @param EntityInterface $entity
-     * @return $this
+     * @return EntityManager
      */
-    public function add( EntityInterface $entity )
+    protected function add( EntityInterface $entity )
     {
         $this->source[] = $entity;
         return $this;
@@ -64,7 +64,7 @@ Abstract class EntityManager extends Foundation implements \Iterator, \Countable
     /**
      * @return EntityManager
      */
-    public function removeAll()
+    protected function removeAll()
     {
         $this->source = array();
         $this->index = 0;

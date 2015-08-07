@@ -2,17 +2,17 @@
 
 namespace MonoKit\Database\Sql\Manager;
 
-use MonoKit\Database\Sql\Manager\Entity\SqlTable;
-use MonoKit\Database\Manager\TableManager;
+use MonoKit\Manager\EntityManager;
 use MonoKit\Database\Sql\SqlException;
+use MonoKit\Database\Sql\Manager\Entity\SqlTable;
 
-class SqlTableManager extends TableManager
+class SqlTableManager extends EntityManager
 {
     /**
      * @param SqlTable $table
-     * @return TableManager
+     * @return SqlTableManager
      */
-    public function add( SqlTable $table )
+    public function addTable( SqlTable $table )
     {
         return parent::add( $table );
     }

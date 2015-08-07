@@ -16,7 +16,7 @@ class SqlJoinTable extends SqlTable implements Stringable
         {
             $Column = new SqlColumn( $this->getAlias().__DOT__.$columnName." AS '".$this->getAlias().__DOT__.$columnName."'" );
 
-            $this->getColumnManager()->add( $Column );
+            $this->getColumnManager()->addColumn( $Column );
         }
 
         return $this;

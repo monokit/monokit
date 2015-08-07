@@ -10,7 +10,7 @@ Class RouteManager extends EntityManager
      * @param Route $route
      * @return RouteManager
      */
-    public function add( Route $route )
+    public function addRoute( Route $route )
     {
         return parent::add( $route );
     }
