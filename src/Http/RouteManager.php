@@ -19,7 +19,7 @@ Class RouteManager extends EntityManager
      * @param array $array
      * @return RouteManager
      */
-    public function set( array $array )
+    public function set( array $array = array() )
     {
         $this->removeAll();
 
