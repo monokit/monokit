@@ -85,9 +85,9 @@ Class File extends Entity
 	 */
 	public function setContentBase64( $content )
 	{
-		if ( strpos( "," , $content ) )
+		if ( strpos( $content , "," ) )
 		{
-			$tmp	= explode( ',' , $content );
+			$tmp = explode( ',' , $content );
 			$this->content = base64_decode( $tmp[1] );
 		} else {
 			$this->content = $content;
