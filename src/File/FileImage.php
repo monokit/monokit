@@ -8,73 +8,65 @@ use MonoKit\Utility\Dimension;
  * Cette classe gère une image sélectionnée sur le serveur.
  *
  * @author Micka VAN HAREN
- * @version 02/2015
+ * @version 07/2015
  */
 Class FileImage extends File
 {
 	/**
-	 * Retourne la largeur de l'image
-	 *
-	 * @example $Image->getWidth();
-	 * @return int
+	 * @return bool|int
 	 */
 	public function getWidth()
 	{
 		if ( !$this->isFile() )
-			return null;
+			return false;
 
 		list( $width ) = getimagesize( $this->file );
 		return $width;
 	}
 
 	/**
-	 * Retourne la hauteur de l'image
-	 *
-	 * @example $Image->getHeight();
-	 * @return int
+	 * @return bool|int
 	 */
 	public function getHeight()
 	{
 		if ( !$this->isFile() )
-			return null;
+			return false;
 
 		list(, $height ) = getimagesize( $this->file );
 		return $height;
 	}
 
 	/**
-	 * @return string|null
+	 * @return bool
 	 */
 	public function getType()
 	{
 		if ( !$this->isFile() )
-			return null;
+			return false;
 
 		list(,, $type ) = getimagesize( $this->file );
 		return $type;
 	}
 
 	/**
-	 * @return string|null
+	 * @return bool
 	 */
 	public function getAttribute()
 	{
 		if ( !$this->isFile() )
-			return null;
+			return false;
 
 		list(,,, $attr ) = getimagesize( $this->file );
 		return $attr;
 	}
 
-    /**
-     * Retoure le ratio de l'image
-     *
-     * @return float
-     */
+	/**
+	 * @return bool|float
+	 */
     public function getRatio()
     {
 		if ( !$this->isFile() )
-			return null;
+			return false;
 
         return $this->getHeight() / $this->getWidth();
     }
