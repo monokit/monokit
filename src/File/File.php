@@ -80,6 +80,23 @@ Class File extends Entity
 	}
 
 	/**
+	 * @param string $content
+	 * @return File
+	 */
+	public function setContentBase64( $content )
+	{
+		if ( strpos( "," , $content ) )
+		{
+			$tmp	= explode( ',' , $content );
+			$this->content = base64_decode( $tmp[1] );
+		} else {
+			$this->content = $content;
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Retourne le nom du fichier sélectionné.
 	 *
 	 * @example $File->getName(); 
