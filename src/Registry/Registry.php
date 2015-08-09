@@ -4,9 +4,10 @@ namespace MonoKit\Registry;
 
 use MonoKit\File\File;
 use MonoKit\File\FileException;
+use MonoKit\Foundation\Arrayable;
 use MonoKit\Foundation\Foundation;
 
-class Registry extends Foundation implements RegistryInterface
+class Registry extends Foundation implements RegistryInterface, Arrayable
 {
     /** @var array */
     protected $data = array();
@@ -24,8 +25,8 @@ class Registry extends Foundation implements RegistryInterface
 
         $m = &$this->data;
 
-        foreach ( explode( "." , strtoupper($key) ) as $k )
-            $m = &$m[$k];
+        foreach ( explode( "." , strtoupper($key) ) as $registryKey )
+            $m = &$m[$registryKey];
 
         $m = $value;
 
@@ -53,14 +54,6 @@ class Registry extends Foundation implements RegistryInterface
     }
 
     /**
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->data;
-    }
-
-    /**
      * @param string $iniFile
      * @return Registry
      * @throws FileException
@@ -73,12 +66,7 @@ class Registry extends Foundation implements RegistryInterface
             throw new FileException( FileException::ERROR_LOADING_FILE , $this , $file );
 
         foreach( parse_ini_file( $file->getFile() , true ) AS $key => $value )
-        {
-            $value = array_change_key_case( $value , CASE_UPPER );
-
-            $this->set( $key , $value );
-        }
-
+            $this->set( $key , array_change_key_case( $value , CASE_UPPER ) );
 
         return $this;
     }
@@ -93,4 +81,14 @@ class Registry extends Foundation implements RegistryInterface
         return ( is_null( $this->get( strtoupper($key) ) ) ) ? false : true;
     }
 
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->data;
+    }
+
 }
+
+

@@ -15,6 +15,8 @@ Class File extends Entity
 {
 	/** @var string */
 	protected $file;
+	/** @var string */
+	protected $content;
 
     /**
      * @param string $file
@@ -46,24 +48,39 @@ Class File extends Entity
 	{
 		return $this->file;
 	}
-	
+
 	/**
-	 * Retourne le contenu du fichier
-	 *
-	 * @example $File->getContent();
-	 * @return string|null
+	 * @param string $content
+	 * @return File
+	 */
+	public function setContent( $content )
+	{
+		$this->content = $content;
+		return $this;
+	}
+
+	/**
+	 * @return string
 	 */
 	public function getContent()
 	{
+		return $this->content;
+	}
+
+	/**
+	 * @return bool|string
+	 */
+	public function getFileContent()
+	{
 		if ( $this->isFile() )
 			if ( $content = implode ('', file( $this->file ) ) )
-				return $content;
+				return $this->content = $content;
 
-		return null;
+		return false;
 	}
-	
+
 	/**
-	 * Retourne le nom du fichier s�lectionn�.
+	 * Retourne le nom du fichier sélectionné.
 	 *
 	 * @example $File->getName(); 
 	 * @return string // nom_du_fichier.ext
@@ -74,7 +91,7 @@ Class File extends Entity
 	}
 	
 	/**
-	 * Retourne le nom du fichier s�lectionn� sans extension.
+	 * Retourne le nom du fichier sélectionné sans extension.
 	 *
 	 * @example $File->getShortName();
 	 * @return string Nom du fichier // nom_du_fichier sans extension
@@ -142,10 +159,10 @@ Class File extends Entity
 	}
 
 	/**
-	 * Indique si un fichier est un v�ritable fichier.
+	 * Indique si un fichier est un véritable fichier.
 	 *
 	 * @example $File->isFile();
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isFile()
 	{
@@ -156,7 +173,7 @@ Class File extends Entity
 	 * Indique si le fichier est ex�cutable.
 	 *
 	 * @example $File->is_executable();
-	 * @return boolean
+	 * @return bool
 	 */
 	public function is_executable()
 	{
@@ -201,7 +218,27 @@ Class File extends Entity
 		return unlink( $this->file );
 	}
 
-	
+	/**
+	 * @param string|null $fileName
+	 * @return bool
+	 * @throws FileException
+	 */
+	public function save( $fileName = null )
+	{
+		$fileName = ( is_null( $fileName )) ? $this->file : $fileName;
+
+		if ( !is_dir( dirname( $fileName ) ) )
+			throw new FileException( FileException::ERROR_LOADDING_DIR , $this , dirname( $fileName ) );
+
+		if ( !is_writable( dirname( $fileName ) ) )
+			throw new FileException( FileException::ERROR_PERMISSION , $this , dirname( $fileName ) );
+
+		$handle = fopen( $fileName , 'w' );
+		fwrite( $handle , $this->content );
+		fclose( $handle );
+
+		return $this;
+	}
 }
 
 ?>

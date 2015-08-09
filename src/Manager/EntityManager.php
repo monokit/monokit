@@ -72,20 +72,20 @@ Abstract class EntityManager extends Foundation implements \Iterator, \Countable
     }
 
     /**
+     * @return EntityInterface
+     */
+    protected function first()
+    {
+        return $this->source[0];
+    }
+
+    /**
      * Return the current element
      * @return EntityInterface
      */
     public function current()
     {
         return $this->source[ $this->index ];
-    }
-
-    /**
-     * @return EntityInterface
-     */
-    protected function first()
-    {
-        return $this->source[0];
     }
 
     /**

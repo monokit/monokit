@@ -1,6 +1,7 @@
 <?php
 
 namespace MonoKit\File;
+
 use MonoKit\Utility\Dimension;
 
 /**
@@ -78,19 +79,16 @@ Class FileImage extends File
         return $this->getHeight() / $this->getWidth();
     }
 
-    /**
-     * @return Dimension
-     */
+	/**
+	 * @return bool|Dimension
+	 */
 	public function getDimension()
     {
+		if ( !$this->isFile() )
+			return false;
+
         return new Dimension( $this->getWidth() , $this->getHeight() );
     }
-
-    public function getAuthor()
-    {
-
-    }
-
 
 }
 

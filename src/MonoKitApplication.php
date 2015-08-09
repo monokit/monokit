@@ -56,7 +56,7 @@ Class MonoKitApplication extends Foundation
         $Dispatcher = new Dispatcher( $UrlRequest );
         $Response = $Dispatcher->getResponse();
 
-        if ( $Response instanceof ResponseHtml && $fileView )
+        if ( $fileView && $Response instanceof ResponseHtml )
         {
             define( "HTML_CONTENT" , $Response->getContent() );
 
