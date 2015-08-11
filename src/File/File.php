@@ -99,14 +99,14 @@ Class File extends Entity
 	/**
 	 * Retourne le nom du fichier sélectionné.
 	 *
-	 * @example $File->getName(); 
+	 * @example $File->getName();
 	 * @return string // nom_du_fichier.ext
 	 */
 	public function getName()
 	{
 		return basename( $this->file );
 	}
-	
+
 	/**
 	 * Retourne le nom du fichier sélectionné sans extension.
 	 *
@@ -118,7 +118,7 @@ Class File extends Entity
 		$fileName = explode( '.' , $this->getName() , 2 );
 		return $fileName[0];
 	}
-	
+
 	/**
 	 * Retourne le type d'un fichier donné.
 	 *
@@ -127,7 +127,7 @@ Class File extends Entity
 	 */
 	public function getType()
 	{
-		return filetype( $this->file ); 
+		return filetype( $this->file );
 	}
 
 	/**
@@ -139,9 +139,9 @@ Class File extends Entity
 	public function getExtension()
 	{
 		$fileName = explode( '.' , $this->getName() );
-		return $fileName[ count( $fileName ) - 1 ];
+		return strtolower( $fileName[ count( $fileName ) - 1 ] );
 	}
-	
+
 	/**
 	 * The size of the file on the local disk in kilobytes.
 	 *
@@ -152,7 +152,7 @@ Class File extends Entity
 	{
 		return ( isset( $this->file ) ) ? number_format( filesize( $this->file ) / 1024 , 1, ',', '' ) : null;
 	}
-	
+
 	/**
 	 * The date that the file on the local disk was last modified.
 	 *
@@ -163,7 +163,7 @@ Class File extends Entity
 	{
 		return date( "Y-m-d" , filemtime( $this->file ) );
 	}
-	
+
 	/**
 	 * Lit les droits d'un fichier.
 	 *
@@ -223,7 +223,7 @@ Class File extends Entity
 		copy( $this->file , $newName );
 		return $this;
 	}
-	
+
 	/**
 	 * Efface un fichier.
 	 *
