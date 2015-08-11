@@ -242,15 +242,15 @@ Class File extends Entity
 	 */
 	public function save( $fileName = null )
 	{
-		$fileName = ( is_null( $fileName )) ? $this->file : $fileName;
+		$this->file = ( is_null( $fileName )) ? $this->file : $fileName;
 
-		if ( !is_dir( dirname( $fileName ) ) )
-			throw new FileException( FileException::ERROR_LOADDING_DIR , $this , dirname( $fileName ) );
+		if ( !is_dir( dirname( $this->file ) ) )
+			throw new FileException( FileException::ERROR_LOADDING_DIR , $this , dirname( $this->file ) );
 
 		if ( !is_writable( dirname( $fileName ) ) )
-			throw new FileException( FileException::ERROR_PERMISSION , $this , dirname( $fileName ) );
+			throw new FileException( FileException::ERROR_PERMISSION , $this , dirname( $this->file ) );
 
-		$handle = fopen( $fileName , 'w' );
+		$handle = fopen( $this->file , 'w' );
 		fwrite( $handle , $this->content );
 		fclose( $handle );
 
