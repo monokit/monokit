@@ -3,9 +3,9 @@
 namespace MonoKit;
 
 use MonoKit\Foundation\Foundation;
+use MonoKit\Registry\RegistryException;
 use MonoKit\Http\Response\Response;
 use MonoKit\Http\Response\ResponseHtml;
-use MonoKit\Registry\RegistryException;
 use MonoKit\Http\Dispatcher;
 use MonoKit\Http\UrlRequest;
 use MonoKit\View\View;

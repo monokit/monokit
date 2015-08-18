@@ -46,7 +46,7 @@ Class RouteManager extends EntityManager
      */
     public function getRouteByName( $name )
     {
-        $array = $this->find( "name" , $name );
+        $array = $this->find( "name" , strtoupper( $name ) );
         return $array[0];
     }
 

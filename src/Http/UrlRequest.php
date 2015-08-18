@@ -34,6 +34,7 @@ Class UrlRequest extends Entity
     public function setUrl( $url )
     {
         $this->url = ( $url != "/" ) ? rtrim( $url , "/" ) : $url; // Supprime le dernier "/"
+        $this->url = str_replace( "//" , "/" , $this->url );
         $this->url = strtolower( $this->url );
         return $this;
     }

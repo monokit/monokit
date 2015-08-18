@@ -51,7 +51,8 @@ Class Controller extends Entity
      */
     protected function redirect( $url )
     {
-        header("Location: $url");
+        header("Location: " . str_replace( "//" , "/" , $url ));
+        exit();
     }
 
     /**

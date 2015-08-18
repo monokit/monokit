@@ -91,4 +91,9 @@ Class View extends Foundation
 
         return $content;
     }
+
+    public function getLoremIpsum()
+    {
+        return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum et dolor lacinia blandit. Mauris ac facilisis ante. Morbi lectus urna, aliquet eget ullamcorper a, gravida non eros. Aliquam id consectetur ligula. Donec auctor enim ut risus imperdiet pharetra. Nunc posuere ante sit amet interdum eleifend. Ut gravida elementum massa, a efficitur odio. Vivamus vel pulvinar purus, quis tincidunt mauris.";
+    }
 }

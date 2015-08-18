@@ -7,7 +7,7 @@ use MonoKit\Manager\Entity;
 Class Counter extends Entity
 {
     /** @var int */
-    protected $counter;
+    protected $counter = 0;
 
     /**
      * @param int $value
