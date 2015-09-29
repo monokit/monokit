@@ -99,12 +99,15 @@ class SqlSelect extends Foundation implements SqlInterface
     }
 
     /**
-     * @param string $order
+     * @param $order
+     * @param bool|true $autoTableAlias
      * @return SqlSelect
      */
-    public function order($order)
+    public function order( $order , $autoTableAlias = true )
     {
-        $this->table->setOrder($this->table->getAlias() . __DOT__ . $order);
+        $value = ( $autoTableAlias == true ) ? $this->table->getAlias() . __DOT__ . $order : $order;
+
+        $this->table->setOrder( $value );
         return $this;
     }
 
