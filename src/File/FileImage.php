@@ -12,6 +12,26 @@ use MonoKit\Utility\Dimension;
  */
 Class FileImage extends File
 {
+	protected $quality = 80;
+
+	/**
+	 * @param int $quality
+	 * @return FileImage
+	 */
+	public function setQuality( $quality = 80 )
+	{
+		$this->quality = $quality;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getQuality()
+	{
+		return $this->quality;
+	}
+
 	/**
 	 * @return bool|int
 	 */
@@ -166,13 +186,13 @@ Class FileImage extends File
 		switch( $this->getExtension() )
 		{
 			case "png":
-				imagepng( $imageResult , $this->file );
+				imagepng( $imageResult , $this->file , $this->getQuality() / 10 );
 				break;
 			case "gif":
 				imagegif( $imageResult , $this->file );
 				break;
 			default:
-				imagejpeg( $imageResult , $this->file );
+				imagejpeg( $imageResult , $this->file , $this->getQuality() );
 		}
 
 		imagedestroy( $imageResult );
