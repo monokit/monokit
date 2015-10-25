@@ -72,11 +72,11 @@ Abstract class EntityManager extends Foundation implements \Iterator, \Countable
     }
 
     /**
-     * @return EntityInterface
+     * @return EntityInterface|null
      */
-    protected function first()
+    public function first()
     {
-        return $this->source[0];
+        return ( isset( $this->source[0] ) ) ? $this->source[0] : null;
     }
 
     /**
