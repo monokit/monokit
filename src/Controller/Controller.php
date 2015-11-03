@@ -2,11 +2,11 @@
 
 namespace MonoKit\Controller;
 
-use MonoKit\Manager\Entity;
 use MonoKit\View\View;
 use MonoKit\Http\Route;
 use MonoKit\Http\Response\ResponseHtml;
 use MonoKit\Http\Response\ResponseJson;
+use MonoKit\Manager\Entity;
 
 Class Controller extends Entity
 {
