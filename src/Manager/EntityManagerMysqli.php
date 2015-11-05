@@ -1,4 +1,5 @@
 <?php
+
 namespace MonoKit\Manager;
 
 use MonoKit\Database\Sql\SqlInterface;
