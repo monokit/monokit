@@ -110,7 +110,7 @@ class Mail extends Foundation
             $content		.= "MIME-version: 1.0\n";
             $content		.= "Content-type: text/html; charset= iso-8859-1\n";
 
-            return mail( $this->getSenderMail() , $this->getSubject() , $this->getBody() , $content );
+            return mail( $this->getAddressMail() , $this->getSubject() , $this->getBody() , $content );
         }
 
         return false;
