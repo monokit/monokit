@@ -89,23 +89,30 @@ class SqlSelect extends Foundation implements SqlInterface
     }
 
     /**
-     * @param string $condition
+     * @param $condition
+     * @param bool|true $autoAlias
      * @return SqlSelect
      */
-    public function where($condition)
+    public function where( $condition , $autoAlias = true )
     {
-        $this->table->setCondition($this->table->getAlias() . __DOT__ . $condition);
+        if ( $autoAlias )
+        {
+            $this->table->setCondition( $this->table->getAlias() . __DOT__ . $condition );
+        } else {
+            $this->table->setCondition( $condition );
+        }
+
         return $this;
     }
 
     /**
      * @param $order
-     * @param bool|true $autoTableAlias
+     * @param bool|true $autoAlias
      * @return SqlSelect
      */
-    public function order( $order , $autoTableAlias = true )
+    public function order( $order , $autoAlias = true )
     {
-        $value = ( $autoTableAlias == true ) ? $this->table->getAlias() . __DOT__ . $order : $order;
+        $value = ( $autoAlias == true ) ? $this->table->getAlias() . __DOT__ . $order : $order;
 
         $this->table->setOrder( $value );
         return $this;
