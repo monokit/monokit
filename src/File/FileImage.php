@@ -12,7 +12,22 @@ use MonoKit\Utility\Dimension;
  */
 Class FileImage extends File
 {
+	/** @var array */
+	protected $imageInfo;
+	/** @var int */
 	protected $quality = 80;
+
+	/**
+	 * @param string $file
+	 * @throws Exception
+	 */
+	public function __construct( $file )
+	{
+		parent::__construct( $file );
+
+		if ( $this->isFile() )
+			$this->imageInfo = getimagesize( $this->file );
+	}
 
 	/**
 	 * @param int $quality
@@ -33,15 +48,11 @@ Class FileImage extends File
 	}
 
 	/**
-	 * @return bool|int
+	 * @return int
 	 */
 	public function getWidth()
 	{
-		if ( !$this->isFile() )
-			return false;
-
-		list( $width ) = getimagesize( $this->file );
-		return $width;
+		return $this->imageInfo['width'];
 	}
 
 	/**
@@ -49,11 +60,7 @@ Class FileImage extends File
 	 */
 	public function getHeight()
 	{
-		if ( !$this->isFile() )
-			return false;
-
-		list(, $height ) = getimagesize( $this->file );
-		return $height;
+		return $this->imageInfo['height'];
 	}
 
 	/**
@@ -61,23 +68,15 @@ Class FileImage extends File
 	 */
 	public function getType()
 	{
-		if ( !$this->isFile() )
-			return false;
-
-		list(,, $type ) = getimagesize( $this->file );
-		return $type;
+		return $this->imageInfo['type'];
 	}
 
 	/**
-	 * @return bool
+	 * @return string
 	 */
-	public function getAttribute()
+	public function getMime()
 	{
-		if ( !$this->isFile() )
-			return false;
-
-		list(,,, $attr ) = getimagesize( $this->file );
-		return $attr;
+		return $this->imageInfo['mime'];
 	}
 
 	/**
