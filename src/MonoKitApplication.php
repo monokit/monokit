@@ -41,5 +41,3 @@ Class MonoKitApplication extends Foundation
         return $Response->getContent();
     }
 }
-
-?>
