@@ -12,14 +12,6 @@ use MonoKit\View\View;
 Class MonoKitApplication extends Foundation
 {
     /**
-     * @param string $namespace
-     */
-    public function __construct( $namespace )
-    {
-        $this->AppRegistry( "APPLICATION.NAMESPACE" , $namespace );
-    }
-
-    /**
      * @param string|null $fileView
      * @param mixed|null $data
      * @return Response|null
