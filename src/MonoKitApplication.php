@@ -3,6 +3,7 @@
 namespace MonoKit;
 
 use MonoKit\Foundation\Foundation;
+use MonoKit\Registry\RegistryException;
 use MonoKit\Http\Response\Response;
 use MonoKit\Http\Response\ResponseHtml;
 use MonoKit\Http\Dispatcher;
@@ -15,9 +16,13 @@ Class MonoKitApplication extends Foundation
      * @param string|null $fileView
      * @param mixed|null $data
      * @return Response|null
+     * @throws RegistryException
      */
     public function render( $fileView = null , $data = null )
     {
+        if ( !$this->AppRegistry( "APPLICATION.NAMESPACE" ) )
+            throw new RegistryException( RegistryException::ERROR_APPLICATION_NAMESPACE , $this , $this->AppRegistry() );
+
         $UrlRequest = new UrlRequest();
         $UrlRequest->autoDetect();
 
