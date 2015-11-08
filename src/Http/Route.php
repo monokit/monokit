@@ -59,7 +59,7 @@ Class Route extends Entity
         $patterns[] = '#{[\w+]+:string}#';
 
         $replaces = array();
-        $replaces[] = '[\w\+_\-àâéèêëùïü\'\(\)]+';
+        $replaces[] = '[\w\+_\-àâéèêëùïü\.\'\(\)]+';
         $replaces[] = '[\d]+';
         $replaces[] = '[\D]+';
 
