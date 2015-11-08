@@ -77,13 +77,13 @@ class SqlSelect extends Foundation implements SqlInterface
      * @param string $condition
      * @return SqlSelect
      */
-    public function setRightJoin($tableName, $columns, $condition)
+    public function setRightJoin( $tableName, $columns, $condition )
     {
-        $Table = new SqlRightJoinTable($tableName);
-        $Table->setColumns(explode(",", $columns));
-        $Table->setCondition($condition);
+        $Table = new SqlRightJoinTable( $tableName );
+        $Table->setColumns( explode( "," , $columns ) );
+        $Table->setCondition( $condition );
 
-        $this->JoinTableManager->addTable($Table);
+        $this->JoinTableManager->addTable( $Table );
 
         return $this;
     }
