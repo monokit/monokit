@@ -72,14 +72,6 @@ Abstract Class Foundation
     }
 
     /**
-     * @return int
-     */
-    public function getUniqueId()
-    {
-        return hexdec( uniqid() );
-    }
-
-    /**
      * @return string
      */
     public function getLoremIpsum()

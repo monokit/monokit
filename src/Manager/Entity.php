@@ -77,6 +77,14 @@ Abstract Class Entity extends Foundation implements EntityInterface
     }
 
     /**
+     * @return int
+     */
+    public function getUniqueId()
+    {
+        return hexdec( uniqid() );
+    }
+
+    /**
      * @param string $property
      * @param mixed $value
      * @return Entity
