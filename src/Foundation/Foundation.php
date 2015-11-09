@@ -72,6 +72,35 @@ Abstract Class Foundation
     }
 
     /**
+     * @param string $label
+     * @param string $message
+     * @return $this
+     */
+    public function addFlash( $label , $message )
+    {
+        $this->AppRegistry( "SYSTEM.FLASH.{$label}" , $message );
+        return $this;
+    }
+
+    /**
+     * @param $label
+     * @return mixed|Registry
+     */
+    public function getFlash( $label )
+    {
+        return $this->AppRegistry()->get( "SYSTEM.FLASH.{$label}" );
+    }
+
+    /**
+     * @param $label
+     * @return bool
+     */
+    public function hasFlash( $label )
+    {
+        return $this->AppRegistry()->has( "SYSTEM.FLASH.{$label}");
+    }
+
+    /**
      * Retourne le nom de la Classe d'instance (sans namespace)
      *
      * @return string
