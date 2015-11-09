@@ -80,6 +80,15 @@ Class File extends Entity
 	}
 
 	/**
+	 * @return null|string
+	 */
+	public function getMimeType()
+	{
+		$fileInfo = new \finfo( FILEINFO_MIME_TYPE );
+		return ( $this->isFile() ) ? $fileInfo->file( $this->file ) : null;
+	}
+
+	/**
 	 * @param string $content
 	 * @return File
 	 */
