@@ -2,7 +2,4 @@
 
 namespace MonoKit\Http\Response;
 
-class ResponseHtml extends Response
-{
-
-}
+class ResponseHtml extends Response {}

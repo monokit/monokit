@@ -85,6 +85,14 @@ Abstract Class Entity extends Foundation implements EntityInterface
     }
 
     /**
+     * @return string
+     */
+    public function getLoremIpsum()
+    {
+        return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas aliquam neque eu enim tempus, non mattis augue scelerisque. Donec quis diam nec libero lacinia aliquet. Vestibulum sed rutrum nunc, sed convallis leo. Phasellus elementum, velit ac rutrum luctus, elit erat venenatis orci, suscipit sollicitudin massa purus sed justo. Pellentesque at orci et metus dapibus aliquet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in posuere mauris. Donec suscipit eleifend consectetur. Pellentesque sollicitudin sodales lectus rutrum tristique. Ut rhoncus dolor sed neque mollis interdum. Sed tempor rhoncus odio vel ullamcorper.";
+    }
+
+    /**
      * @param string $property
      * @param mixed $value
      * @return Entity
