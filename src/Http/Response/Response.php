@@ -19,7 +19,7 @@ Class Response extends Foundation
     }
 
     /**
-     * @param $content
+     * @param mixed $content
      * @return Response
      */
     public function setContent( $content )

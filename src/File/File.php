@@ -84,8 +84,19 @@ Class File extends Entity
 	 */
 	public function getMimeType()
 	{
-		$fileInfo = new \finfo( FILEINFO_MIME_TYPE );
-		return ( $this->isFile() ) ? $fileInfo->file( $this->file ) : null;
+		if ( !$this->file )
+			return null;
+
+		switch( $this->getExtension() )
+		{
+			case 'css':
+				return 'text/css';
+			case 'js':
+				return 'application/javascript';
+			default:
+				$fileInfo = new \finfo( FILEINFO_MIME_TYPE );
+				return $fileInfo->file( $this->file );
+		}
 	}
 
 	/**
