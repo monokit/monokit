@@ -103,5 +103,3 @@ Class Dispatcher extends Foundation
     }
 
 }
-
-?>

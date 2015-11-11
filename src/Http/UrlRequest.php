@@ -90,5 +90,3 @@ Class UrlRequest extends Entity
     }
 
 }
-
-?>
