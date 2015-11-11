@@ -2,13 +2,14 @@
 
 namespace MonoKit\Bundle;
 
-use MonoKit\Foundation\Foundation;
-use MonoKit\Registry\RegistryException;
-use MonoKit\Http\Response\Response;
-use MonoKit\Http\Response\ResponseHtml;
+use MonoKit\Http\UrlRequestDiscover;
+use MonoKit\View\View;
 use MonoKit\Http\Dispatcher;
 use MonoKit\Http\UrlRequest;
-use MonoKit\View\View;
+use MonoKit\Http\Response\Response;
+use MonoKit\Http\Response\ResponseHtml;
+use MonoKit\Registry\RegistryException;
+use MonoKit\Foundation\Foundation;
 
 Abstract Class Bundle extends Foundation
 {
@@ -23,10 +24,10 @@ Abstract Class Bundle extends Foundation
         if ( !$this->AppRegistry( "APPLICATION.NAMESPACE" ) )
             throw new RegistryException( RegistryException::ERROR_APPLICATION_NAMESPACE , $this , $this->AppRegistry() );
 
-        $UrlRequest = new UrlRequest();
         $Dispatcher = new Dispatcher();
+        $UrlRequest = new UrlRequestDiscover();
 
-        $Response = $Dispatcher->getResponse( $UrlRequest->autoDetect() );
+        $Response = $Dispatcher->getResponse( $UrlRequest );
 
         if ( $fileView && $Response instanceof ResponseHtml )
         {

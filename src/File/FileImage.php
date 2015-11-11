@@ -19,7 +19,6 @@ Class FileImage extends File
 
 	/**
 	 * @param string $file
-	 * @throws Exception
 	 */
 	public function __construct( $file )
 	{
@@ -69,14 +68,6 @@ Class FileImage extends File
 	public function getType()
 	{
 		return $this->imageInfo['type'];
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getMime()
-	{
-		return $this->imageInfo['mime'];
 	}
 
 	/**

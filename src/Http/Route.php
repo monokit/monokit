@@ -19,10 +19,9 @@ Class Route extends Entity
 
     public function __construct( $name )
     {
-        $this->setUrlRequest( new UrlRequest() );
-
         $this->setName( $name );
         $this->setPattern( "/" );
+        $this->setUrlRequest( new UrlRequest() );
     }
 
     /**

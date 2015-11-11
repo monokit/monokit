@@ -13,19 +13,9 @@ Class UrlRequest extends Entity
     const DELETE    = "DELETE";
 
     /** @var string */
-    protected $url;
+    protected $url = "/";
 	/** @var string */
-	protected $method;
-
-    /**
-     * @param string $url
-     * @param string $method
-     */
-    public function __construct( $url = "/" , $method = "GET" )
-    {
-        $this->setUrl( $url );
-        $this->setMethod( $method );
-    }
+	protected $method = "GET";
 
     /**
      * @param string $url
@@ -99,17 +89,6 @@ Class UrlRequest extends Entity
         return array_diff( explode( "/" , $urlRequest->getUrl() ) , explode( "/" , $this->getUrl() ) );
     }
 
-    /**
-     * @return UrlRequest
-     */
-    public function autoDetect()
-    {
-        $this->setUrl( "/".$_SERVER["QUERY_STRING"] );
-        $this->setMethod( $_SERVER["REQUEST_METHOD"] );
-
-        return $this;
-    }
-	
 }
 
 ?>
