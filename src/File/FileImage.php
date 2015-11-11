@@ -190,7 +190,4 @@ Class FileImage extends File
 		return $this;
 	}
 
-
 }
-
-?>
