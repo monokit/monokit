@@ -9,38 +9,10 @@ use MonoKit\Http\Response\Response;
 
 Class Dispatcher extends Foundation
 {
-    /** @var UrlRequest */
-    protected $urlRequest;
     /** @var Controller */
     protected $controller;
     /** @var string */
     protected $action;
-
-    /**
-     * @param RouteManager $routeManager
-     */
-    public function __construct( UrlRequest $urlRequest )
-    {
-        $this->setUrlRequest( $urlRequest );
-    }
-
-    /**
-     * @param UrlRequest $urlRequest
-     * @return Dispatcher
-     */
-    public function setUrlRequest( UrlRequest $urlRequest )
-    {
-        $this->urlRequest = $urlRequest;
-        return $this;
-    }
-
-    /**
-     * @return UrlRequest
-     */
-    public function getUrlRequest()
-    {
-        return $this->urlRequest;
-    }
 
     /**
      * @param Controller $controller
@@ -59,7 +31,7 @@ Class Dispatcher extends Foundation
      */
     protected function setControllerFromString( $controllerName )
     {
-        $controller = $this->AppRegistry( "APPLICATION.NAMESPACE" ) . "\\" . MONOKIT_APPLICATION_CONTROLLER_DIRECTORY. "\\" . $controllerName;
+        $controller = $this->AppRegistry( "APPLICATION.NAMESPACE" ) . "\\Controller\\" . $controllerName;
 
         if ( !class_exists( $controller ) )
             throw new ControllerException( ControllerException::ERROR_CONTROLLER , $this , $controller );
@@ -101,24 +73,26 @@ Class Dispatcher extends Foundation
     }
 
     /**
-     * @return Response
+     * @param UrlRequest $urlRequest
+     * @return mixed|Response
+     * @throws ControllerException
      */
-    public function getResponse()
+    public function getResponse( UrlRequest $urlRequest )
     {
-        //http_response_code(404);
-        if ( !$route = $this->AppRouter()->getRouteByUrlRequest( $this->getUrlRequest() ) )
-        {
+        if ( !$route = $this->AppRouter()->getRouteByUrlRequest( $urlRequest ) )
+        { // HTTP RESPONSE CODE(404)
             header("HTTP/1.0 404 Not Found");
             $this->setControllerFromString( "AppController" );
             $this->setAction( "error404" );
 
             $content = call_user_func( array( $this->getController() , $this->getAction() ) );
-        } else {
-            //http_response_code(200);
+        }
+        else
+        { // HTTP RESPONSE CODE(200)
             $this->setControllerFromString( $route->getControllerName() );
             $this->setAction( $route->getActionName() );
 
-            $content = call_user_func_array( array( $this->getController() , $this->getAction() ) , $route->getUrlRequest()->getParametersValue( $this->getUrlRequest() ) );
+            $content = call_user_func_array( array( $this->getController() , $this->getAction() ) , $route->getUrlRequest()->getParametersValue( $urlRequest ) );
         }
 
         if ( $content instanceof Response )

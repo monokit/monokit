@@ -10,7 +10,7 @@ use MonoKit\Http\Dispatcher;
 use MonoKit\Http\UrlRequest;
 use MonoKit\View\View;
 
-Class Bundle extends Foundation
+Abstract Class Bundle extends Foundation
 {
     /**
      * @param string|null $fileView
@@ -24,10 +24,9 @@ Class Bundle extends Foundation
             throw new RegistryException( RegistryException::ERROR_APPLICATION_NAMESPACE , $this , $this->AppRegistry() );
 
         $UrlRequest = new UrlRequest();
-        $UrlRequest->autoDetect();
+        $Dispatcher = new Dispatcher();
 
-        $Dispatcher = new Dispatcher( $UrlRequest );
-        $Response = $Dispatcher->getResponse();
+        $Response = $Dispatcher->getResponse( $UrlRequest->autoDetect() );
 
         if ( $fileView && $Response instanceof ResponseHtml )
         {

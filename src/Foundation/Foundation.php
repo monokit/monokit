@@ -155,7 +155,6 @@ Abstract Class Foundation
 
     define( "MONOKIT_APPLICATION_VIEW_DIRECTORY"        , "View" );
     define( "MONOKIT_APPLICATION_ROUTE_SEPARATOR"       , ":" );
-    define( "MONOKIT_APPLICATION_CONTROLLER_DIRECTORY"  , "Controller" );
     define( "MONOKIT_APPLICATION_CONTROLLER_SUFFIX"     , "Controller" );
 
 ?>

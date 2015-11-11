@@ -6,11 +6,11 @@ use MonoKit\Manager\Entity;
 
 Class UrlRequest extends Entity
 {
-    const GET = "GET";
-    const PUT = "PUT";
-    const POST = "POST";
-    const HEAD = "HEAD";
-    const DELETE = "DELETE";
+    const GET       = "GET";
+    const PUT       = "PUT";
+    const POST      = "POST";
+    const HEAD      = "HEAD";
+    const DELETE    = "DELETE";
 
     /** @var string */
     protected $url;
