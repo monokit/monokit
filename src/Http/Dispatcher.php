@@ -2,6 +2,7 @@
 
 namespace MonoKit\Http;
 
+use MonoKit\Bundle\Bundle;
 use MonoKit\Foundation\Foundation;
 use MonoKit\Controller\Controller;
 use MonoKit\Controller\ControllerException;
@@ -29,9 +30,9 @@ Class Dispatcher extends Foundation
      * @return Dispatcher
      * @throws ControllerException
      */
-    protected function setControllerFromString( $controllerName )
+    protected function setControllerFromString( $controllerName , $namespace )
     {
-        $controller = $this->AppRegistry( "APPLICATION.NAMESPACE" ) . "\\Controller\\" . $controllerName;
+        $controller = "{$namespace}\\Controller\\{$controllerName}";
 
         if ( !class_exists( $controller ) )
             throw new ControllerException( ControllerException::ERROR_CONTROLLER , $this , $controller );
@@ -74,22 +75,23 @@ Class Dispatcher extends Foundation
 
     /**
      * @param UrlRequest $urlRequest
+     * @param Bundle $bundle
      * @return mixed|Response
      * @throws ControllerException
      */
-    public function getResponse( UrlRequest $urlRequest )
+    public function getResponse( UrlRequest $urlRequest , Bundle $bundle )
     {
         if ( !$route = $this->AppRouter()->getRouteByUrlRequest( $urlRequest ) )
         { // HTTP RESPONSE CODE(404)
             header("HTTP/1.0 404 Not Found");
-            $this->setControllerFromString( "AppController" );
+            $this->setControllerFromString( "AppController" , $bundle->getClassNamespace() );
             $this->setAction( "error404" );
 
             $content = call_user_func( array( $this->getController() , $this->getAction() ) );
         }
         else
         { // HTTP RESPONSE CODE(200)
-            $this->setControllerFromString( $route->getControllerName() );
+            $this->setControllerFromString( $route->getControllerName() , $bundle->getClassNamespace() );
             $this->setAction( $route->getActionName() );
 
             $content = call_user_func_array( array( $this->getController() , $this->getAction() ) , $route->getUrlRequest()->getParametersValue( $urlRequest ) );
