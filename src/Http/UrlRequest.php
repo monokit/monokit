@@ -15,7 +15,7 @@ Class UrlRequest extends Entity
     /** @var string */
     protected $url = "/";
 	/** @var string */
-	protected $method = "GET";
+	protected $method = self::GET;
 
     /**
      * @param string $url
