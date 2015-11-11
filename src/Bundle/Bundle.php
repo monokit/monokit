@@ -1,6 +1,6 @@
 <?php
 
-namespace MonoKit;
+namespace MonoKit\Bundle;
 
 use MonoKit\Foundation\Foundation;
 use MonoKit\Registry\RegistryException;
@@ -10,7 +10,7 @@ use MonoKit\Http\Dispatcher;
 use MonoKit\Http\UrlRequest;
 use MonoKit\View\View;
 
-Class MonoKitApplication extends Foundation
+Class Bundle extends Foundation
 {
     /**
      * @param string|null $fileView
