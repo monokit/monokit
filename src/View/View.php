@@ -92,4 +92,14 @@ Class View extends Foundation
         return $content;
     }
 
+    /**
+     * @param string $routeName
+     * @return string
+     */
+    public function getUrlByRouteName( $routeName )
+    {
+        // TODO
+        return $this->AppRouter()->getRouteByName( $routeName )->getUrlRequest()->getUrl();
+    }
+
 }

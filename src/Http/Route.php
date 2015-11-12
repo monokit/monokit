@@ -54,8 +54,6 @@ Class Route extends Entity
     {
         $this->UrlRequest->setUrl( $pattern );
 
-        $pattern = strtolower( $pattern );
-
         $patterns = array();
         $patterns[] = '#{[\w+]+}#';
         $patterns[] = '#{[\w+]+:int}#';

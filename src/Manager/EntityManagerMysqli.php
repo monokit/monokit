@@ -89,7 +89,4 @@ Abstract Class EntityManagerMysqli extends EntityManager
 		return $this->mysqli->insert_id;
 	}
 
-
 }
-
-?>
