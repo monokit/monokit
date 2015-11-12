@@ -64,7 +64,7 @@ Class Route extends Entity
         $replaces[] = '[\d]+';
         $replaces[] = '[\D]+';
 
-        $this->pattern = "#^".preg_replace( $patterns , $replaces , $pattern )."$#";
+        $this->pattern = '#^'.preg_replace( $patterns , $replaces , $pattern ).'$#i';
 
         return $this;
     }

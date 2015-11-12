@@ -9,7 +9,7 @@ use MonoKit\Foundation\Exception\Exception;
  * Cette classe gère un fichier sélectionné sur le serveur.
  *
  * @author Micka VAN HAREN
- * @version 07/2015
+ * @version 11/2015
  */
 Class File extends Entity
 {

@@ -1,22 +1,19 @@
 <?php
 
-namespace MonoKit\Bundle;
+namespace MonoKit\App;
 
 use MonoKit\View\View;
 use MonoKit\Http\Dispatcher;
 use MonoKit\Http\UrlRequestDiscover;
-use MonoKit\Http\Response\Response;
 use MonoKit\Http\Response\ResponseHtml;
-use MonoKit\Registry\RegistryException;
 use MonoKit\Foundation\Foundation;
 
-Abstract Class Bundle extends Foundation
+Abstract Class App extends Foundation
 {
     /**
-     * @param string|null $fileView
-     * @param mixed|null $data
-     * @return Response|null
-     * @throws RegistryException
+     * @param null $fileView
+     * @param null $data
+     * @return mixed|View
      */
     public function render( $fileView = null , $data = null )
     {
@@ -35,6 +32,28 @@ Abstract Class Bundle extends Foundation
         echo $Response->getContent();
 
         return $Response->getContent();
+    }
+
+    /**
+     * @param $iniFile
+     * @return App
+     * @throws \MonoKit\File\FileException
+     */
+    public function setAppRegistryFromIniFile( $iniFile )
+    {
+        $this->AppRegistry()->setFromIniFile( $iniFile );
+        return $this;
+    }
+
+    /**
+     * @param string $iniFile
+     * @return App
+     * @throws \MonoKit\File\FileException
+     */
+    public function setAppRouterFromIniFile( $iniFile )
+    {
+        $this->AppRouter()->setFromIniFile( $iniFile );
+        return $this;
     }
 
 }

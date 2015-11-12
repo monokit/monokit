@@ -2,7 +2,7 @@
 
 namespace MonoKit\Http;
 
-use MonoKit\Bundle\Bundle;
+use MonoKit\App\App;
 use MonoKit\Foundation\Foundation;
 use MonoKit\Controller\Controller;
 use MonoKit\Controller\ControllerException;
@@ -75,23 +75,23 @@ Class Dispatcher extends Foundation
 
     /**
      * @param UrlRequest $urlRequest
-     * @param Bundle $bundle
+     * @param App $app
      * @return mixed|Response
      * @throws ControllerException
      */
-    public function getResponse( UrlRequest $urlRequest , Bundle $bundle )
+    public function getResponse( UrlRequest $urlRequest , App $app )
     {
         if ( !$route = $this->AppRouter()->getRouteByUrlRequest( $urlRequest ) )
         { // HTTP RESPONSE CODE(404)
             header("HTTP/1.0 404 Not Found");
-            $this->setControllerFromString( "AppController" , $bundle->getClassNamespace() );
+            $this->setControllerFromString( "AppController" , $app->getClassNamespace() );
             $this->setAction( "error404" );
 
             $content = call_user_func( array( $this->getController() , $this->getAction() ) );
         }
         else
         { // HTTP RESPONSE CODE(200)
-            $this->setControllerFromString( $route->getControllerName() , $bundle->getClassNamespace() );
+            $this->setControllerFromString( $route->getControllerName() , $app->getClassNamespace() );
             $this->setAction( $route->getActionName() );
 
             $content = call_user_func_array( array( $this->getController() , $this->getAction() ) , $route->getUrlRequest()->getParametersValue( $urlRequest ) );

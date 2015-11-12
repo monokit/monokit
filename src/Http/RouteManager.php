@@ -69,7 +69,7 @@ Class RouteManager extends EntityManager
      */
     public function comparePattern( Route $route , UrlRequest $urlRequest )
     {
-        return preg_match( strtolower( $route->getPattern() ) , strtolower( $urlRequest->getUrl() ) );
+        return preg_match( $route->getPattern() , $urlRequest->getUrl() );
     }
 
     /**

@@ -13,7 +13,8 @@ class FileManager extends EntityManager
     public function getFilesFromDirectory( $directory )
     {
         if ( is_dir($directory) )
-            foreach (scandir($directory) AS $file) {
+            foreach (scandir($directory) AS $file)
+            {
                 if (substr($file, 0, 1) != ".") {
                     $File = new File(rtrim($directory, "/") . "/" . $file);
 

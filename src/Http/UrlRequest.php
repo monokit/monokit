@@ -87,7 +87,7 @@ Class UrlRequest extends Entity
      */
     public function getParametersValue( UrlRequest $urlRequest )
     {
-        return array_diff( explode( "/" , $urlRequest->getUrl() ) , explode( "/" , $this->getUrl() ) );
+        return array_udiff( explode( "/" , $urlRequest->getUrl() ) , explode( "/" , $this->getUrl() ) , 'strcasecmp' );
     }
 
 }
