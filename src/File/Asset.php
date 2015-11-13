@@ -17,15 +17,16 @@ class Asset extends File
     {
         $url = ltrim( $url , "/" );
 
-        preg_match('/@(?P<AppName>\w+):/', $url , $matches );
+        preg_match('/@(?P<AppName>\w+)\//', $url , $matches );
 
         if ( isset( $matches["AppName"] ) )
         {
             $this->setAppName( $matches["AppName"] );
 
-            $urlArray = explode(":" , $url , 2 );
+            $urlArray = explode("@{$this->getAppName()}/" , $url , 2 );
 
             $this->setUrl( "../../{$this->getAppName()}/Assets/{$urlArray[1]}" );
+
         } else {
             $this->setUrl( $url );
         }
