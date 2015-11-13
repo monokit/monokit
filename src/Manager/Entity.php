@@ -81,7 +81,7 @@ Abstract Class Entity extends Foundation implements EntityInterface
      */
     public function getUniqueId()
     {
-        return hexdec( uniqid() );
+        return number_format( hexdec( uniqid() ) , 0 , '', '' );
     }
 
     /**
