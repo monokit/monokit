@@ -226,6 +226,9 @@ Class File extends Entity
 	 */
 	public function rename( $newName )
 	{
+		if ( !$this->isFile() )
+			return false;
+
 		rename( $this->file , $newName );
 		$this->file = $newName;
 		return $this;
@@ -240,6 +243,9 @@ Class File extends Entity
 	 */
 	public function duplicate( $newName )
 	{
+		if ( !$this->isFile() )
+			return false;
+
 		copy( $this->file , $newName );
 		return $this;
 	}
@@ -252,6 +258,9 @@ Class File extends Entity
 	 */
 	public function remove()
 	{
+		if ( !$this->isFile() )
+			return false;
+
 		return unlink( $this->file );
 	}
 
