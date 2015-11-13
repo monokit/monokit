@@ -21,7 +21,7 @@ Class Controller extends Foundation
     /**
      * @param string $viewFile
      * @param mixed|null $data
-     * @return mixed
+     * @return ResponseHtml
      */
     protected function render( $viewFile , $data = null )
     {
