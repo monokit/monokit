@@ -77,11 +77,12 @@ Abstract Class Entity extends Foundation implements EntityInterface
     }
 
     /**
-     * @return int
+     * @return Entity
      */
-    public function getUniqueId()
+    public function setUniqueId()
     {
-        return number_format( hexdec( uniqid() ) , 0 , '', '' );
+        $this->setProperty( "id" , number_format( hexdec( uniqid() ) , 0 , '', '' ) );
+        return $this;
     }
 
     /**
