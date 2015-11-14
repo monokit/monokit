@@ -107,7 +107,7 @@ Abstract Class Foundation
      */
     final protected function getClassName()
     {
-        return basename( get_class( $this ) );
+        return end( explode( "\\" , get_class($this) ) );
     }
 
     /**

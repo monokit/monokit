@@ -70,9 +70,9 @@ Abstract Class App extends Foundation
         if ( isset( $matches["AppName"] ) )
         {
             $urlArray = explode("@{$matches['AppName']}/" , $fileUrl , 2 );
-            $url = "../../{$matches['AppName']}/Assets/{$urlArray[1]}";
+            $url = __SRC__ . "{$matches['AppName']}/Assets/{$urlArray[1]}";
         } else {
-            $url = __DIR__ . "/Assets/" . $fileUrl;
+            $url = __SRC__ . "{$this->getClassName()}/Assets/" . $fileUrl;
         }
 
         $File = new File( $url );
