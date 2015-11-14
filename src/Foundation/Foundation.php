@@ -151,7 +151,7 @@ Abstract Class Foundation
     define( "__EMPTY__"     , "''" );
     define( "__RETURN__"    , "\n" );
 
-    define( "__SRC__" , __DIR__ . "/../../../../src/" );
+    define( "__SRC__" , __DIR__ . "/../../../../../src/" );
     define( "__ROOT__" , ( !empty( $_SERVER["QUERY_STRING"] ) ) ? substr( $_SERVER["REQUEST_URI"] , 0, -(strlen( $_SERVER["QUERY_STRING"] ) ) ) : $_SERVER["REQUEST_URI"] );
 
     define( "MONOKIT_APPLICATION_VIEW_DIRECTORY"        , "View" );
