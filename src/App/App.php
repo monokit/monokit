@@ -81,7 +81,6 @@ Abstract Class App extends Foundation
         {
             header( "Content-type:".$File->getMimeType() );
             echo $File->getFileContent();
-            exit();
         } else {
             header("HTTP/1.0 404 Not Found");
         }
