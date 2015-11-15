@@ -5,7 +5,6 @@ namespace MonoKit\App;
 use MonoKit\File\File;
 use MonoKit\View\View;
 use MonoKit\Http\Dispatcher;
-use MonoKit\Http\UrlRequestDiscover;
 use MonoKit\Http\Response\ResponseHtml;
 use MonoKit\Foundation\Foundation;
 
@@ -41,9 +40,8 @@ Abstract Class App extends Foundation
     public function render( $fileView = null , $data = null )
     {
         $Dispatcher = new Dispatcher();
-        $UrlRequest = new UrlRequestDiscover();
 
-        $Response = $Dispatcher->getResponse( $UrlRequest , $this );
+        $Response = $Dispatcher->getResponse( $this->getUrlRequest() , $this );
 
         if ( $fileView && $Response instanceof ResponseHtml )
         {

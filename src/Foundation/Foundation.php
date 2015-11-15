@@ -4,6 +4,7 @@ namespace MonoKit\Foundation;
 
 use MonoKit\Http\Route;
 use MonoKit\Http\RouteManager;
+use MonoKit\Http\UrlRequestDiscover;
 use MonoKit\Registry\Registry;
 
 Abstract Class Foundation
@@ -118,6 +119,14 @@ Abstract Class Foundation
     final protected function getClassNamespace()
     {
         return substr( get_class($this) , 0 , strrpos( get_class($this) , '\\' ) );
+    }
+
+    /**
+     * @return UrlRequestDiscover
+     */
+    public function getUrlRequest()
+    {
+        return new UrlRequestDiscover();
     }
 
     /**
