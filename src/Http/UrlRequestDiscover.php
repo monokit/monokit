@@ -9,7 +9,13 @@ class UrlRequestDiscover extends UrlRequest
      */
     public function __construct()
     {
-        $this->setUrl( "/" . $_SERVER["QUERY_STRING"] );
+        $url = ( isset( $_SERVER["REDIRECT_QUERY_STRING"] ) ) ? $_SERVER["REDIRECT_QUERY_STRING"] : "";
+
+        $this->setUrl( "/" . strstr( $url , "&" , true ) );
         $this->setMethod( $_SERVER["REQUEST_METHOD"] );
+
+        foreach( $_GET as $key => $value )
+            $this->setParam( $key , $value );
+
     }
 }

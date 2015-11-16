@@ -25,21 +25,9 @@ Class UrlRequest extends Entity
      */
     public function setUrl( $url )
     {
-        $urlArray = explode( "&" , $url , 2 );
-
         // Supprime le dernier "/"
-        $this->url = ( $urlArray[0] != "/" ) ? rtrim( $urlArray[0] , "/" ) : $urlArray[0];
+        $this->url = ( $url != "/" ) ? rtrim( $url , "/" ) : $url;
         $this->url = str_replace( "//" , "/" , $this->url );
-
-        // Gestion des params ?xxx=xxx
-        if ( isset( $urlArray[1]) )
-        {
-            foreach( explode( "&" , $urlArray[1] ) as $param )
-            {
-                list($key,$value) = explode( "=" , $param );
-                $this->setParam( $key , $value );
-            }
-        }
 
         return $this;
     }
