@@ -38,6 +38,14 @@ Class UrlRequest extends Entity
         return $this->url;
     }
 
+    /**
+     * @return string
+     */
+    public function getFullUrl()
+    {
+        return rtrim( __ROOT__ , "/" ) . $this->getUrl();
+    }
+
 	/**
 	* @param string $method
 	* @return UrlRequest
