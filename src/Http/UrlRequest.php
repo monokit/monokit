@@ -16,6 +16,8 @@ Class UrlRequest extends Entity
     protected $url = "/";
 	/** @var string */
 	protected $method = self::GET;
+    /** @var array */
+    protected $params;
 
     /**
      * @param string $url
@@ -23,9 +25,21 @@ Class UrlRequest extends Entity
      */
     public function setUrl( $url )
     {
+        $urlArray = explode( "&" , $url , 2 );
+
         // Supprime le dernier "/"
-        $this->url = ( $url != "/" ) ? rtrim( $url , "/" ) : $url;
+        $this->url = ( $urlArray[0] != "/" ) ? rtrim( $urlArray[0] , "/" ) : $urlArray[0];
         $this->url = str_replace( "//" , "/" , $this->url );
+
+        // Gestion des params ?xxx=xxx
+        if ( isset( $urlArray[1]) )
+        {
+            foreach( explode( "&" , $urlArray[1] ) as $param )
+            {
+                list($key,$value) = explode( "=" , $param );
+                $this->setParam( $key , $value );
+            }
+        }
 
         return $this;
     }
@@ -85,6 +99,26 @@ Class UrlRequest extends Entity
     public function is( $method )
     {
         return ( $this->method == strtoupper( $method ) ) ? true : false;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed|null $value
+     * @return UrlRequest
+     */
+    public function setParam( $key , $value = null )
+    {
+        $this->params[strtoupper($key)] = $value;
+        return $this;
+    }
+
+    /**
+     * @param $key
+     * @return mixed
+     */
+    public function getParam( $key )
+    {
+        return $this->params[strtoupper($key)];
     }
 
     /**
