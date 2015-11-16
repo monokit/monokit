@@ -15,10 +15,11 @@ class Registry extends Foundation implements RegistryInterface, Arrayable
     /**
      * @param string $key
      * @param string $value
+     * @param string $defaultValue
      * @return Registry
      * @throws RegistryException
      */
-    public function set( $key , $value )
+    public function set( $key , $value = null , $defaultValue = null )
     {
         if ( empty( $key ) )
             throw new RegistryException( RegistryException::ERROR_EMPTY_KEY , $this );
@@ -28,7 +29,7 @@ class Registry extends Foundation implements RegistryInterface, Arrayable
         foreach ( explode( "." , strtoupper($key) ) as $registryKey )
             $m = &$m[$registryKey];
 
-        $m = $value;
+        $m = ( empty( $value ) ) ? $defaultValue : $value;
 
         $this->data = array_change_key_case( $this->data , CASE_UPPER );
 

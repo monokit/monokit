@@ -22,15 +22,15 @@ Abstract Class Foundation
      * @return mixed|Registry
      * @throws \MonoKit\Registry\RegistryException
      */
-    public static function AppRegistry( $key = null , $value = null )
+    public static function AppRegistry( $key = null , $value = null , $defaultValue = null )
     {
         if( is_null( self::$AppRegistry_instance ) )
             self::$AppRegistry_instance = new Registry();
 
-        if ( !is_null($key) && is_null($value) )
+        if ( !is_null($key) && is_null($value) && is_null($defaultValue) )
             return self::$AppRegistry_instance->get( $key );
         elseif ( !is_null($key) )
-            return self::$AppRegistry_instance->set( $key , $value );
+            return self::$AppRegistry_instance->set( $key , $value , $defaultValue );
 
         return self::$AppRegistry_instance;
     }
