@@ -15,6 +15,8 @@ Abstract Class Foundation
     private static $AppRouter_instance;
     /** @var Registry */
     private static $AppService_instance;
+    /** @var Registry */
+    private static $AppTranslate_instance;
 
     /**
      * @param string|null $key
@@ -73,6 +75,25 @@ Abstract Class Foundation
     }
 
     /**
+     * @param string|null $key
+     * @param mixed|null $value
+     * @return mixed|Registry
+     * @throws \MonoKit\Registry\RegistryException
+     */
+    public static function AppTranslate( $key = null , $value = null )
+    {
+        if( is_null( self::$AppTranslate_instance ) )
+            self::$AppTranslate_instance = new Registry();
+
+        if ( !is_null($key) && is_null($value) )
+            return self::$AppTranslate_instance->get( $key );
+        elseif ( !is_null($key) )
+            return self::$AppTranslate_instance->set( $key , $value );
+
+        return self::$AppTranslate_instance;
+    }
+
+    /**
      * @param string $label
      * @param string $message
      * @return $this
@@ -99,6 +120,20 @@ Abstract Class Foundation
     public function hasFlash( $label )
     {
         return $this->AppRegistry()->has( "SYSTEM.FLASH.{$label}");
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    public function getTranslate( $key )
+    {
+        $key .= __DOT__ . $this->AppRegistry( "APPLICATION.LANGUAGE" );
+        $args = func_get_args();
+
+        array_splice( $args , 0 , 1 );
+
+        return vsprintf( $this->AppTranslate( $key ) , $args );
     }
 
     /**

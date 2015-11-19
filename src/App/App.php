@@ -33,6 +33,17 @@ Abstract Class App extends Foundation
     }
 
     /**
+     * @param string $iniFile
+     * @return App
+     * @throws \MonoKit\File\FileException
+     */
+    public function setAppTranslateFromIniFile( $iniFile )
+    {
+        $this->AppTranslate()->setFromIniFile( $iniFile );
+        return $this;
+    }
+
+    /**
      * @param null $fileView
      * @param null $data
      * @return mixed|View
