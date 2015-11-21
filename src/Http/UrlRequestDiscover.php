@@ -12,8 +12,10 @@ class UrlRequestDiscover extends UrlRequest
         $url = ( isset( $_SERVER["REDIRECT_QUERY_STRING"] ) ) ? $_SERVER["REDIRECT_QUERY_STRING"] : "";
         $url = ( strstr( $url , "&" , true ) ) ? strstr( $url , "&" , true ) : $url;
 
+        $method = ( isset( $_POST["_method"] ) ) ? $_POST["_method"] : $_SERVER[ "REQUEST_METHOD" ];
+
         $this->setUrl( "/" . $url );
-        $this->setMethod( $_SERVER["REQUEST_METHOD"] );
+        $this->setMethod( $method );
 
         foreach( $_GET as $key => $value )
             $this->setParam( $key , $value );
