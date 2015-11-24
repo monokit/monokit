@@ -11,8 +11,6 @@ class Mail extends Foundation
     /** @var string */
     protected $senderMail;
     /** @var string */
-    protected $addressMail;
-    /** @var string */
     protected $subject = "No subject";
     /** @var string */
     protected $body;
@@ -33,24 +31,6 @@ class Mail extends Foundation
     public function getSenderMail()
     {
         return $this->senderMail;
-    }
-
-    /**
-     * @param string $addressMail
-     * @return Mail
-     */
-    public function setAddressMail($addressMail)
-    {
-        $this->addressMail = ( filter_var( $addressMail , FILTER_VALIDATE_EMAIL) ) ? $addressMail : null;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAddressMail()
-    {
-        return $this->addressMail;
     }
 
     /**
@@ -100,17 +80,20 @@ class Mail extends Foundation
     }
 
     /**
+     * @param string $email
      * @return bool
      */
-    public function send()
+    public function send( $email )
     {
-        if ( $this->getBody() && $this->getSenderMail() && $this->getAddressMail() )
+        $email = ( filter_var( $email , FILTER_VALIDATE_EMAIL) ) ? $email : null;
+
+        if ( $this->getBody() && $this->getSenderMail() && $email )
         {
             $content  		= "From:{$this->getSenderMail()}\n";
             $content		.= "MIME-version: 1.0\n";
             $content		.= "Content-type: text/html; charset= iso-8859-1\n";
 
-            return mail( $this->getAddressMail() , $this->getSubject() , $this->getBody() , $content );
+            return mail( $email , $this->getSubject() , $this->getBody() , $content );
         }
 
         return false;
