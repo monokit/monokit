@@ -39,7 +39,7 @@ Class FileImage extends File
 	public function getWidth()
 	{
 		$imageInfo = getimagesize( $this->file );
-		return $imageInfo[1];
+		return $imageInfo[0];
 	}
 
 	/**
@@ -48,7 +48,7 @@ Class FileImage extends File
 	public function getHeight()
 	{
 		$imageInfo = getimagesize( $this->file );
-		return $imageInfo[0];
+		return $imageInfo[1];
 	}
 
 	/**
