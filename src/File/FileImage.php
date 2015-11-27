@@ -12,21 +12,8 @@ use MonoKit\Utility\Dimension;
  */
 Class FileImage extends File
 {
-	/** @var array */
-	protected $imageInfo;
 	/** @var int */
 	protected $quality = 80;
-
-	/**
-	 * @param string $file
-	 */
-	public function __construct( $file )
-	{
-		parent::__construct( $file );
-
-		if ( $this->isFile() )
-			$this->imageInfo = getimagesize( $this->file );
-	}
 
 	/**
 	 * @param int $quality
@@ -52,7 +39,7 @@ Class FileImage extends File
 	public function getWidth()
 	{
 		$imageInfo = getimagesize( $this->file );
-		return $imageInfo['width'];
+		return $imageInfo[1];
 	}
 
 	/**
@@ -61,7 +48,7 @@ Class FileImage extends File
 	public function getHeight()
 	{
 		$imageInfo = getimagesize( $this->file );
-		return $imageInfo['height'];
+		return $imageInfo[0];
 	}
 
 	/**
@@ -70,7 +57,7 @@ Class FileImage extends File
 	public function getType()
 	{
 		$imageInfo = getimagesize( $this->file );
-		return $imageInfo['type'];
+		return $imageInfo[2];
 	}
 
 	/**
