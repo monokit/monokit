@@ -19,12 +19,13 @@ Class File extends Entity
 	protected $content;
 
     /**
-     * @param string $file
+     * @param string|null $file
      * @throws Exception
      */
-	public function __construct( $file )
+	public function __construct( $file = null )
 	{
-		$this->setFile( $file );
+		if ( !is_null( $file) )
+			$this->setFile( $file );
 	}
 
 	/**
