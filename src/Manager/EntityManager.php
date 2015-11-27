@@ -4,6 +4,7 @@ namespace MonoKit\Manager;
 
 use MonoKit\Foundation\Foundation;
 use MonoKit\Foundation\Arrayable;
+use MonoKit\Foundation\Stringable;
 
 Abstract class EntityManager extends Foundation implements \Iterator, \Countable, Arrayable
 {

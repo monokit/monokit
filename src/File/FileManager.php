@@ -2,9 +2,10 @@
 
 namespace MonoKit\File;
 
+use MonoKit\Foundation\Stringable;
 use MonoKit\Manager\EntityManager;
 
-class FileManager extends EntityManager
+class FileManager extends EntityManager implements Stringable
 {
     /**
      * @param string $directory
@@ -24,5 +25,18 @@ class FileManager extends EntityManager
             }
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function toString()
+    {
+        $files = array();
+
+        foreach( $this->toArray() AS $File )
+            $files[] = $File->getFile();
+
+        return implode( "," , $files );
     }
 }
