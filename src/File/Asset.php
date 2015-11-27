@@ -10,7 +10,7 @@ class Asset extends File
     /**
      * Asset constructor.
      * @param string $asset
-     * throws Exception
+     * throws AssetException
      */
     public function __construct( $asset )
     {

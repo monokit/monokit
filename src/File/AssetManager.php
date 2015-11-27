@@ -2,9 +2,10 @@
 
 namespace MonoKit\File;
 
+use MonoKit\Foundation\Stringable;
 use MonoKit\Manager\EntityManager;
 
-class AssetManager extends EntityManager
+class AssetManager extends EntityManager implements Stringable
 {
     /**
      * @param string $directory
@@ -33,5 +34,18 @@ class AssetManager extends EntityManager
             }
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function toString()
+    {
+        $assets = array();
+
+        foreach( $this AS $Asset )
+            $assets[] = $Asset->getProperty( "asset" );
+
+        return implode( "," , $assets );
     }
 }
