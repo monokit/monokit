@@ -24,7 +24,7 @@ Class File extends Entity
      */
 	public function __construct( $file = null )
 	{
-		if ( !is_null( $file) )
+		if ( !is_null( $file ) )
 			$this->setFile( $file );
 	}
 
