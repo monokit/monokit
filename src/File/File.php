@@ -34,7 +34,6 @@ Class File extends Entity
 	public function setFile( $file )
 	{
 		$this->file = $file;
-
 		return $this;
 	}
 
