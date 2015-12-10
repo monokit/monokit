@@ -89,7 +89,7 @@ class SqlSelect extends Foundation implements SqlInterface
     }
 
     /**
-     * @param $condition
+     * @param string $condition
      * @param bool|true $autoAlias
      * @return SqlSelect
      */
@@ -106,16 +106,33 @@ class SqlSelect extends Foundation implements SqlInterface
     }
 
     /**
-     * @param $order
+     * @param string $order
      * @param bool|true $autoAlias
      * @return SqlSelect
      */
     public function order( $order , $autoAlias = true )
     {
-        $value = ( $autoAlias == true ) ? $this->table->getAlias() . __DOT__ . $order : $order;
+        if ( $autoAlias )
+        {
+            $this->table->setOrder( $this->table->getAlias() . __DOT__ . $order );
+        } else {
+            $this->table->setOrder( $order );
+        }
 
-        $this->table->setOrder( $value );
         return $this;
+    }
+
+    /**
+     * @param string $order
+     * @param string $type
+     * @param bool|true $autoAlias
+     * @return $this
+     */
+    public function orderBy( $order , $type = "ASC" , $autoAlias = true )
+    {
+        $this->table->setOrderType( $type );
+
+        return $this->order( $order , $autoAlias );
     }
 
     /**
