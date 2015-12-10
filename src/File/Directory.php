@@ -12,7 +12,7 @@ class Directory extends Foundation
      * @param bool|true $recursive
      * @return bool
      */
-    public function createDirectory( $dir , $mode = "0777" , $recursive = true )
+    public function create( $dir , $mode = "0777" , $recursive = true )
     {
         return mkdir( $dir , $mode , $recursive  );
     }
@@ -21,12 +21,12 @@ class Directory extends Foundation
      * @param string $dir
      * @return bool
      */
-    public function deleteDirectory( $dir )
+    public function delete( $dir )
     {
         $files = array_diff( scandir( $dir ) , array('.','..') );
 
         foreach ($files as $file)
-            ( is_dir( "{$dir}/{$file}" ) ) ? $this->deleteDirectory( "{$dir}/{$file}" ) : unlink( "{$dir}/{$file}" );
+            ( is_dir( "{$dir}/{$file}" ) ) ? $this->delete( "{$dir}/{$file}" ) : unlink( "{$dir}/{$file}" );
 
         return rmdir( $dir );
     }
