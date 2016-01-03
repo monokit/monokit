@@ -21,7 +21,7 @@ class SqlSelect extends Foundation implements SqlInterface
      * @param string $tableName
      * @param string|null $tableAlias
      */
-    public function __construct($tableName, $tableAlias = null)
+    public function __construct( $tableName , $tableAlias = null )
     {
         $this->table = new SqlTable($tableName, $tableAlias);
         $this->JoinTableManager = new SqlTableManager();
@@ -43,7 +43,7 @@ class SqlSelect extends Foundation implements SqlInterface
      * @param string $condition
      * @return SqlSelect
      */
-    public function setInnerJoin($tableName, $columns, $condition)
+    public function setInnerJoin( $tableName , $columns , $condition)
     {
         $Table = new SqlInnerJoinTable($tableName);
         $Table->setColumns(explode(",", $columns));
@@ -60,13 +60,15 @@ class SqlSelect extends Foundation implements SqlInterface
      * @param string $condition
      * @return SqlSelect
      */
-    public function setLeftJoin($tableName, $columns, $condition)
+    public function setLeftJoin( $tableName , $columns , $condition )
     {
-        $Table = new SqlLeftJoinTable($tableName);
-        $Table->setColumns(explode(",", $columns));
-        $Table->setCondition($condition);
+        $tableName = explode( " AS " , $tableName );
 
-        $this->JoinTableManager->addTable($Table);
+        $Table = new SqlLeftJoinTable( $tableName[0] , end($tableName) );
+        $Table->setColumns( explode( "," , $columns ) );
+        $Table->setCondition( $condition );
+
+        $this->JoinTableManager->addTable( $Table );
 
         return $this;
     }
@@ -77,7 +79,7 @@ class SqlSelect extends Foundation implements SqlInterface
      * @param string $condition
      * @return SqlSelect
      */
-    public function setRightJoin( $tableName, $columns, $condition )
+    public function setRightJoin( $tableName , $columns , $condition )
     {
         $Table = new SqlRightJoinTable( $tableName );
         $Table->setColumns( explode( "," , $columns ) );
