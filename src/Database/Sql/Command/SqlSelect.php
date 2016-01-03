@@ -45,8 +45,10 @@ class SqlSelect extends Foundation implements SqlInterface
      */
     public function setInnerJoin( $tableName , $columns , $condition)
     {
-        $Table = new SqlInnerJoinTable($tableName);
-        $Table->setColumns(explode(",", $columns));
+        $tableName = explode( " AS " , $tableName );
+
+        $Table = new SqlInnerJoinTable( $tableName[0] , end($tableName) );
+        $Table->setColumns( explode( "," , $columns ));
         $Table->setCondition($condition);
 
         $this->JoinTableManager->addTable($Table);
@@ -81,7 +83,9 @@ class SqlSelect extends Foundation implements SqlInterface
      */
     public function setRightJoin( $tableName , $columns , $condition )
     {
-        $Table = new SqlRightJoinTable( $tableName );
+        $tableName = explode( " AS " , $tableName );
+
+        $Table = new SqlRightJoinTable( $tableName[0] , end($tableName) );
         $Table->setColumns( explode( "," , $columns ) );
         $Table->setCondition( $condition );
 
