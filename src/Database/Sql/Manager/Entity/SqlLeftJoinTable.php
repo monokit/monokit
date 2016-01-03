@@ -9,6 +9,9 @@ class SqlLeftJoinTable extends SqlJoinTable
      */
     public function toString()
     {
+        if ( $this->getAlias() )
+            return sprintf("LEFT JOIN %s AS %s ON %s" , $this->getName() , $this->getAlias() , $this->condition );
+
         return sprintf("LEFT JOIN %s ON %s" , $this->getName() , $this->condition );
     }
 }
