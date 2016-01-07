@@ -19,7 +19,7 @@ class SqlJoinTable extends SqlTable implements Stringable
             if ( strpos( $columnName , " AS " ) )
             {
                 $columnNameArray = explode( " AS " , $columnName );
-                $Column = new SqlColumn( "{$columnName} AS '".end($columnNameArray)."'" );
+                $Column = new SqlColumn( current($columnNameArray)." AS '".end($columnNameArray)."'" );
             } else {
                 $Column = new SqlColumn( "{$columnName} AS '{$columnName}'" );
             }
