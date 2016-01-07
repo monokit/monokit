@@ -14,7 +14,15 @@ class SqlJoinTable extends SqlTable implements Stringable
     {
         foreach( $columnsName AS $columnName )
         {
-            $Column = new SqlColumn( $this->getAlias().__DOT__.$columnName." AS '".$this->getAlias().__DOT__.$columnName."'" );
+            $columnName = $this->getAlias().__DOT__.$columnName;
+
+            if ( strpos( $columnName , " AS " ) )
+            {
+                $columnNameArray = explode( " AS " , $columnName );
+                $Column = new SqlColumn( "{$columnName} AS '".end($columnNameArray)."'" );
+            } else {
+                $Column = new SqlColumn( "{$columnName} AS '{$columnName}'" );
+            }
 
             $this->getColumnManager()->addColumn( $Column );
         }
