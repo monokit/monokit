@@ -194,6 +194,7 @@ Abstract Class Foundation
     define( "__SPACE__"     , " " );
     define( "__EMPTY__"     , "''" );
     define( "__RETURN__"    , "\n" );
+    define( "__LOREM__"     , "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis aliquet euismod. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin interdum ultricies odio id luctus. Pellentesque eu massa vitae mi semper blandit. Ut lobortis ex ultrices sem auctor, vel finibus nisl viverra. Morbi pulvinar sapien lacus. Vivamus mollis fermentum purus, vel laoreet neque tempus id. Sed tempus tristique vestibulum. Maecenas nec felis facilisis, molestie ipsum et, placerat tellus. Ut hendrerit tempus vestibulum. Suspendisse potenti." );
 
     define( "__SRC__" , __DIR__ . "/../../../../../src/" );
     define( "__ROOT__" , ( !empty( $_SERVER["QUERY_STRING"] ) ) ? substr( $_SERVER["REQUEST_URI"] , 0, -(strlen( $_SERVER["QUERY_STRING"] ) ) ) : $_SERVER["REQUEST_URI"] );
