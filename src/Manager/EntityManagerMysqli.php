@@ -66,7 +66,7 @@ Abstract Class EntityManagerMysqli extends EntityManager
 
         while( $data = $this->mysqli_result->fetch_assoc() )
         {
-            $e = clone $entity;
+            $e = new $entity;
             $this->add( $e->setProperties( $data ) );
         }
 
