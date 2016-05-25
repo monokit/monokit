@@ -84,7 +84,7 @@ Class EntityManagerMysqli extends EntityManager
     {
         $this->sql = $sql;
 
-        AppRegistry::AppRegistry( "APPLICATION.DATABASE.SQL.".$this->getUniqueId() , $sql->toString() );
+        AppRegistry::AppRegistry( AppRegistry::APPLICATION_DATABASE_SQL , $sql->toString() );
 
         return $this;
     }

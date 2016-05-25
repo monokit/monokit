@@ -13,6 +13,7 @@ Abstract Class AppRegistry
     const APPLICATION_NOTIFY            = "APPLICATION.NOTIFY";
     const APPLICATION_SERVICE           = "APPLICATION.SERVICE";
     const APPLICATION_TRANSLATE         = "APPLICATION.TRANSLATE";
+    const APPLICATION_DATABASE_SQL      = "APPLICATION.DATABASE.SQL";
 
     /** @var Registry */
     private static $AppRegistry;

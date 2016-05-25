@@ -149,6 +149,6 @@ Abstract Class App extends Entity
      */
     public function getSqlDatabaseHistory()
     {
-        return $this->AppRegistry( "APPLICATION.DATABASE.SQL" );
+        return $this->AppRegistry( AppRegistry::APPLICATION_DATABASE_SQL );
     }
 }
