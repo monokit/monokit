@@ -75,6 +75,8 @@ define( "__CONTROLLER_METHOD_SUFFIX__"      , "Action" );
 
 define( "__ROUTE_SEPARATOR__" , ":" );
 
+define( "__SRC__"       , __DIR__ . "/../../../../../src/" );
+define( "__ROOT__"      , ( !empty( $_SERVER["QUERY_STRING"] ) ) ? substr( $_SERVER["REQUEST_URI"] , 0, -(strlen( $_SERVER["QUERY_STRING"] ) ) ) : $_SERVER["REQUEST_URI"] );
 
 
 
