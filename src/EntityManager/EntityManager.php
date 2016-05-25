@@ -114,6 +114,14 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     }
 
     /**
+     * @return int
+     */
+    public function getCount()
+    {
+        return $this->count();
+    }
+
+    /**
      * @param array $data
      * @return EntityManager
      */
