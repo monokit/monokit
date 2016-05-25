@@ -86,8 +86,6 @@ Class EntityManagerMysqli extends EntityManager
 
         AppRegistry::AppRegistry( AppRegistry::APPLICATION_DATABASE_SQL , $sql->toString() );
 
-        $this->addNotify( "SQL" , $sql->toString() );
-
         return $this;
     }
 
