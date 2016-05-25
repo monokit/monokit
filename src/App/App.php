@@ -141,7 +141,7 @@ Abstract Class App extends Entity
         $this->getResponse()->getHeader();
 
         $View = new ViewFile();
-        echo $View->render( $viewFile );
+        echo $View->render( $viewFile , $this );
     }
 
     /**
