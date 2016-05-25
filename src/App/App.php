@@ -19,6 +19,8 @@ Abstract Class App extends Entity
 {
     /** @var Response */
     protected $response;
+    /** @var mixed */
+    protected $AppContent;
 
     /**
      * @param string $key
@@ -99,16 +101,41 @@ Abstract Class App extends Entity
     /**
      * @return Response
      */
-    protected function getResponse()
+    public function getResponse()
     {
         return $this->response;
     }
 
     /**
      * @return mixed
+     */
+    public function getAppContent()
+    {
+        return $this->AppContent;
+    }
+
+    /**
+     * @param string $viewFile
+     * @return void
      * @throws ControllerException
      */
-    protected function getAppContent()
+    public function render( $viewFile )
+    {
+        $this->response = new Response( 200 );
+
+        $this->AppContent = $this->processRender();
+
+        $this->getResponse()->getHeader();
+
+        $View = new ViewFile();
+        echo $View->render( $viewFile , $this );
+    }
+
+    /**
+     * @return mixed
+     * @throws ControllerException
+     */
+    protected function processRender()
     {
         if ( !$Route = $this->getRouteManager()->getRouteByUrlRequest( $this->getUrlRequest() ) )
         {
@@ -127,21 +154,6 @@ Abstract Class App extends Entity
             throw new ControllerException( ControllerException::ERROR_METHOD , $controller , $action );
 
         return call_user_func_array( array( new $controller() , $action ) , $Route->getParameters( $this->getUrlRequest() ) );
-    }
-
-    /**
-     * @param string $viewFile
-     * @return void
-     * @throws ControllerException
-     */
-    public function render( $viewFile )
-    {
-        $this->response = new Response( 200 );
-
-        $this->getResponse()->getHeader();
-
-        $View = new ViewFile();
-        echo $View->render( $viewFile , $this );
     }
 
     /**

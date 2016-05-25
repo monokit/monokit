@@ -131,29 +131,5 @@ Abstract Class Entity extends Foundation implements EntityInterface
     {
         return new $this();
     }
-
-    /**
-     * @param string $name
-     * @return bool
-     */
-    public function __isset( $name = null )
-    {
-        if ( is_null( $name ) )
-            return false;
-
-        $var = $this->get( $name );
-
-        return isset( $var );
-    }
-
-    /**
-     * @param string $name
-     * @return mixed
-     */
-    public function __get( $name )
-    {
-
-        return $this->get( $name );
-    }
-
+    
 }
