@@ -21,6 +21,8 @@ class Sql extends Entity implements SqlInterface
     {
         if ( !is_null( $sql ) )
             $this->setSql( $sql );
+
+        $this->setUniqueId();
     }
 
     /**
