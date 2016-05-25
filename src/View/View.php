@@ -2,64 +2,18 @@
 
 namespace MonoKit\View;
 
-use MonoKit\File\File;
-use MonoKit\File\FileException;
-use MonoKit\Foundation\Foundation;
+use MonoKit\App\AppRegistry;
+use MonoKit\Component\Notify\NotifyManager;
+use MonoKit\EntityManager\Entity;
 
-Class View extends Foundation
+Class View extends Entity
 {
-    /** @var File */
-    protected $file;
     /** @var mixed */
-    protected $data = array();
-
-    /**
-     * @param string|null $fileName
-     * @param mixed|null $data
-     */
-    public function __construct( $fileName = null , $data = array() )
-    {
-        if ( !is_null( $fileName ))
-            $this->render( $fileName , $data );
-    }
-
-    /**
-     * @param File $file
-     * @return View
-     * @throws FileException
-     */
-    protected function setFile( File $file )
-    {
-        $this->file = $file;
-
-        if ( !$this->file->isFile() )
-            throw new FileException( FileException::ERROR_LOADING_FILE , $this , $file );
-
-        return $this;
-    }
-
-    /**
-     * @param string $filename
-     * @return View
-     * @throws FileException
-     */
-    protected function setFileFromString( $filename )
-    {
-        $file = new File( "../" . MONOKIT_APPLICATION_VIEW_DIRECTORY . "/" . $filename );
-        return $this->setFile( $file );
-    }
-
-    /**
-     * @return File
-     */
-    protected function getFile()
-    {
-        return $this->file;
-    }
+    protected $data;
 
     /**
      * @param mixed $data
-     * @return View
+     * @return ViewFile
      */
     protected function setData( $data )
     {
@@ -76,30 +30,22 @@ Class View extends Foundation
     }
 
     /**
-     * @param string $filename
-     * @param mixed $data
-     * @return string ViewFile content
+     * @return NotifyManager
      */
-    public function render( $filename , $data = array() )
+    public function getNotifyManager()
     {
-        $this->setFileFromString( $filename );
-        $this->setData( $data );
-
-        $file = $this->getFile();
-
-        $content = require "{$file->getFile()}";
-
-        return $content;
+        return AppRegistry::AppRegistry( AppRegistry::APPLICATION_NOTIFY );
     }
 
     /**
-     * @param string $routeName
-     * @return string
+     * @param string $viewFilePath
+     * @param mixed|null $data
+     * @return mixed
      */
-    public function getUrlByRouteName( $routeName )
+    public function render( $viewFilePath , $data = null )
     {
-        // TODO
-        return $this->AppRouter()->getRouteByName( $routeName )->getUrlRequest()->getUrl();
+        $ViewFile = new ViewFile();
+        return $ViewFile->render( $viewFilePath , $data );
     }
 
 }

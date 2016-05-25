@@ -2,81 +2,36 @@
 
 namespace MonoKit\Controller;
 
+use MonoKit\Component\Html\Tag\H1;
+use MonoKit\EntityManager\Entity;
 use MonoKit\View\View;
-use MonoKit\Http\Route;
-use MonoKit\Http\Response\ResponseHtml;
-use MonoKit\Http\Response\ResponseJson;
-use MonoKit\Foundation\Foundation;
 
-Class Controller extends Foundation
+Abstract Class Controller extends Entity
 {
     /**
-     * @return ResponseHtml
+     * @return string
      */
     public function indexAction()
     {
-        return new ResponseHtml( "<H1>It works!!!</H1><H2>{$this}</H2>" );
+        return new H1( "It's Work!" );
     }
 
     /**
-     * @param string $viewFile
+     * @param $viewFile
      * @param mixed|null $data
-     * @return ResponseHtml
+     * @return string
      */
-    protected function render( $viewFile , $data = null )
+    public function render( $viewFile , $data = null )
     {
-        $view = new View();
-
-        ob_start();
-
-            $view->render( $viewFile , $data );
-            $content = ob_get_contents();
-
-        ob_end_clean();
-
-        return new ResponseHtml( $content );
+        $View = new View();
+        return $View->render( $viewFile , $data );
     }
 
     /**
-     * @param mixed $data
-     * @return ResponseJson
+     * @return string
      */
-    protected function renderJson( $data )
-    {
-        return new ResponseJson( $data );
-    }
-
-    /**
-     * @param string $url
-     */
-    protected function redirect( $url )
-    {
-        header("Location: " . str_replace( "//" , "/" , $url ));
-        exit();
-    }
-
-    /**
-     * @param Route $route
-     */
-    protected function redirectByRoute( Route $route )
-    {
-        $this->redirect( __ROOT__.$route->getUrlRequest()->getUrl() );
-    }
-
-    /**
-     * @param $routeName
-     * @throws ControllerException
-     */
-    protected function redirectByRouteName( $routeName )
-    {
-        if ( !$route = $this->AppRouter()->getRouteByName( $routeName ) )
-            throw new ControllerException( ControllerException::ERROR_ROUTE , $this , $routeName );
-
-        $this->redirectByRoute( $route );
-    }
-
     public function error404()
     {
-        exit("Erreur 404 !!!");
+        return new H1( "Erreur 404" );
     }
 }

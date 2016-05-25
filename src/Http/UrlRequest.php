@@ -2,22 +2,26 @@
 
 namespace MonoKit\Http;
 
-use MonoKit\Manager\Entity;
+use MonoKit\EntityManager\Entity;
+use MonoKit\Component\Registry\Registry;
 
 Class UrlRequest extends Entity
 {
-    const GET       = "GET";
-    const PUT       = "PUT";
-    const POST      = "POST";
-    const HEAD      = "HEAD";
-    const DELETE    = "DELETE";
-
     /** @var string */
     protected $url = "/";
-	/** @var string */
-	protected $method = self::GET;
-    /** @var array */
-    protected $params;
+    /** @var Method */
+    protected $Method;
+    /** @var Registry */
+    protected $ParamsRegistry;
+
+    /**
+     * UrlRequest constructor.
+     */
+    public function __construct()
+    {
+        $this->Method           = new Method();
+        $this->ParamsRegistry   = new Registry();
+    }
 
     /**
      * @param string $url
@@ -26,9 +30,8 @@ Class UrlRequest extends Entity
     public function setUrl( $url )
     {
         // Supprime le dernier "/"
-        $this->url = ( $url != "/" ) ? rtrim( $url , "/" ) : $url;
-        $this->url = str_replace( "//" , "/" , $this->url );
-
+        $url = ( $url != "/" ) ? rtrim( $url , "/" ) : $url;
+        $this->url = str_replace( "//" , "/" , $url );;
         return $this;
     }
 
@@ -41,83 +44,63 @@ Class UrlRequest extends Entity
     }
 
     /**
-     * @return string
-     */
-    public function getFullUrl()
-    {
-        return rtrim( __ROOT__ , "/" ) . $this->getUrl();
-    }
-
-	/**
-	* @param string $method
-	* @return UrlRequest
-	*/
-	public function setMethod( $method = "GET" )
-    {
-        switch ( strtoupper( $method ) )
-        {
-            case "POST":
-                $this->method = self::POST;
-                break;
-            case "PUT":
-                $this->method = self::PUT;
-                break;
-            case "DELETE":
-                $this->method = self::DELETE;
-                break;
-            default:
-                $this->method = self::GET;
-        }
-
-		return $this;
-	}
-
-	/**
-	* @return string
-	*/
-    public function getMethod()
-    {
-        return $this->method;
-    }
-
-    /**
-     * @param string $method
-     * @return bool
-     */
-    public function is( $method )
-    {
-        return ( $this->method == strtoupper( $method ) ) ? true : false;
-    }
-
-    /**
-     * @param string $key
-     * @param mixed|null $value
+     * @param Method $method
      * @return UrlRequest
      */
-    public function setParam( $key , $value = null )
+    public function setMethod( Method $method )
     {
-        $this->params[strtoupper($key)] = $value;
+        $this->Method = $method;
         return $this;
     }
 
     /**
-     * @param $key
-     * @return mixed
+     * @return Method
      */
-    public function getParam( $key )
+    public function getMethod()
     {
-        return $this->params[strtoupper($key)];
+        return $this->Method;
     }
 
     /**
-     * Retourne un tableau contenant tous les paramètres trouvés dans l'url fournie.
-     *
-     * @param UrlRequest $urlRequest
-     * @return array
+     * @param Registry $paramsRegistry
+     * @return UrlRequest
      */
-    public function getParametersValue( UrlRequest $urlRequest )
+    public function setParamsRegistry( Registry $paramsRegistry )
     {
-        return array_udiff( explode( "/" , $urlRequest->getUrl() ) , explode( "/" , $this->getUrl() ) , 'strcasecmp' );
+        $this->ParamsRegistry = $paramsRegistry;
+        return $this;
     }
+
+    /**
+     * @return Registry
+     */
+    public function getParamsRegistry()
+    {
+        return $this->ParamsRegistry;
+    }
+
+    /**
+     * @param string $key
+     * @param string|null $value
+     * @return $this
+     * @throws \MonoKit\Component\Registry\Exception\RegistryException
+     */
+    public function setParam( $key , $value = null )
+    {
+        $this->getParamsRegistry()->set( $key , $value );
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @return mixed
+     * @throws \MonoKit\Component\Registry\Exception\RegistryException
+     */
+    public function getParam( $key )
+    {
+        return $this->getParamsRegistry()->get( $key );
+    }
+
+
 
 }
