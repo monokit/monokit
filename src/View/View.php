@@ -30,6 +30,17 @@ Class View extends Entity
     }
 
     /**
+     * @param string $key
+     * @param mixed|null $value
+     * @param mixed|null $defaultValue
+     * @return mixed
+     */
+    public function AppRegistry( $key = AppRegistry::APPLICATION , $value = null , $defaultValue = null )
+    {
+        return AppRegistry::AppRegistry( $key , $value , $defaultValue );
+    }
+
+    /**
      * @return NotifyManager
      */
     public function getNotifyManager()
