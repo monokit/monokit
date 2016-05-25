@@ -2,18 +2,20 @@
 
 namespace MonoKit\App;
 
-use MonoKit\Component\File\Exception\FileException;
-use MonoKit\Component\File\File;
-use MonoKit\Component\Service\Interfaces\ServiceInterface;
-use MonoKit\Foundation\Foundation;
+
+use MonoKit\EntityManager\Entity;
 use MonoKit\Http\UrlRequestDiscover;
 use MonoKit\Http\Response;
 use MonoKit\Routing\Route;
 use MonoKit\Routing\RouteManager;
 use MonoKit\View\View;
+use MonoKit\Component\File\File;
+use MonoKit\Component\File\Exception\FileException;
+use MonoKit\Component\Service\Interfaces\ServiceInterface;
 use MonoKit\Controller\Exception\ControllerException;
+use MonoKit\View\ViewFile;
 
-Abstract Class App extends Foundation
+Abstract Class App extends Entity
 {
     /** @var Response */
     protected $response;
@@ -136,11 +138,9 @@ Abstract Class App extends Foundation
     {
         $this->response = new Response( 200 );
 
-        define( "HTML_CONTENT" , $this->getAppContent() );
-
         $this->getResponse()->getHeader();
 
-        $View = new View();
+        $View = new ViewFile();
         echo $View->render( $viewFile );
     }
 
@@ -149,6 +149,6 @@ Abstract Class App extends Foundation
      */
     public function getSqlDatabaseHistory()
     {
-        return $this->AppRegistry( "APPLICATION.DATABASE.SQL.HISTORY" );
+        return $this->AppRegistry( "APPLICATION.DATABASE.SQL" );
     }
 }

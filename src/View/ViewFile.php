@@ -4,6 +4,7 @@ namespace MonoKit\View;
 
 use MonoKit\Component\File\File;
 use MonoKit\Component\File\Exception\FileException;
+use MonoKit\EntityManager\Entity;
 use MonoKit\View\Exception\ViewFileException;
 use MonoKit\View\Interfaces\ViewFileInterface;
 
@@ -53,9 +54,14 @@ Class ViewFile extends View implements ViewFileInterface
             $content = ob_get_contents();
 
         ob_end_clean();
-        
-        $Mustache = new \Mustache_Engine();
-        return $Mustache->render( $content , $data );
+
+        if ( $data instanceof Entity )
+        {
+            $Render = new RenderEntity( $content , $data );
+            return $Render->toString();
+        }
+
+        return $content;
 
     }
     
