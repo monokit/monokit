@@ -63,6 +63,15 @@ Class FormSelect extends Select
     }
 
     /**
+     * @param $name
+     * @return $this
+     */
+    public function setName( $name )
+    {
+        return $this->name( $name );
+    }
+
+    /**
      * @return string
      */
     public function toHtml()
