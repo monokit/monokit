@@ -16,6 +16,8 @@ use MonoKit\Controller\Exception\ControllerException;
 
 Abstract Class App extends Entity
 {
+    Const APPLICATION_NAME = "MonoKit Application";
+
     /** @var Response */
     protected $response;
     /** @var mixed */
@@ -166,9 +168,17 @@ Abstract Class App extends Entity
     /**
      * @return string
      */
-    public function getRoot()
+    public function getAppRoot()
     {
         return __ROOT__;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAppName()
+    {
+        return static::APPLICATION_NAME;
     }
 
 }
