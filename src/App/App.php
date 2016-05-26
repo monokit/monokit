@@ -16,8 +16,8 @@ use MonoKit\Controller\Exception\ControllerException;
 
 Abstract Class App extends Entity
 {
-    Const APPLICATION_NAME = "MonoKit Application";
-
+    /** @var string */
+    protected $name = "MonoKitApplication";
     /** @var Response */
     protected $response;
     /** @var mixed */
@@ -124,6 +124,32 @@ Abstract Class App extends Entity
     }
 
     /**
+     * @param string $name
+     * @return App
+     */
+    public function setName( $name )
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAppName()
+    {
+        return $this->getName();
+    }
+
+    /**
      * @param string $viewFile
      * @return void
      * @throws ControllerException
@@ -171,14 +197,6 @@ Abstract Class App extends Entity
     public function getAppRoot()
     {
         return __ROOT__;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAppName()
-    {
-        return static::APPLICATION_NAME;
     }
 
 }
