@@ -11,8 +11,8 @@ Abstract Class Entity extends Foundation implements EntityInterface
     protected $id;
 
     /**
-     * @param $id
-     * @return Entity
+     * @param mixed $id
+     * @return $this
      */
     public function setId( $id )
     {
@@ -21,7 +21,7 @@ Abstract Class Entity extends Foundation implements EntityInterface
     }
 
     /**
-     * @return int
+     * @return mixed
      */
     public function getId()
     {

@@ -113,7 +113,7 @@ class SqlSelect extends Sql
     /**
      * @param string $condition
      * @param bool|true $autoAlias
-     * @return SqlUpdate
+     * @return SqlSelect
      */
     public function where( $condition , $autoAlias = true )
     {

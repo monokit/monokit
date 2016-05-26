@@ -15,7 +15,7 @@ Interface EntityInterface
 
     /**
      * @param mixed $value
-     * @return Entity
+     * @return $this
      */
     public function setId( $value );
 
@@ -31,13 +31,13 @@ Interface EntityInterface
     public function getId();
 
     /**
-     * @return Entity
+     * @return $this
      */
     public function getClone();
 
     /**
      * @param array $array
-     * @return Entity
+     * @return $this
      */
     public function serialize( array $array );
 }
