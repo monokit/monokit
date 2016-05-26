@@ -9,12 +9,10 @@ Class FormSelectOption extends Option
 {
     public function __construct( EntityInterface $entity = null )
     {
-        parent::__construct();
+        parent::__construct( $entity );
 
         if ( $entity )
-        {
-            $this->label( $entity );
             $this->value( $entity->getId() );
-        }
+
     }
 }
