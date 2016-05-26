@@ -8,6 +8,9 @@ use MonoKit\EntityManager\Entity;
 
 Class View extends Entity
 {
+    Const VIEW_DIRECTORY = "View";
+    Const VIEW_SUFFIX = "View";
+
     /** @var mixed */
     protected $data;
 

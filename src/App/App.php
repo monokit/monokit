@@ -2,18 +2,17 @@
 
 namespace MonoKit\App;
 
-
+use MonoKit\Controller\Controller;
 use MonoKit\EntityManager\Entity;
 use MonoKit\Http\UrlRequestDiscover;
 use MonoKit\Http\Response;
 use MonoKit\Routing\Route;
+use MonoKit\View\ViewFile;
 use MonoKit\Routing\RouteManager;
-use MonoKit\View\View;
 use MonoKit\Component\File\File;
 use MonoKit\Component\File\Exception\FileException;
 use MonoKit\Component\Service\Interfaces\ServiceInterface;
 use MonoKit\Controller\Exception\ControllerException;
-use MonoKit\View\ViewFile;
 
 Abstract Class App extends Entity
 {
@@ -141,10 +140,10 @@ Abstract Class App extends Entity
         {
             // ERROR 404
             $this->getResponse()->setStatus( 404 );
-            return call_user_func( array( "{$this->getClassNamespace()}\\Controller\\AppController" , "error404" ) );
+            return call_user_func( array( $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ ."AppController" , "error404" ) );
         }
 
-        $controller = $this->getClassNamespace() . "\\Controller\\" . $Route->getControllerName();
+        $controller = $this->getClassNamespace() . Controller::CONTROLLER_DIRECTORY . $Route->getControllerName();
         $action = $Route->getActionName();
 
         if ( !class_exists( $controller ) )

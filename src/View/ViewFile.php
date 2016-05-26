@@ -10,6 +10,8 @@ use MonoKit\View\Interfaces\ViewFileInterface;
 
 Class ViewFile extends View implements ViewFileInterface
 {
+    Const VIEW_SUFFIX = ".view.php";
+
     /** @var File */
     protected $file;
 
@@ -21,7 +23,7 @@ Class ViewFile extends View implements ViewFileInterface
     public function setFile( File $file )
     {
         if ( !$file->isFile() )
-            throw new ViewFileException( FileException::ERROR_LOADING_FILE , $this , $file );
+            throw new ViewFileException( FileException::ERROR_LOADING_FILE , $this , $file->getFilePath() );
 
         $this->file = $file;
         return $this;
@@ -42,9 +44,9 @@ Class ViewFile extends View implements ViewFileInterface
      */
     public function render( $viewFilePath , $data = null )
     {
-        $viewFilePath = (substr($viewFilePath, -strlen(__VIEWFILE_SUFFIX__) ) == __VIEWFILE_SUFFIX__) ? $viewFilePath : $viewFilePath . __VIEWFILE_SUFFIX__;
+        $viewFilePath = (substr($viewFilePath, -strlen(self::VIEW_SUFFIX) ) == self::VIEW_SUFFIX) ? $viewFilePath : $viewFilePath . self::VIEW_SUFFIX;
 
-        $this->setFile( new File( "../" .__VIEW_DIRECTORY__ . __DS__ . $viewFilePath ) );
+        $this->setFile( new File( "../" . self::VIEW_DIRECTORY . __DS__ . $viewFilePath ) );
         $this->setData( $data );
 
         ob_start();
@@ -62,7 +64,6 @@ Class ViewFile extends View implements ViewFileInterface
         }
 
         return $content;
-
     }
     
 }

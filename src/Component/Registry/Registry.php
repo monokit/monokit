@@ -26,7 +26,7 @@ class Registry extends Foundation implements RegistryInterface, ArrayInterface
 
         $m = &$this->data;
 
-        foreach ( explode( "." , strtoupper($key) ) as $registryKey )
+        foreach ( explode( __DOT__ , strtoupper($key) ) as $registryKey )
             $m = &$m[$registryKey];
 
         $m = ( empty( $value ) ) ? $defaultValue : $value;
@@ -48,7 +48,7 @@ class Registry extends Foundation implements RegistryInterface, ArrayInterface
 
         $m = $this->data;
 
-        foreach ( explode( "." , strtoupper($key) ) as $k )
+        foreach ( explode( __DOT__ , strtoupper($key) ) as $k )
             $m = &$m[$k];
 
         return $m;

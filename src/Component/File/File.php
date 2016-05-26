@@ -76,7 +76,7 @@ Class File extends Entity
      */
     public function getShortName()
     {
-        $fileName = explode( '.' , $this->getName() , 2 );
+        $fileName = explode( __DOT__ , $this->getName() , 2 );
         return $fileName[0];
     }
 
@@ -99,7 +99,7 @@ Class File extends Entity
      */
     public function getExtension()
     {
-        $fileName = explode( '.' , $this->getName() );
+        $fileName = explode( __DOT__ , $this->getName() );
         return strtolower( $fileName[ count( $fileName ) - 1 ] );
     }
 

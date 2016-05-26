@@ -61,21 +61,16 @@ Abstract Class Foundation implements StringInterface
 
 }
 
-define( "__DS__"        , "/" );
+define( "__BR__"        , "<BR>" );
+define( "__HR__"        , "<HR>" );
+define( "__DS__"        , "/" );            // DIRECTORY SEPARATOR
+define( "__NSS__"       , "\\" );           // NAMESPACE SEPARATOR
 define( "__DOT__"       , "." );
 define( "__SPACE__"     , " " );
 define( "__EMPTY__"     , "''" );
 define( "__LOREM__"     , "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis aliquet euismod. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin interdum ultricies odio id luctus. Pellentesque eu massa vitae mi semper blandit. Ut lobortis ex ultrices sem auctor, vel finibus nisl viverra. Morbi pulvinar sapien lacus. Vivamus mollis fermentum purus, vel laoreet neque tempus id. Sed tempus tristique vestibulum. Maecenas nec felis facilisis, molestie ipsum et, placerat tellus. Ut hendrerit tempus vestibulum. Suspendisse potenti." );
 
-define( "__VIEW_SUFFIX__"                   , "View" );
-define( "__VIEW_DIRECTORY__"                , "View" );
-define( "__VIEWFILE_SUFFIX__"               , ".view.php" );
-define( "__CONTROLLER_SUFFIX__"             , "Controller" );
-define( "__CONTROLLER_METHOD_SUFFIX__"      , "Action" );
-
 define( "__ROUTE_SEPARATOR__" , ":" );
 
-define( "__BR__"        , "<BR>" );
-define( "__HR__"        , "<HR>" );
 define( "__SRC__"       , __DIR__ . "/../../../../../src/" );
 define( "__ROOT__"      , ( !empty( $_SERVER["QUERY_STRING"] ) ) ? substr( $_SERVER["REQUEST_URI"] , 0, -(strlen( $_SERVER["QUERY_STRING"] ) ) ) : $_SERVER["REQUEST_URI"] );
