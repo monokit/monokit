@@ -12,9 +12,9 @@ Class File extends Entity
 
     /**
      * File constructor.
-     * @param string|null $filePath
+     * @param string $filePath
      */
-    public function __construct( $filePath = null )
+    public function __construct( $filePath )
     {
         $this->setFilePath( $filePath );
     }
@@ -25,6 +25,8 @@ Class File extends Entity
      */
     public function setFilePath( $filePath )
     {
+        $filePath = __ROOT__ . '../' . $filePath;
+
         $this->filePath = $filePath;
         return $this;
     }
