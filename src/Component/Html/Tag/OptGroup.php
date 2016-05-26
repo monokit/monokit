@@ -9,18 +9,6 @@ Class OptGroup extends HtmlFormElement
     const Tag = "optgroup";
 
     /**
-     * OptGroup constructor.
-     * @param string|null $string
-     */
-    public function __construct( $string = null )
-    {
-        parent::__construct();
-
-        if ( !is_null($string))
-            $this->label( $string );
-    }
-
-    /**
      * @param Option $option
      * @return $this
      */
