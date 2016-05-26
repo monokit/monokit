@@ -143,7 +143,7 @@ Abstract Class App extends Entity
             return call_user_func( array( $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ ."AppController" , "error404" ) );
         }
 
-        $controller = $this->getClassNamespace() . Controller::CONTROLLER_DIRECTORY . $Route->getControllerName();
+        $controller = $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ . $Route->getControllerName();
         $action = $Route->getActionName();
 
         if ( !class_exists( $controller ) )
