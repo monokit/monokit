@@ -44,7 +44,7 @@ Class ViewFile extends View implements ViewFileInterface
     {
         $viewFilePath = (substr($viewFilePath, strlen(__VIEWFILE_SUFFIX__) ) == __VIEWFILE_SUFFIX__) ? $viewFilePath : $viewFilePath . __VIEWFILE_SUFFIX__;
 
-        $this->setFile( new File( __VIEW_DIRECTORY__ . __DS__ . $viewFilePath ) );
+        $this->setFile( new File( "../" .__VIEW_DIRECTORY__ . __DS__ . $viewFilePath ) );
         $this->setData( $data );
 
         ob_start();

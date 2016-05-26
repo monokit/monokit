@@ -25,8 +25,6 @@ Class File extends Entity
      */
     public function setFilePath( $filePath )
     {
-        $filePath = __ROOT__ . '../' . $filePath;
-
         $this->filePath = $filePath;
         return $this;
     }
