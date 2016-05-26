@@ -163,4 +163,12 @@ Abstract Class App extends Entity
         return call_user_func_array( array( new $controller() , $action ) , $Route->getParameters( $this->getUrlRequest() ) );
     }
 
+    /**
+     * @return string
+     */
+    public function getRoot()
+    {
+        return __ROOT__;
+    }
+
 }
