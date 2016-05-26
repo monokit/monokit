@@ -44,9 +44,14 @@ Class ViewFile extends View implements ViewFileInterface
      */
     public function render( $viewFilePath , $data = null )
     {
-        $viewFilePath = (substr($viewFilePath, -strlen(self::VIEW_SUFFIX) ) == self::VIEW_SUFFIX) ? $viewFilePath : $viewFilePath . self::VIEW_SUFFIX;
+        // Vérification de l'existence d'une extension ( VIEW_SUFFIX )
+        $viewFilePath = ( substr($viewFilePath, -strlen(self::VIEW_SUFFIX) ) == self::VIEW_SUFFIX) ? $viewFilePath : $viewFilePath . self::VIEW_SUFFIX;
 
-        $this->setFile( new File( "../" . self::VIEW_DIRECTORY . __DS__ . $viewFilePath ) );
+        $viewFilePath = ( preg_match('/@(?P<AppName>\w+):/', $viewFilePath , $matches ) )
+            ? "@{$matches["AppName"]}:" . self::VIEW_DIRECTORY . __DS__ . end( explode("@{$matches['AppName']}:" , $viewFilePath , 2 ) )
+            : "../" . self::VIEW_DIRECTORY . __DS__ . $viewFilePath;
+
+        $this->setFile( new File( $viewFilePath ) );
         $this->setData( $data );
 
         ob_start();
