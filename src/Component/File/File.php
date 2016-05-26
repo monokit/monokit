@@ -25,6 +25,12 @@ Class File extends Entity
      */
     public function setFilePath( $filePath )
     {
+        if ( preg_match('/@(?P<AppName>\w+):/', $filePath , $matches ) )
+        {
+            $filePath = end( explode("@{$matches['AppName']}:" , $filePath , 2 ) );
+            $filePath = __SRC__ . $matches['AppName'] . __DS__ . $filePath;
+        }
+
         $this->filePath = $filePath;
         return $this;
     }

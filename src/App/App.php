@@ -90,6 +90,14 @@ Abstract Class App extends Entity
     }
 
     /**
+     * @return mixed|\MonoKit\Component\Registry\Registry
+     */
+    public function getSqlDatabaseHistory()
+    {
+        return $this->AppRegistry( AppRegistry::APPLICATION_DATABASE_SQL );
+    }
+
+    /**
      * @return UrlRequestDiscover
      */
     public function getUrlRequest()
@@ -155,11 +163,4 @@ Abstract Class App extends Entity
         return call_user_func_array( array( new $controller() , $action ) , $Route->getParameters( $this->getUrlRequest() ) );
     }
 
-    /**
-     * @return mixed|\MonoKit\Component\Registry\Registry
-     */
-    public function getSqlDatabaseHistory()
-    {
-        return $this->AppRegistry( AppRegistry::APPLICATION_DATABASE_SQL );
-    }
 }
