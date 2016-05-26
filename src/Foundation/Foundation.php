@@ -64,7 +64,7 @@ Abstract Class Foundation implements StringInterface
 define( "__BR__"        , "<BR>" );
 define( "__HR__"        , "<HR>" );
 define( "__DS__"        , "/" );            // DIRECTORY SEPARATOR
-define( "__NSS__"       , "\\" );           // NAMESPACE SEPARATOR
+define( "__NSS__"       , '\\' );           // NAMESPACE SEPARATOR
 define( "__DOT__"       , "." );
 define( "__SPACE__"     , " " );
 define( "__EMPTY__"     , "''" );
