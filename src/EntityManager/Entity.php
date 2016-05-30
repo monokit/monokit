@@ -149,7 +149,12 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
      */
     public function toArray()
     {
-        return get_object_vars($this);
+        $arr = array();
+
+        foreach ( get_object_vars($this) AS $key => $value )
+            $arr[$key] = ( $value instanceof Entity ) ? $value->toArray() : $value;
+
+        return $arr;
     }
 
 }
