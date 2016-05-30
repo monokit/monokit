@@ -62,19 +62,24 @@ Class RenderEntity extends Foundation implements StringInterface
     {
         $template = $this->getTemplate();
 
-        if ( preg_match_all( '/{{([\.\w]+)}}/', $template , $fields ) )
-        {
-            $i = 0;
-
-            for( $n = 0 ; $n<count($fields[0]) ; $n++ )
+        if ( preg_match_all( '/{{([\"\.\:\w]+)}}/', $template , $fields ) )
+            foreach ( $fields[0] AS $key => $value )
             {
-                $template = str_replace( $fields[0][$i], $this->getEntity()->get($fields[1][$i]) , $template );
-                $i++;
+
+                $template = str_replace( $value , $this->getEntity()->get( $this->strip($value) ) , $template );
             }
 
-        }
 
         return $template;
+    }
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public function strip( $value )
+    {
+        return substr( $value , 2 , -2 );
     }
 
     /**

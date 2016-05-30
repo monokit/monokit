@@ -6,8 +6,9 @@ use MonoKit\EntityManager\Interfaces\EntityInterface;
 use MonoKit\EntityManager\Interfaces\EntityManagerInterface;
 use MonoKit\Foundation\Interfaces\ArrayInterface;
 use MonoKit\Foundation\Interfaces\CountInterface;
+use MonoKit\Foundation\Interfaces\JsonInterface;
 
-Class EntityManager extends Entity implements EntityManagerInterface, ArrayInterface , CountInterface
+Class EntityManager extends Entity implements EntityManagerInterface, ArrayInterface , CountInterface, JsonInterface
 {
     /** @var int */
     private $index = 0;
@@ -148,5 +149,18 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     public function toArray()
     {
         return $this->data;
+    }
+
+    /**
+     * @return string
+     */
+    public function toJson()
+    {
+        $arr = array();
+
+        foreach ( $this AS $Entity )
+            $arr[] = $Entity->toArray();
+
+        return json_encode( $arr );
     }
 }

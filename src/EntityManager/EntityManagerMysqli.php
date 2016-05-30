@@ -45,7 +45,7 @@ Class EntityManagerMysqli extends EntityManager
     /**
      * @param SqlInterface $sql
      * @param Entity|null $entity
-     * @return $this|EntityManagerMysqli
+     * @return EntityManagerMysqli
      * @throws EntityManagerMysqliException
      * @throws SqlException
      */
@@ -66,7 +66,7 @@ Class EntityManagerMysqli extends EntityManager
 
     /**
      * @param Entity $entity
-     * @return $this
+     * @return EntityManagerMysqli
      */
     protected function fetch( \mysqli_result $result , Entity $entity = null )
     {
@@ -78,7 +78,7 @@ Class EntityManagerMysqli extends EntityManager
 
     /**
      * @param SqlInterface $sql
-     * @return $this
+     * @return EntityManagerMysqli
      */
     protected function setSql( SqlInterface $sql )
     {

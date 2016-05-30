@@ -4,8 +4,9 @@ namespace MonoKit\EntityManager;
 
 use MonoKit\Foundation\Foundation;
 use MonoKit\EntityManager\Interfaces\EntityInterface;
+use MonoKit\Foundation\Interfaces\ArrayInterface;
 
-Abstract Class Entity extends Foundation implements EntityInterface
+Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterface
 {
     /** @var mixed */
     protected $id;
@@ -56,6 +57,17 @@ Abstract Class Entity extends Foundation implements EntityInterface
     {
         if ( is_null($property) )
             return null;
+
+        // Conditions
+        if ( strpos( $property , ":" ) )
+        {
+            $properties = explode( ":" , $property , 2 );
+
+            if ( $return = $this->get( current($properties) ) )
+                return $return;
+
+            return $this->get( end($properties) );
+        }
 
         // SubEntity
         if ( strpos( $property , "." ) )
@@ -131,5 +143,13 @@ Abstract Class Entity extends Foundation implements EntityInterface
     {
         return new $this();
     }
-    
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return get_object_vars($this);
+    }
+
 }
