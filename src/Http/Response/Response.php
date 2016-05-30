@@ -1,6 +1,6 @@
 <?php
 
-namespace MonoKit\Http;
+namespace MonoKit\Http\Response;
 
 use MonoKit\Foundation\Foundation;
 
@@ -68,15 +68,21 @@ Class Response extends Foundation
     const HTTP_NOT_EXTENDED = 510;                                                // RFC2774
     const HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511;                             // RFC6585
 
+    const RESPONSE_HEADER = "HTTP/1.1 200 OK";
+
+
     /** @var int */
     protected $status;
+    /** @var mixed */
+    protected $content;
 
     /**
      * Response constructor.
      * @param int $status
      */
-    public function __construct( $status = 200 )
+    public function __construct( $content = null , $status = 200 )
     {
+        $this->setContent( $content );
         $this->setStatus( $status );
     }
 
@@ -90,11 +96,31 @@ Class Response extends Foundation
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getStatus()
     {
         return $this->status;
     }
 
+    /**
+     * @param mixed $content
+     * @return Response
+     */
+    public function setContent( $content = null )
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
 
     public function getHeader()
     {
@@ -104,8 +130,10 @@ Class Response extends Foundation
             {
                 case 404:
                     header( "HTTP/1.0 404 Not Found" );
-                    break;
+                    return;
             }
+
+            header( static::RESPONSE_HEADER );
         }
     }
 

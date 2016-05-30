@@ -4,8 +4,9 @@ namespace MonoKit\App;
 
 use MonoKit\Controller\Controller;
 use MonoKit\EntityManager\Entity;
+use MonoKit\Http\Response\Response;
+use MonoKit\Http\Response\ResponseHtml;
 use MonoKit\Http\UrlRequestDiscover;
-use MonoKit\Http\Response;
 use MonoKit\Routing\Route;
 use MonoKit\View\ViewFile;
 use MonoKit\Routing\RouteManager;
@@ -108,14 +109,6 @@ Abstract Class App extends Entity
     }
 
     /**
-     * @return Response
-     */
-    public function getResponse()
-    {
-        return $this->response;
-    }
-
-    /**
      * @return mixed
      */
     public function getAppContent()
@@ -156,28 +149,33 @@ Abstract Class App extends Entity
      */
     public function render( $viewFile )
     {
-        $this->response = new Response( 200 );
+        $response = $this->getResponse();
+        $response->getHeader();
 
-        $this->AppContent = $this->processRender();
+        if ( $response instanceof ResponseHtml )
+        {
+            // ResponseHTML
+            $this->AppContent = $response->getContent();
 
-        $this->getResponse()->getHeader();
+            $View = new ViewFile();
+            echo $View->render( $viewFile , $this );
 
-        $View = new ViewFile();
-        echo $View->render( $viewFile , $this );
+        } else {
+            // ResponseJson
+            echo $response->getContent();
+        }
+
     }
 
     /**
-     * @return mixed
+     * @return Response
      * @throws ControllerException
      */
-    protected function processRender()
+    protected function getResponse()
     {
+        // ERROR 404
         if ( !$Route = $this->getRouteManager()->getRouteByUrlRequest( $this->getUrlRequest() ) )
-        {
-            // ERROR 404
-            $this->getResponse()->setStatus( 404 );
-            return call_user_func( array( $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ ."AppController" , "error404" ) );
-        }
+            return new ResponseHtml( call_user_func( array( $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ ."AppController" , "error404" ) ) , 404 );
 
         $controller = $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ . $Route->getControllerName();
         $action = $Route->getActionName();

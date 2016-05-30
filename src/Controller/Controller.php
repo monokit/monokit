@@ -6,14 +6,15 @@ use MonoKit\App\AppRegistry;
 use MonoKit\Component\Html\Tag\H1;
 use MonoKit\Controller\Exception\ControllerException;
 use MonoKit\EntityManager\Entity;
+use MonoKit\Http\Response\ResponseHtml;
 use MonoKit\Routing\Route;
 use MonoKit\View\ViewFile;
 
 Abstract Class Controller extends Entity
 {
-    Const CONTROLLER_DIRECTORY = "Controller";
-    Const CONTROLLER_SUFFIX = "Controller";
-    Const CONTROLLER_METHOD_SUFFIX = "Action";
+    Const CONTROLLER_DIRECTORY          = "Controller";
+    Const CONTROLLER_SUFFIX             = "Controller";
+    Const CONTROLLER_METHOD_SUFFIX      = "Action";
 
     /**
      * @return string
@@ -31,7 +32,7 @@ Abstract Class Controller extends Entity
     public function render( $viewFile , $data = null )
     {
         $View = new ViewFile();
-        return $View->render( $viewFile , $data );
+        return new ResponseHtml( $View->render( $viewFile , $data ) );
     }
 
     /**
