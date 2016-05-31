@@ -5,8 +5,9 @@ namespace MonoKit\EntityManager;
 use MonoKit\Foundation\Foundation;
 use MonoKit\EntityManager\Interfaces\EntityInterface;
 use MonoKit\Foundation\Interfaces\ArrayInterface;
+use MonoKit\Foundation\Interfaces\JsonInterface;
 
-Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterface
+Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterface, JsonInterface
 {
     /** @var mixed */
     protected $id;
@@ -156,6 +157,14 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
                 $arr[$key] = ( $value instanceof Entity ) ? $value->toArray() : $value;
 
         return $arr;
+    }
+
+    /**
+     * @return string
+     */
+    public function toJson()
+    {
+        return json_encode( $this->toArray() );
     }
 
 }
