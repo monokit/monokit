@@ -65,6 +65,15 @@ class Registry extends Foundation implements RegistryInterface, ArrayInterface
     }
 
     /**
+     * @param $key
+     * @return bool
+     */
+    public function hasKey( $key )
+    {
+        return array_key_exists( $key , $this->data );
+    }
+
+    /**
      * @return array
      */
     public function toArray()
