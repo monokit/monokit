@@ -14,6 +14,9 @@ Class UrlRequestDiscover extends UrlRequest
         $this->setUrl( "/" . $url );
         $this->setMethod( new Method( ( isset( $_POST["_method"] ) ) ? $_POST["_method"] : $_SERVER[ "REQUEST_METHOD" ] ) );
 
+        if ( isset( $_SERVER["CONTENT_TYPE"] ) )
+            $this->setContentType( $_SERVER["CONTENT_TYPE"] );
+
         foreach( $_REQUEST as $key => $value )
             $this->setParam( $key , $value );
     }

@@ -7,6 +7,7 @@ use MonoKit\Component\Html\Tag\H1;
 use MonoKit\Controller\Exception\ControllerException;
 use MonoKit\EntityManager\Entity;
 use MonoKit\Http\Response\ResponseHtml;
+use MonoKit\Http\UrlRequestDiscover;
 use MonoKit\Routing\Route;
 use MonoKit\View\ViewFile;
 
@@ -65,10 +66,20 @@ Abstract Class Controller extends Entity
     }
 
     /**
+     * @return UrlRequestDiscover
+     */
+    public function getUrlRequest()
+    {
+        return new UrlRequestDiscover();
+    }
+
+    /**
      * @return string
      */
     public function error404()
     {
         return new ResponseHtml( "<H1>Erreur 404</H1>" );
     }
+
+
 }

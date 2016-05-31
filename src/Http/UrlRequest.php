@@ -11,6 +11,8 @@ Class UrlRequest extends Entity
     protected $url = "/";
     /** @var Method */
     protected $Method;
+    /** @var string */
+    protected $ContentType;
     /** @var Registry */
     protected $ParamsRegistry;
 
@@ -19,8 +21,8 @@ Class UrlRequest extends Entity
      */
     public function __construct()
     {
-        $this->Method           = new Method();
-        $this->ParamsRegistry   = new Registry();
+        $this->setMethod( new Method() );
+        $this->setParamsRegistry( new Registry() );
     }
 
     /**
@@ -59,6 +61,24 @@ Class UrlRequest extends Entity
     public function getMethod()
     {
         return $this->Method;
+    }
+
+    /**
+     * @param string $ContentType
+     * @return UrlRequest
+     */
+    public function setContentType( $ContentType )
+    {
+        $this->ContentType = $ContentType;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContentType()
+    {
+        return $this->ContentType;
     }
 
     /**
@@ -101,6 +121,12 @@ Class UrlRequest extends Entity
         return $this->getParamsRegistry()->get( $key );
     }
 
-
+    /**
+     * @return bool
+     */
+    public function isJson()
+    {
+        return ( $this->getContentType() == "application/json" ) ? true : false;
+    }
 
 }
