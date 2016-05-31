@@ -92,13 +92,14 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
     }
 
     /**
-     * @param array $properties
+     * @param array|null $properties
      * @return Entity
      */
-    public function serialize( array $properties )
+    public function serialize( array $properties = null )
     {
-        foreach ( $properties as $property => $value )
-            $this->set( $property , $value );
+        if ( !is_null( $properties ) )
+            foreach ( $properties as $property => $value )
+                $this->set( $property , $value );
 
         return $this;
     }
