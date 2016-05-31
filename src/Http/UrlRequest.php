@@ -124,9 +124,17 @@ Class UrlRequest extends Entity
     /**
      * @return bool
      */
-    public function isJson()
+    public function isJsonRequest()
     {
         return ( $this->getContentType() == "application/json" || $this->getParamsRegistry()->hasKey("JSON") ) ? true : false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isWsdlRequest()
+    {
+        return ( $this->getParamsRegistry()->hasKey("WSDL") ) ? true : false;
     }
 
 }
