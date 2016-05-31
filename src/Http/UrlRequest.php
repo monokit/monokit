@@ -126,7 +126,7 @@ Class UrlRequest extends Entity
      */
     public function isJson()
     {
-        return ( $this->getContentType() == "application/json" ) ? true : false;
+        return ( $this->getContentType() == "application/json" || $this->getParamsRegistry()->has("JSON") ) ? true : false;
     }
 
 }
