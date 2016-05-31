@@ -149,7 +149,9 @@ Abstract Class App extends Entity
      */
     public function render( $viewFile )
     {
-        $response = $this->getResponse();
+        if ( !$response = $this->getResponse() )
+            exit();
+
         $response->getHeader();
 
         if ( $response instanceof ResponseHtml )
