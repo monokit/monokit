@@ -21,7 +21,7 @@ Abstract Class Controller extends Entity
      */
     public function indexAction()
     {
-        return new H1( "It's Work!" );
+        return new ResponseHtml( "<H1>It's Work!</H1>" );
     }
 
     /**
@@ -69,6 +69,6 @@ Abstract Class Controller extends Entity
      */
     public function error404()
     {
-        return new H1( "Erreur 404" );
+        return new ResponseHtml( "<H1>Erreur 404</H1>" );
     }
 }
