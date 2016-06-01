@@ -38,7 +38,12 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
     public function set( $property , $value )
     {
         if ( is_array( $value ) )
+        {
+            if ( $this->get( $property ) instanceof Entity )
+                return $this->get( $property )->serialize( $value );
+
             return $this->serialize( $value );
+        }
 
         // SubEntity
         if ( strpos( $property , "." ) )
