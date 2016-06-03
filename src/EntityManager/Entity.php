@@ -42,7 +42,7 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
             if ( $this->get( $property ) instanceof Entity )
                 return $this->get( $property )->serialize( $value );
 
-            return $this->serialize( $value );
+            return $this->set( $property , $value ) ;
         }
 
         // SubEntity
