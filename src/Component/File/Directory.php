@@ -52,7 +52,10 @@ class Directory extends Entity
      */
     public function create( $dir , $mode = "0777" , $recursive = true )
     {
-        return mkdir( $dir , $mode , $recursive  );
+        $result = mkdir( $dir , $mode , $recursive );
+                  chmod( $dir , $mode );
+
+        return $result;
     }
 
     /**
