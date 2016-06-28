@@ -158,7 +158,16 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
 
         foreach ( get_object_vars($this) AS $key => $value )
             if ( !is_null( $value ) )
-                $arr[$key] = ( $value instanceof Entity ) ? $value->toArray() : $value;
+            {
+                if ( $value instanceof EntityManager ) {
+                    foreach ( $value AS $v )
+                        $arr[$key][] = $v->toArray();
+                } elseif ( $value instanceof Entity ) {
+                    $arr[$key] = $value->toArray();
+                } else {
+                    $arr[$key] = $value;
+                }
+            }
 
         return $arr;
     }
