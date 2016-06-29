@@ -7,6 +7,7 @@ use MonoKit\Component\Html\Tag\H1;
 use MonoKit\Controller\Exception\ControllerException;
 use MonoKit\EntityManager\Entity;
 use MonoKit\Http\Response\ResponseHtml;
+use MonoKit\Http\Response\ResponseJson;
 use MonoKit\Http\UrlRequestDiscover;
 use MonoKit\Routing\Route;
 use MonoKit\View\ViewFile;
@@ -23,6 +24,16 @@ Abstract Class Controller extends Entity
     public function indexAction()
     {
         return new ResponseHtml( "<H1>It's Work!</H1>" );
+    }
+
+    /**
+     * @param mixed $data
+     * @param int $status
+     * @return ResponseJson
+     */
+    public function json( $data = null , $status = 200 )
+    {
+        return new ResponseJson( $data , $status );
     }
 
     /**

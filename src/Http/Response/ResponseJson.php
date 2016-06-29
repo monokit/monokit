@@ -10,12 +10,14 @@ Class ResponseJson extends Response
 
     /**
      * ResponseJson constructor.
-     * @param JsonInterface|null $content
+     * @param mixed $content
      * @param int $status
      */
-    public function __construct( JsonInterface $content = null , $status = 200 )
+    public function __construct( $content = null , $status = 200 )
     {
-        parent::__construct( $content->toJson() , $status );
-    }
+        if ( $content instanceof JsonInterface )
+            $content = $content->toJson();
 
+        parent::__construct( $content , $status );
+    }
 }
