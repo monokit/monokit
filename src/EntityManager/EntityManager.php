@@ -148,7 +148,13 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
      */
     public function toArray()
     {
-        return $this->data;
+        $arr = get_object_vars( $this );
+        $arr["data"] = array();
+
+        foreach ( $this->toArray() AS $Entity )
+            $arr["data"][] = $Entity->toArray();
+
+        return $arr;
     }
 
     /**
@@ -156,11 +162,6 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
      */
     public function toJson()
     {
-        $arr = array();
-
-        foreach ( $this AS $Entity )
-            $arr[] = $Entity->toArray();
-
-        return json_encode( $arr );
+        return json_encode( $this->toArray() );
     }
 }

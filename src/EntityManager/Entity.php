@@ -171,7 +171,6 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
             }
         }
 
-
         return $arr;
     }
 
