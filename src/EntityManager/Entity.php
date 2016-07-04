@@ -157,7 +157,8 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
         $arr = array();
 
         foreach ( get_object_vars($this) AS $key => $value )
-            if ( !is_null( $value ) )
+        {
+            if ( !is_null( $value = $this->get( $key ) ) )
             {
                 if ( $value instanceof EntityManager ) {
                     foreach ( $value AS $v )
@@ -168,6 +169,8 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
                     $arr[$key] = $value;
                 }
             }
+        }
+
 
         return $arr;
     }
