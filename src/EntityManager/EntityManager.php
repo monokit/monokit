@@ -151,7 +151,7 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
         $arr = get_object_vars( $this );
         $arr["data"] = array();
 
-        foreach ( $this->toArray() AS $Entity )
+        foreach ( $this AS $Entity )
             $arr["data"][] = $Entity->toArray();
 
         return $arr;
