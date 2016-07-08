@@ -24,6 +24,9 @@ class Directory extends Entity
      */
     public function setPath( $path )
     {
+        // Supprime le dernier "/"
+        $path = rtrim( $path , __DS__ );
+
         $this->path = $path;
         return $this;
     }
@@ -52,10 +55,10 @@ class Directory extends Entity
      */
     public function create( $dirName , $mode = 0777 , $recursive = true )
     {
-        $dir = $this->getPath() . __DS__ . $dirName;
+        $this->setPath( $this->getPath() . __DS__ . $dirName );
 
-        $result = mkdir( $dir , $mode , $recursive );
-                  chmod( $dir , $mode );
+        $result = mkdir( $this->getPath() , $mode , $recursive );
+                  chmod( $this->getPath() , $mode );
 
         return $result;
     }
