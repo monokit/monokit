@@ -45,13 +45,15 @@ class Directory extends Entity
     }
 
     /**
-     * @param string $dir
+     * @param string $dirName
      * @param int $mode
      * @param bool|true $recursive
      * @return bool
      */
-    public function create( $dir , $mode = 0777 , $recursive = true )
+    public function create( $dirName , $mode = 0777 , $recursive = true )
     {
+        $dir = $this->getPath() . __DS__ . $dirName;
+
         $result = mkdir( $dir , $mode , $recursive );
                   chmod( $dir , $mode );
 
