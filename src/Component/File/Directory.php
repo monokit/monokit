@@ -57,6 +57,9 @@ class Directory extends Entity
     {
         $this->setPath( $this->getPath() . __DS__ . $dirName );
 
+        if ( $this->isDir() )
+            return false;
+
         $result = mkdir( $this->getPath() , $mode , $recursive );
                   chmod( $this->getPath() , $mode );
 
