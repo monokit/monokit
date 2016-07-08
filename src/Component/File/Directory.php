@@ -46,11 +46,11 @@ class Directory extends Entity
 
     /**
      * @param string $dir
-     * @param string $mode
+     * @param int $mode
      * @param bool|true $recursive
      * @return bool
      */
-    public function create( $dir , $mode = "0777" , $recursive = true )
+    public function create( $dir , $mode = 0777 , $recursive = true )
     {
         $result = mkdir( $dir , $mode , $recursive );
                   chmod( $dir , $mode );
