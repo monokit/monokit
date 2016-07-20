@@ -158,6 +158,33 @@ class SqlSelect extends Sql
     }
 
     /**
+     * @param string $group
+     * @param bool|true $autoAlias
+     * @return SqlSelect
+     */
+    public function group( $group , $autoAlias = true )
+    {
+        if ( $autoAlias )
+        {
+            $this->getSqlTable()->setGroup( $this->getSqlTable()->getAlias() . __DOT__ . $group );
+        } else {
+            $this->getSqlTable()->setGroup( $group );
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $group
+     * @param bool|true $autoAlias
+     * @return SqlSelect
+     */
+    public function groupBy( $group , $autoAlias = true )
+    {
+        return $this->group( $group , $autoAlias );
+    }
+
+    /**
      * @return string
      */
     public function toString()
@@ -176,11 +203,12 @@ class SqlSelect extends Sql
         $columnsString = implode( ", " , $columnArray );
         $columnsString = ( substr($columnsString, 0 , 1 ) == "*" ) ? $this->getSqlTable()->getAlias() . __DOT__ . $columnsString : $columnsString;
 
-        return sprintf("SELECT %s FROM %s %s %s %s",    $columnsString,
-                                                        $this->getSqlTable()->toString(),
-                                                        implode(__SPACE__, $joinTableArray),
-                                                        $this->getSqlTable()->getCondition(),
-                                                        $this->getSqlTable()->getOrder());
+        return sprintf("SELECT %s FROM %s %s %s %s %s",     $columnsString,
+                                                            $this->getSqlTable()->toString(),
+                                                            implode(__SPACE__, $joinTableArray),
+                                                            $this->getSqlTable()->getCondition(),
+                                                            $this->getSqlTable()->getOrder(),
+                                                            $this->getSqlTable()->getGroup());
 
     }
 }

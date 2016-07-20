@@ -15,6 +15,8 @@ class SqlTable extends Table
     protected $order;
     /** @var string */
     protected $orderType = "ASC";
+    /** @var string */
+    protected $group;
     /** @var SqlColumnManager */
     protected $ColumnManager;
 
@@ -128,6 +130,27 @@ class SqlTable extends Table
     public function getOrderType()
     {
         return $this->orderType;
+    }
+
+    /**
+     * @param string $group
+     * @return SqlTable
+     */
+    public function setGroup( $group )
+    {
+        $this->group = $group;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGroup()
+    {
+        if ( $this->group )
+            return "GROUP BY {$this->group}";
+
+        return null;
     }
 
     /**
