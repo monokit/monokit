@@ -3,9 +3,9 @@
 namespace MonoKit\EntityManager;
 
 use MonoKit\Foundation\Foundation;
-use MonoKit\EntityManager\Interfaces\EntityInterface;
 use MonoKit\Foundation\Interfaces\ArrayInterface;
 use MonoKit\Foundation\Interfaces\JsonInterface;
+use MonoKit\EntityManager\Interfaces\EntityInterface;
 
 Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterface, JsonInterface
 {

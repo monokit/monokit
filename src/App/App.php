@@ -18,7 +18,7 @@ use MonoKit\Controller\Exception\ControllerException;
 Abstract Class App extends Entity
 {
     /** @var string */
-    protected $name = "MonoKitApplication";
+    protected $name;
     /** @var Response */
     protected $response;
     /** @var mixed */
@@ -141,6 +141,9 @@ Abstract Class App extends Entity
      */
     public function getName()
     {
+        if ( is_null( $this->name) )
+            return $this->getClassNamespace();
+
         return $this->name;
     }
 
