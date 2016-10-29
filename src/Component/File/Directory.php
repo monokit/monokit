@@ -15,7 +15,7 @@ class Directory extends Entity
      */
     public function __construct( $path )
     {
-       $this->setPath($path);
+       $this->setPath( $path );
     }
 
     /**
@@ -67,6 +67,19 @@ class Directory extends Entity
     }
 
     /**
+     * @param string $dirName
+     * @return bool
+     */
+    public function rename( $dirName )
+    {
+        $oldPath = $this->getPath();
+
+        $this->setPath( $this->getPath() . "/../" . $dirName );
+
+        return rename( $oldPath , $this->getPath() );
+    }
+
+    /**
      * @param string $dir
      * @return bool
      */
@@ -78,5 +91,23 @@ class Directory extends Entity
             ( is_dir( $dir . __DS__ .$file ) ) ? $this->delete( $dir . __DS__ . $file ) : unlink( $dir . __DS__ . $file );
 
         return rmdir( $dir );
+    }
+
+    /**
+     * @return FileManager
+     */
+    public function getFileList()
+    {
+        $FileManager = new FileManager();
+        return $FileManager->getFilesFromDirectory( $this );
+    }
+
+    /**
+     * @return DirectoryManager
+     */
+    public function getDirectoryList()
+    {
+        $DirectoryManager = new DirectoryManager();
+        return $DirectoryManager->getDirectoryFromDirectory( $this );
     }
 }
