@@ -36,6 +36,16 @@ Abstract Class App extends Entity
     }
 
     /**
+     * @param RouteManager $routeManager
+     * @return App
+     */
+    public function setRouteManager( RouteManager $routeManager )
+    {
+        AppRegistry::AppRegistry( AppRegistry::APPLICATION_ROUTES , $routeManager );
+        return $this;
+    }
+
+    /**
      * @param File $iniFile
      * @return RouteManager
      * @throws FileException
@@ -63,7 +73,7 @@ Abstract Class App extends Entity
      */
     public function setRouteManagerFromIniFilePath( $filePath )
     {
-        return $this->setRouteManagerFromIniFile( new File( $filePath) );
+        return $this->setRouteManagerFromIniFile( new File( $filePath ) );
     }
 
     /**
