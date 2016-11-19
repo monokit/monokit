@@ -11,7 +11,11 @@ class Column extends Entity
     /** @var string */
     protected $type;
 
-    public function __construct( $field )
+    /**
+     * Column constructor.
+     * @param null|string $field
+     */
+    public function __construct( $field = null )
     {
         $this->setField( $field );
     }

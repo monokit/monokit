@@ -17,10 +17,10 @@ Class MysqliService extends \mysqli implements ServiceInterface
      * @param string $username
      * @param string $passwd
      * @param string $dbname
-     * @param int $port
-     * @param string $socket
+     * @param int|null $port
+     * @param string|null $socket
      */
-    public function __construct( $host, $username, $passwd, $dbname, $port = null , $socket = null )
+    public function __construct( $host, $username, $passwd, $dbname , $port = null , $socket = null )
     {
         parent::__construct( $host, $username, $passwd, $dbname, $port, $socket);
 
@@ -29,7 +29,7 @@ Class MysqliService extends \mysqli implements ServiceInterface
 
     /**
      * @param string $name
-     * @return $this
+     * @return MysqliService
      */
     public function setName($name)
     {

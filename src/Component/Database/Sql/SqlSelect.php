@@ -12,7 +12,10 @@ class SqlSelect extends Sql
 {
     /** @var SqlTableManager */
     protected $JoinTableManager;
-
+    /** @var int */
+    protected $limit;
+    /** @var int */
+    protected $offset;
     /**
      * @param string $tableName
      * @param string|null $tableAlias
@@ -185,6 +188,42 @@ class SqlSelect extends Sql
     }
 
     /**
+     * @param int $limit
+     * @return SqlSelect
+     */
+    public function setLimit( $limit )
+    {
+        $this->limit = $limit;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    /**
+     * @param int $offset
+     * @return SqlSelect
+     */
+    public function setOffset($offset)
+    {
+        $this->offset = $offset;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOffset()
+    {
+        return $this->offset;
+    }
+
+    /**
      * @return string
      */
     public function toString()
@@ -203,12 +242,13 @@ class SqlSelect extends Sql
         $columnsString = implode( ", " , $columnArray );
         $columnsString = ( substr($columnsString, 0 , 1 ) == "*" ) ? $this->getSqlTable()->getAlias() . __DOT__ . $columnsString : $columnsString;
 
-        return sprintf("SELECT %s FROM %s %s %s %s %s",     $columnsString,
+        return sprintf("SELECT %s FROM %s %s %s %s %s %s",     $columnsString,
                                                             $this->getSqlTable()->toString(),
                                                             implode(__SPACE__, $joinTableArray),
                                                             $this->getSqlTable()->getCondition(),
                                                             $this->getSqlTable()->getOrder(),
-                                                            $this->getSqlTable()->getGroup());
+                                                            $this->getSqlTable()->getGroup(),
+                                                            ( $this->getLimit() ) ? "LIMIT {$this->getLimit()}" : '');
 
     }
 }

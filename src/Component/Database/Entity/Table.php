@@ -9,7 +9,11 @@ class Table extends Entity
     /** @var string */
     protected $name;
 
-    public function __construct( $name )
+    /**
+     * Table constructor.
+     * @param null|string $name
+     */
+    public function __construct( $name = null )
     {
         $this->setName( $name );
     }
