@@ -49,7 +49,10 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
      */
     public function getFirst()
     {
-        return $this->data[0];
+        if ( isset( $this->data[0] ) )
+            return $this->data[0];
+
+        return null;
     }
 
     /**
