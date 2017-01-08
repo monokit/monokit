@@ -158,7 +158,7 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
 
         foreach ( get_object_vars($this) AS $key => $value )
         {
-            if ( !is_null( $value = $this->get( $key ) ) )
+            if ( !is_null( $value ) ) //$value = $this->get( $key )
                 $arr[$key] = ( $value instanceof Entity ) ? $value->toArray() : $value;
         }
 
