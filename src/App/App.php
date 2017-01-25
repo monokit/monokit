@@ -162,24 +162,20 @@ Abstract Class App extends Entity
      */
     public function render( $viewFile )
     {
-        if ( !$response = $this->getResponse() )
-            exit();
-
+        $response = $this->getResponse();
+        $response = ( !$response instanceof Response ) ? new Response( $response ) : $response;
         $response->getHeader();
 
         if ( $response instanceof ResponseHtml )
         {
-            // ResponseHTML
             $this->AppContent = $response->getContent();
 
             $View = new ViewFile();
             echo $View->render( $viewFile , $this );
 
         } else {
-            // ResponseJson
-            echo $response->getContent();
+            $response->render();
         }
-
     }
 
     /**

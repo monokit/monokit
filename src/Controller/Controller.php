@@ -3,7 +3,6 @@
 namespace MonoKit\Controller;
 
 use MonoKit\App\AppRegistry;
-use MonoKit\Component\Html\Tag\H1;
 use MonoKit\Controller\Exception\ControllerException;
 use MonoKit\EntityManager\Entity;
 use MonoKit\Http\Response\ResponseHtml;
@@ -24,6 +23,16 @@ Abstract Class Controller extends Entity
     public function indexAction()
     {
         return new ResponseHtml( "<H1>It's Work!</H1>" );
+    }
+
+    /**
+     * @param mixed $data
+     * @param int $status
+     * @return ResponseHtml
+     */
+    public function html( $data = null , $status = 200 )
+    {
+        return new ResponseHtml( $data , $status );
     }
 
     /**

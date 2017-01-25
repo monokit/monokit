@@ -3,8 +3,9 @@
 namespace MonoKit\Http\Response;
 
 use MonoKit\Foundation\Foundation;
+use MonoKit\Http\Response\Interfaces\ResponseInterface;
 
-Class Response extends Foundation
+Class Response extends Foundation implements ResponseInterface
 {
     const HTTP_CONTINUE = 100;
     const HTTP_SWITCHING_PROTOCOLS = 101;
@@ -68,7 +69,7 @@ Class Response extends Foundation
     const HTTP_NOT_EXTENDED = 510;                                                // RFC2774
     const HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511;                             // RFC6585
 
-    const RESPONSE_HEADER = "HTTP/1.1 200 OK";
+    const RESPONSE_HEADER = "Content-Type:text/plain";
 
 
     /** @var int */
@@ -135,6 +136,11 @@ Class Response extends Foundation
 
             header( static::RESPONSE_HEADER );
         }
+    }
+
+    public function render( $viewFile = null )
+    {
+        echo $this->getContent();
     }
 
 }
