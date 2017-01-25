@@ -44,6 +44,9 @@ Class Image extends File
      */
     public function resize( $width , $height )
     {
+        if ( !$this->isFile() )
+            return false;
+
         $image = imagecreatetruecolor( $width , $height );
         imagecopyresampled( $image, $this->getImage(), 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
 
@@ -54,6 +57,9 @@ Class Image extends File
 
     public function setMaxSize( $max )
     {
+        if ( !$this->isFile() )
+            return false;
+
         $ratio = $this->getRatio();
 
         if ( $ratio <= 1 ) // WIDTH PLUS GRAND
@@ -77,6 +83,9 @@ Class Image extends File
 
     public function square( $size )
     {
+        if ( !$this->isFile() )
+            return false;
+
         $ratio = $this->getRatio();
 
         $width = $this->getWidth();
