@@ -59,7 +59,7 @@ Class View extends Entity
     public function render( $viewFilePath , $data = null )
     {
         $ViewFile = new ViewFile();
-        return $ViewFile->render( $viewFilePath , $data );
+        return $ViewFile->render( $viewFilePath , ( $data ) ? $data : $this->getData() );
     }
 
 }
