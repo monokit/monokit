@@ -52,7 +52,9 @@ Class ViewFile extends View implements ViewFileInterface
             : "../" . self::VIEW_DIRECTORY . __DS__ . $viewFilePath;
 
         $this->setFile( new File( $viewFilePath ) );
-        $this->setData( $data );
+
+        if ( $data )
+            $this->setData( $data );
 
         ob_start();
 
