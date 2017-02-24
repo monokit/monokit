@@ -16,7 +16,7 @@ Class Image extends File
         parent::__construct($filePath);
 
         if ( $this->isFile() )
-            $this->image = imagecreatefromjpeg( $this->filePath );
+            $this->image = imagecreatefromjpeg( $this->getFilePath() );
     }
 
     /**
@@ -137,6 +137,15 @@ Class Image extends File
     }
 
     /**
+     * @return Image
+     */
+    public function save()
+    {
+        imagejpeg( $this->image , $this->getFilePath() );
+        return $this;
+    }
+
+    /**
      * @return float
      */
     protected function getRatio()
@@ -146,5 +155,7 @@ Class Image extends File
 
         return $this->getHeight() / $this->getWidth();
     }
+
+
 
 }
