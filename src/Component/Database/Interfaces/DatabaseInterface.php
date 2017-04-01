@@ -2,7 +2,4 @@
 
 namespace MonoKit\Component\Database\Interfaces;
 
-interface DatabaseInterface
-{
-
-}
+interface DatabaseInterface {}

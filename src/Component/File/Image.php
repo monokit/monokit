@@ -55,6 +55,10 @@ Class Image extends File
         return $this;
     }
 
+    /**
+     * @param int $max
+     * @return Image
+     */
     public function setMaxSize( $max )
     {
         if ( !$this->isFile() )
@@ -81,6 +85,10 @@ Class Image extends File
         return $this;
     }
 
+    /**
+     * @param int $size
+     * @return Image
+     */
     public function square( $size )
     {
         if ( !$this->isFile() )
@@ -155,7 +163,5 @@ Class Image extends File
 
         return $this->getHeight() / $this->getWidth();
     }
-
-
 
 }

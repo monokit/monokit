@@ -44,7 +44,18 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
         if ( strpos( $property , "." ) )
         {
             list( $instanceName , $instanceProperty ) = explode( '.' , $property , 2 );
-            return ( $this->get( $instanceName ) instanceof Entity ) ? $this->get( $instanceName )->set( $instanceProperty , $value ) : $this;
+
+            if ( $this->get( $instanceName ) instanceof Entity )
+                return $this->get( $instanceName )->set( $instanceProperty , $value );
+
+            $class = new \ReflectionClass( $this );
+            $params = $class->getMethod( $this->getMethodSet( $instanceName ) )->getParameters();
+            $instance = $params[0]->getClass()->getName();
+
+            $method = $this->getMethodSet( $instanceName );
+            $this->$method( new $instance() );
+
+            return $this->get( $instanceName )->set( $instanceProperty , $value );
         }
 
         if ( $method = $this->getMethodSet( $property ) )

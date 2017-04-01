@@ -4,7 +4,4 @@ namespace MonoKit\Component\Database\Manager;
 
 use MonoKit\EntityManager\EntityManager;
 
-Class ColumnManager extends EntityManager
-{
-
-}
+Class ColumnManager extends EntityManager {}
