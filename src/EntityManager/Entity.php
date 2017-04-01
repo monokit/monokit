@@ -35,8 +35,11 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
      * @param mixed $value
      * @return Entity
      */
-    public function set( $property , $value )
+    public function set( $property , $value = null )
     {
+        if ( is_null($value) )
+            return $this;
+
         if ( is_array( $value ) && $this->get( $property ) instanceof Entity )
             return $this->get( $property )->serialize( $value );
 
