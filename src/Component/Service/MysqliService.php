@@ -23,7 +23,6 @@ Class MysqliService extends \mysqli implements ServiceInterface
     public function __construct( $host, $username, $passwd, $dbname , $port = null , $socket = null )
     {
         parent::__construct( $host, $username, $passwd, $dbname, $port, $socket);
-
         $this->set_charset( "UTF8" );
     }
 
