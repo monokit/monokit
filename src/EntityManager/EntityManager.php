@@ -151,18 +151,9 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
      */
     public function toArray( array $arr = array() )
     {
-
         foreach ( $this AS $Entity )
             $arr["data"][] = $Entity->toArray();
 
         return $arr;
-    }
-
-    /**
-     * @return string
-     */
-    public function toJson()
-    {
-        return json_encode( $this->toArray() );
     }
 }
