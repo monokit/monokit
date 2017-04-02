@@ -12,7 +12,7 @@ Class EntityManagerMysqli extends EntityManager
 {
     /** @var MysqliService */
     private $MySqliService;
-    /** @var SqlInterface */
+    /** @var string */
     private $sql;
 
     public function __construct( MysqliService $mysqliService = null )
@@ -55,8 +55,8 @@ Class EntityManagerMysqli extends EntityManager
 
         $this->setSql( $sql );
 
-        if ( !$result = $this->getMysqliService()->query( $sql ) )
-            throw new SqlException( SqlException::ERROR_SQL , $this , $sql );
+        if ( !$result = $this->getMysqliService()->query( $this->getSql() ) )
+            throw new SqlException( SqlException::ERROR_SQL , $this , $this->getSql() );
 
         if ( $entity )
             return $this->fetch( $result , $entity );
@@ -82,9 +82,9 @@ Class EntityManagerMysqli extends EntityManager
      */
     protected function setSql( SqlInterface $sql )
     {
-        $this->sql = $sql;
+        $this->sql = $sql->toString();
 
-        AppRegistry::AppRegistry( AppRegistry::APPLICATION_DATABASE_SQL . __DOT__ . $sql->getId() , $sql->toString() );
+        AppRegistry::AppRegistry( AppRegistry::APPLICATION_DATABASE_SQL . __DOT__ . $this->getUniqueId() , $this->sql );
 
         return $this;
     }

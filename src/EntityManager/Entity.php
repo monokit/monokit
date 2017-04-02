@@ -9,27 +9,6 @@ use MonoKit\EntityManager\Interfaces\EntityInterface;
 
 Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterface, JsonInterface
 {
-    /** @var mixed */
-    protected $id;
-
-    /**
-     * @param mixed $id
-     * @return $this
-     */
-    public function setId( $id )
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * @param string $property
      * @param mixed $value
@@ -53,12 +32,15 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
 
             $class = new \ReflectionClass( $this );
             $params = $class->getMethod( $this->getMethodSet( $instanceName ) )->getParameters();
-            $instance = $params[0]->getClass()->getName();
 
-            $method = $this->getMethodSet( $instanceName );
-            $this->$method( new $instance() );
+            if ( $instance = $params[0]->getClass()->name )
+            {
+                $method = $this->getMethodSet( $instanceName );
+                $this->$method( new $instance() );
 
-            return $this->get( $instanceName )->set( $instanceProperty , $value );
+                return $this->get( $instanceName )->set( $instanceProperty , $value );
+            }
+
         }
 
         if ( $method = $this->getMethodSet( $property ) )
@@ -105,18 +87,8 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
      */
     public function setUniqueId()
     {
-        return $this->setId( $this->getUniqueId() );
-    }
-
-    /**
-     * @param array|null $properties
-     * @return Entity
-     */
-    public function serialize( array $properties = null )
-    {
-        if ( !is_null( $properties ) )
-            foreach ( $properties as $property => $value )
-                $this->set( $property , $value );
+        if ( $method = $this->getMethodSet( "id" ) )
+            $this->$method( $this->getUniqueId() );
 
         return $this;
     }
@@ -130,6 +102,47 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
     {
         return number_format( hexdec( uniqid() ) , 0 , '', '' );
     }
+
+    /**
+     * @return Entity
+     */
+    public function getClone()
+    {
+        return new $this();
+    }
+
+    /**
+     * @param array|null $properties
+     * @return Entity
+     */
+    public function serialize( array $properties = array() )
+    {
+        foreach ( $properties as $property => $value )
+            $this->set( $property , $value );
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray( array $arr = array() )
+    {
+        foreach ( get_object_vars($this) AS $key => $value )
+            if ( !is_null( $value ) ) //$value = $this->get( $key )
+                $arr[$key] = ( $value instanceof Entity ) ? $value->toArray() : $value;
+
+        return $arr;
+    }
+
+    /**
+     * @return string
+     */
+    public function toJson()
+    {
+        return json_encode( $this->toArray() );
+    }
+
 
     /**
      * @param string $property
@@ -153,38 +166,6 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
             return null;
 
         return $method;
-    }
-
-    /**
-     * @return Entity
-     */
-    public function getClone()
-    {
-        return new $this();
-    }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        $arr = array();
-
-        foreach ( get_object_vars($this) AS $key => $value )
-        {
-            if ( !is_null( $value ) ) //$value = $this->get( $key )
-                $arr[$key] = ( $value instanceof Entity ) ? $value->toArray() : $value;
-        }
-
-        return $arr;
-    }
-
-    /**
-     * @return string
-     */
-    public function toJson()
-    {
-        return json_encode( $this->toArray() );
     }
 
 }
