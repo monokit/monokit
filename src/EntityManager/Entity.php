@@ -16,6 +16,9 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
      */
     public function set( $property , $value = null )
     {
+        if ( is_null($value) )
+            return null;
+
         list( $instanceName , $instanceProperty ) = explode( '.' , $property , 2 );
 
         if ( !$methodSet = $this->getMethodSet( $instanceName ) )
@@ -37,7 +40,6 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
             return $this->get( $instanceName )->serialize( $value );
 
         return $this->$methodSet( $value );
-
     }
 
     /**
