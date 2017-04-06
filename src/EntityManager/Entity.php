@@ -16,37 +16,28 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
      */
     public function set( $property , $value = null )
     {
-        if ( is_null($value) )
-            return $this;
+        list( $instanceName , $instanceProperty ) = explode( '.' , $property , 2 );
 
-        if ( is_array( $value ) && $this->get( $property ) instanceof Entity )
-            return $this->get( $property )->serialize( $value );
+        if ( !$methodSet = $this->getMethodSet( $instanceName ) )
+            return false;
 
-        // SubEntity
-        if ( strpos( $property , "." ) )
+        if ( !$this->get( $instanceName ) )
         {
-            list( $instanceName , $instanceProperty ) = explode( '.' , $property , 2 );
-
-            if ( $this->get( $instanceName ) instanceof Entity )
-                return $this->get( $instanceName )->set( $instanceProperty , $value );
-
             $class = new \ReflectionClass( $this );
-            $params = $class->getMethod( $this->getMethodSet( $instanceName ) )->getParameters();
+            $params = $class->getMethod( $methodSet )->getParameters();
 
             if ( $instance = $params[0]->getClass()->name )
-            {
-                $method = $this->getMethodSet( $instanceName );
-                $this->$method( new $instance() );
-
-                return $this->get( $instanceName )->set( $instanceProperty , $value );
-            }
-
+                $this->$methodSet( new $instance() );
         }
 
-        if ( $method = $this->getMethodSet( $property ) )
-            $this->$method( $value );
+        if ( strpos( $property , "." ) )
+            return $this->get( $instanceName )->set( $instanceProperty , $value );
 
-        return $this;
+        if ( is_array( $value ) && $this->get( $instanceName ) instanceof Entity )
+            return $this->get( $instanceName )->serialize( $value );
+
+        return $this->$methodSet( $value );
+
     }
 
     /**
@@ -117,7 +108,7 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
      */
     public function serialize( array $properties = array() )
     {
-        foreach ( $properties as $property => $value )
+        foreach ( $properties AS $property => $value )
             $this->set( $property , $value );
 
         return $this;
@@ -166,5 +157,4 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
 
         return $method;
     }
-
 }
