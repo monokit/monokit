@@ -147,10 +147,14 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     }
 
     /**
+     * @param array $arr
      * @return array
      */
     public function toArray( array $arr = array() )
     {
+        $arr = parent::toArray( $arr );
+        $arr["data"] = array();
+
         foreach ( $this AS $Entity )
             $arr["data"][] = $Entity->toArray();
 
