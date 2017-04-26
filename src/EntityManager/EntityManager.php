@@ -151,8 +151,8 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
      */
     public function toArray()
     {
-        $arr = array();
-        parent::toArray();
+        $arr = parent::toArray();
+        $arr[$this->getClassBaseName()]["data"] = array();
 
         foreach ( $this AS $Entity )
             $arr[$this->getClassBaseName()]["data"][] = $Entity->toArray();
