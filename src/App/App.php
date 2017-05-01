@@ -164,7 +164,6 @@ Abstract Class App extends Entity
     {
         $response = $this->getResponse();
         $response = ( !$response instanceof Response ) ? new Response( $response ) : $response;
-        $response->getHeader();
 
         if ( $response instanceof ResponseHtml )
         {
