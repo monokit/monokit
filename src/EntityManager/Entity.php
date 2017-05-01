@@ -135,7 +135,7 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
      */
     public function toJson()
     {
-        return json_encode( array( $this->getClassBaseName() => $this->toArray()  ));
+        return json_encode( $this->toArray() );
     }
 
     /**

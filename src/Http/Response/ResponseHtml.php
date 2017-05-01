@@ -6,7 +6,7 @@ use MonoKit\View\ViewFile;
 
 Class ResponseHtml extends Response
 {
-    const RESPONSE_HEADER = "Content-Type: text/html";
+    const CONTENT_TYPE = "text/html";
 
     public function render( $viewFile = null )
     {

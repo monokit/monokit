@@ -69,7 +69,7 @@ Class Response extends Foundation implements ResponseInterface
     const HTTP_NOT_EXTENDED = 510;                                                // RFC2774
     const HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511;                             // RFC6585
 
-    const RESPONSE_HEADER = "Content-Type:text/plain";
+    const CONTENT_TYPE = "text/plain";
 
 
     /** @var int */
@@ -81,7 +81,7 @@ Class Response extends Foundation implements ResponseInterface
      * Response constructor.
      * @param int $status
      */
-    public function __construct( $content = null , $status = 200 )
+    public function __construct( $content = null , $status = self::HTTP_OK )
     {
         $this->setContent( $content );
         $this->setStatus( $status );
@@ -91,7 +91,7 @@ Class Response extends Foundation implements ResponseInterface
      * @param int $status
      * @return Response
      */
-    public function setStatus( $status = 200 )
+    public function setStatus( $status )
     {
         $this->status = $status;
         return $this;
@@ -129,12 +129,50 @@ Class Response extends Foundation implements ResponseInterface
         {
             switch ( $this->getStatus() )
             {
-                case 404:
-                    header( "HTTP/1.0 404 Not Found" );
-                    return;
+                case 100: $text = 'Continue'; break;
+                case 101: $text = 'Switching Protocols'; break;
+                case 200: $text = 'OK'; break;
+                case 201: $text = 'Created'; break;
+                case 202: $text = 'Accepted'; break;
+                case 203: $text = 'Non-Authoritative Information'; break;
+                case 204: $text = 'No Content'; break;
+                case 205: $text = 'Reset Content'; break;
+                case 206: $text = 'Partial Content'; break;
+                case 300: $text = 'Multiple Choices'; break;
+                case 301: $text = 'Moved Permanently'; break;
+                case 302: $text = 'Moved Temporarily'; break;
+                case 303: $text = 'See Other'; break;
+                case 304: $text = 'Not Modified'; break;
+                case 305: $text = 'Use Proxy'; break;
+                case 400: $text = 'Bad Request'; break;
+                case 401: $text = 'Unauthorized'; break;
+                case 402: $text = 'Payment Required'; break;
+                case 403: $text = 'Forbidden'; break;
+                case 404: $text = 'Not Found'; break;
+                case 405: $text = 'Method Not Allowed'; break;
+                case 406: $text = 'Not Acceptable'; break;
+                case 407: $text = 'Proxy Authentication Required'; break;
+                case 408: $text = 'Request Time-out'; break;
+                case 409: $text = 'Conflict'; break;
+                case 410: $text = 'Gone'; break;
+                case 411: $text = 'Length Required'; break;
+                case 412: $text = 'Precondition Failed'; break;
+                case 413: $text = 'Request Entity Too Large'; break;
+                case 414: $text = 'Request-URI Too Large'; break;
+                case 415: $text = 'Unsupported Media Type'; break;
+                case 500: $text = 'Internal Server Error'; break;
+                case 501: $text = 'Not Implemented'; break;
+                case 502: $text = 'Bad Gateway'; break;
+                case 503: $text = 'Service Unavailable'; break;
+                case 504: $text = 'Gateway Time-out'; break;
+                case 505: $text = 'HTTP Version not supported'; break;
+                default:  $text = "OK";
             }
 
-            header( static::RESPONSE_HEADER );
+            $protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');
+
+            header( "content-type:" . static::CONTENT_TYPE );
+            header( "{$protocol} {$this->getStatus()} {$text}");
         }
     }
 

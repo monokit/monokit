@@ -6,7 +6,7 @@ use MonoKit\Component\File\Image;
 
 Class ResponseImage extends Response
 {
-    const RESPONSE_HEADER = "Content-Type: image/jpg";
+    const CONTENT_TYPE = "image/jpg";
 
     public function __construct( Image $image , $status = 200 )
     {
