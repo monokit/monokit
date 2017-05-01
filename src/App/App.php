@@ -170,7 +170,7 @@ Abstract Class App extends Entity
             $this->AppContent = $response->getContent();
 
             $View = new ViewFile();
-            echo $View->render( $viewFile , $this );
+            $View->render( $viewFile , $this );
 
         } else {
             $response->render();

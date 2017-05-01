@@ -10,6 +10,8 @@ Class ResponseHtml extends Response
 
     public function render( $viewFile = null )
     {
+        $this->getHeader();
+
         $View = new ViewFile();
         echo $View->render( $viewFile , $this->getContent() );
     }

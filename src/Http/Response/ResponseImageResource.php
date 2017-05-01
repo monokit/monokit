@@ -4,18 +4,18 @@ namespace MonoKit\Http\Response;
 
 use MonoKit\Component\Image\ImageResource;
 
-Class ResponseImageRessource extends Response
+Class ResponseImageResource extends Response
 {
     const CONTENT_TYPE = "image/jpg";
 
     /**
-     * ResponseImageRessource constructor.
-     * @param ImageResource $imageRessource
+     * ResponseImageResource constructor.
+     * @param ImageResource $imageResource
      * @param int $status
      */
-    public function __construct( ImageResource $imageRessource, $status = self::HTTP_OK )
+    public function __construct( ImageResource $imageResource, $status = self::HTTP_OK )
     {
-        parent::__construct( $imageRessource->getImage() , $status );
+        parent::__construct( $imageResource->getImage() , $status );
     }
 
     /**
@@ -23,6 +23,7 @@ Class ResponseImageRessource extends Response
      */
     public function render($viewFile = null)
     {
+        $this->getHeader();
         imagejpeg( $this->getContent() );
         imagedestroy($this->getContent() );
     }
