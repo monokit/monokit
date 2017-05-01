@@ -163,18 +163,18 @@ Abstract Class App extends Entity
     public function render( $viewFile )
     {
         $response = $this->getResponse();
-        $response = ( !$response instanceof Response ) ? new Response( $response ) : $response;
+        $response->getHeader();
 
         if ( $response instanceof ResponseHtml )
         {
             $this->AppContent = $response->getContent();
 
             $View = new ViewFile();
-            $View->render( $viewFile , $this );
-
-        } else {
-            $response->render();
+            $response->setContent( $View->render( $viewFile , $this ) );
         }
+
+        $response->render();
+
     }
 
     /**
@@ -196,7 +196,9 @@ Abstract Class App extends Entity
         if ( !method_exists( $controller , $action ) )
             throw new ControllerException( ControllerException::ERROR_METHOD , $controller , $action );
 
-        return call_user_func_array( array( new $controller() , $action ) , $Route->getParameters( $this->getUrlRequest() ) );
+        $response = call_user_func_array( array( new $controller() , $action ) , $Route->getParameters( $this->getUrlRequest() ) );
+
+        return ( !$response instanceof Response ) ? new Response( $response ) : $response;
     }
 
     /**

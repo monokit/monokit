@@ -184,9 +184,8 @@ Class Response extends Foundation implements ResponseInterface
         }
     }
 
-    public function render( $viewFile = null )
+    public function render()
     {
-        $this->getHeader();
         echo $this->getContent();
     }
 

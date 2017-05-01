@@ -23,7 +23,6 @@ Class ResponseImageResource extends Response
      */
     public function render($viewFile = null)
     {
-        $this->getHeader();
         imagejpeg( $this->getContent() );
         imagedestroy($this->getContent() );
     }
