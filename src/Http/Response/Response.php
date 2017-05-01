@@ -123,6 +123,14 @@ Class Response extends Foundation implements ResponseInterface
         return $this->content;
     }
 
+    /**
+     * @return string
+     */
+    public function getContentType()
+    {
+        return static::CONTENT_TYPE;
+    }
+
     public function getHeader()
     {
         if (!headers_sent())
@@ -178,6 +186,7 @@ Class Response extends Foundation implements ResponseInterface
 
     public function render( $viewFile = null )
     {
+        $this->getHeader();
         echo $this->getContent();
     }
 
