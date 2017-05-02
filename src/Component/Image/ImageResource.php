@@ -10,9 +10,16 @@ Class ImageResource extends Entity
     /** @var resource */
     protected $image;
 
-    public function __construct()
+    /**
+     * ImageResource constructor.
+     * @param string $filePath
+     */
+    public function __construct( $filePath = null )
     {
         $this->setImage( imagecreate( 100 , 100) );
+
+        if ( !is_null($filePath) )
+            $this->setImageFromFile( new File( $filePath ) );
     }
 
     /**
@@ -34,7 +41,7 @@ Class ImageResource extends Entity
     }
 
     /**
-     * @param string $imageFile
+     * @param File $file
      * @return ImageResource
      */
     public function setImageFromFile( File $file )
