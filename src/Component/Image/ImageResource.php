@@ -119,11 +119,11 @@ Class ImageResource extends Entity
         {
             $y = 0;
             $x = ($width - $height) / 2;
-            $smallestSide = $height;
+            $smallestSide = $height * .99;
         } else {
             $x = 0;
             $y = ($height - $width) / 2;
-            $smallestSide = $width;
+            $smallestSide = $width * .99;
         }
 
         $image = imagecreatetruecolor( $size , $size );
