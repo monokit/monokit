@@ -2,7 +2,6 @@
 
 namespace MonoKit\App;
 
-use MonoKit\Controller\Controller;
 use MonoKit\EntityManager\Entity;
 use MonoKit\Http\Response\Response;
 use MonoKit\Http\Response\ResponseHtml;
@@ -13,6 +12,7 @@ use MonoKit\Routing\RouteManager;
 use MonoKit\Component\File\File;
 use MonoKit\Component\File\Exception\FileException;
 use MonoKit\Component\Service\Interfaces\ServiceInterface;
+use MonoKit\Controller\Controller;
 use MonoKit\Controller\Exception\ControllerException;
 
 Abstract Class App extends Entity
@@ -119,14 +119,6 @@ Abstract Class App extends Entity
     }
 
     /**
-     * @return mixed
-     */
-    public function getAppContent()
-    {
-        return $this->AppContent;
-    }
-
-    /**
      * @param string $name
      * @return App
      */
@@ -156,6 +148,22 @@ Abstract Class App extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getAppRoot()
+    {
+        return __ROOT__;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAppContent()
+    {
+        return $this->AppContent;
+    }
+
+    /**
      * @param string $viewFile
      * @return void
      * @throws ControllerException
@@ -174,7 +182,6 @@ Abstract Class App extends Entity
         }
 
         $response->render();
-
     }
 
     /**
@@ -200,13 +207,4 @@ Abstract Class App extends Entity
 
         return ( !$response instanceof Response ) ? new Response( $response ) : $response;
     }
-
-    /**
-     * @return string
-     */
-    public function getAppRoot()
-    {
-        return __ROOT__;
-    }
-
 }

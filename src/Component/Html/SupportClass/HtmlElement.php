@@ -150,9 +150,6 @@ Abstract Class HtmlElement extends Entity implements HtmlInterface
     {
         $str = "<".static::Tag;
 
-        if ( $this->getId() )
-            $str .= " id=\"{$this->getId()}\"";
-
         if ( $this->hasHtmlAttributeManager() )
             foreach ( $this->HtmlAttributeManager AS $HtmlAttribute )
                 $str .= $HtmlAttribute->toString();

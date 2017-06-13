@@ -34,6 +34,7 @@ Class RouteManager extends EntityManager
         foreach( $this AS $route )
             if ( $this->comparePattern( $route , $urlRequest ) && $this->compareMethod( $route , $urlRequest ) )
                 return $route;
+
         return null;
     }
 

@@ -4,6 +4,9 @@ namespace MonoKit\Http;
 
 Class UrlRequestDiscover extends UrlRequest
 {
+    /**
+     * UrlRequestDiscover constructor.
+     */
     public function __construct()
     {
         parent::__construct();
