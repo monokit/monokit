@@ -70,7 +70,7 @@ class SqlSelect extends Sql
         $Table->setColumns( explode( "," , $columns ));
         $Table->setCondition($condition);
 
-        $this->getJoinTableManager()->add( $Table );
+        $this->getJoinTableManager()->addSqlTable( $Table );
 
         return $this;
     }
@@ -89,7 +89,7 @@ class SqlSelect extends Sql
         $LeftJoinTable->setColumns( explode( "," , $columns ) );
         $LeftJoinTable->setCondition( $condition );
 
-        $this->getJoinTableManager()->add( $LeftJoinTable );
+        $this->getJoinTableManager()->addSqlTable( $LeftJoinTable );
 
         return $this;
     }
@@ -108,7 +108,7 @@ class SqlSelect extends Sql
         $Table->setColumns( explode( "," , $columns ) );
         $Table->setCondition( $condition );
 
-        $this->getJoinTableManager()->add( $Table );
+        $this->getJoinTableManager()->addSqlTable( $Table );
 
         return $this;
     }
@@ -242,7 +242,7 @@ class SqlSelect extends Sql
         $columnsString = implode( ", " , $columnArray );
         $columnsString = ( substr($columnsString, 0 , 1 ) == "*" ) ? $this->getSqlTable()->getAlias() . __DOT__ . $columnsString : $columnsString;
 
-        return sprintf("SELECT %s FROM %s %s %s %s %s %s",     $columnsString,
+        return sprintf("SELECT %s FROM %s %s %s %s %s %s",  $columnsString,
                                                             $this->getSqlTable()->toString(),
                                                             implode(__SPACE__, $joinTableArray),
                                                             $this->getSqlTable()->getCondition(),

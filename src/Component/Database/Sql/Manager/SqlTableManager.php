@@ -12,7 +12,7 @@ class SqlTableManager extends EntityManager
      * @param SqlTable $sqlTable
      * @return SqlTableManager
      */
-    public function add( SqlTable $sqlTable )
+    public function addSqlTable( SqlTable $sqlTable )
     {
         return parent::add( $sqlTable );
     }
