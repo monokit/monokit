@@ -18,6 +18,8 @@ use MonoKit\Controller\Exception\ControllerException;
 Abstract Class App extends Entity
 {
     /** @var string */
+    protected $mode;
+    /** @var string */
     protected $name;
     /** @var Response */
     protected $response;
@@ -116,6 +118,38 @@ Abstract Class App extends Entity
     public function getUrlRequest()
     {
         return new UrlRequestDiscover();
+    }
+
+    /**
+     * @param string $mode
+     * @return App
+     */
+    public function setMode( $mode = "PRODUCTION" )
+    {
+        switch ( $mode )
+        {
+            case "DEV":
+                ini_set( "display_startup_errors" , true );
+                ini_set( "display_errors" , true );
+                ini_set( "error_reporting" , E_ALL );
+                break;
+
+            default:
+                ini_set( "display_startup_errors" , false );
+                ini_set( "display_errors" , false );
+                ini_set( "error_reporting" , false );
+                break;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMode()
+    {
+        return $this->mode;
     }
 
     /**
