@@ -4,7 +4,7 @@ namespace MonoKit\Component\Notify;
 
 use MonoKit\EntityManager\Entity;
 
-Class Notify extends Entity
+Class Notify extends Entity implements NotifyInterface
 {
     const TYPE_MESSAGE  = "MESSAGE";
     const TYPE_ALERT    = "ALERT";
