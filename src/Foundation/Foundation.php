@@ -3,20 +3,19 @@
 namespace MonoKit\Foundation;
 
 use MonoKit\App\AppRegistry;
-use MonoKit\Component\Notify\Notify;
+use MonoKit\Component\Notify\NotifyInterface;
 use MonoKit\Foundation\Interfaces\StringInterface;
 
 Abstract Class Foundation implements StringInterface
 {
     /**
-     * @param string $title
-     * @param string $message
-     * @param string $type
+     * @param NotifyInterface $nottify
+     * @return Foundation
      */
-    protected function addNotify( $title , $message = null , $type = Notify::TYPE_MESSAGE )
+    protected function addNotify( NotifyInterface $nottify )
     {
-        $Notify = new Notify( $title , $message , $type );
-        AppRegistry::AppRegistry( AppRegistry::APPLICATION_NOTIFY )->add( $Notify );
+        AppRegistry::AppRegistry( AppRegistry::APPLICATION_NOTIFY )->add( $nottify );
+        return $this;
     }
 
     /**

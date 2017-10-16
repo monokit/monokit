@@ -19,7 +19,7 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
         if ( is_null($value) )
             return null;
 
-        list( $instanceName , $instanceProperty ) = explode( '.' , $property , 2 );
+        @list( $instanceName , $instanceProperty ) = explode( '.' , $property , 2 );
 
         if ( !$methodSet = $this->getMethodSet( $instanceName ) )
             return false;
@@ -29,7 +29,7 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
             $class = new \ReflectionClass( $this );
             $params = $class->getMethod( $methodSet )->getParameters();
 
-            if ( $instance = $params[0]->getClass()->name )
+            if ( $instance = @$params[0]->getClass()->name )
                 $this->$methodSet( new $instance() );
         }
 

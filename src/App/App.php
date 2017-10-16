@@ -126,7 +126,7 @@ Abstract Class App extends Entity
      */
     public function setMode( $mode = "PRODUCTION" )
     {
-        switch ( $mode )
+        switch ( $this->mode = $mode )
         {
             case "DEV":
                 ini_set( "display_startup_errors" , true );
