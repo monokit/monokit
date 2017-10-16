@@ -6,7 +6,7 @@ use MonoKit\EntityManager\EntityManager;
 
 Class NotifyManager extends EntityManager
 {
-    public function addNotify( Notify $notify )
+    public function addNotify( NotifyInterface $notify )
     {
         return parent::add( $notify );
     }
