@@ -9,12 +9,12 @@ use MonoKit\Foundation\Interfaces\StringInterface;
 Abstract Class Foundation implements StringInterface
 {
     /**
-     * @param NotifyInterface $nottify
+     * @param NotifyInterface $notify
      * @return Foundation
      */
-    protected function addNotify( NotifyInterface $nottify )
+    protected function addNotify( NotifyInterface $notify )
     {
-        AppRegistry::AppRegistry( AppRegistry::APPLICATION_NOTIFY )->add( $nottify );
+        AppRegistry::AppRegistry( AppRegistry::APPLICATION_NOTIFY )->add( $notify );
         return $this;
     }
 
