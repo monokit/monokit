@@ -18,7 +18,7 @@ use MonoKit\Controller\Exception\ControllerException;
 Abstract Class App extends Entity
 {
     /** @var string */
-    protected $mode;
+    protected $mode = "PRODUCTION";
     /** @var string */
     protected $name;
     /** @var Response */

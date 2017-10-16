@@ -9,18 +9,18 @@ Class Counter extends Entity
     /** @var int */
     protected $value = 0;
     /** @var int */
-    protected $maximum = 0;
+    protected $maximum;
     /** @var int */
-    protected $minimum = 0;
+    protected $minimum;
 
     /**
      * @param int $value
      * @return Counter
      */
-    public function setValue( $value = 0 )
+    public function setValue( $value )
     {
-        $value = ( $value < $this->getMin() ) ? $this->getMin() : $value;
-        $value = ( $value > $this->getMax() ) ? $this->getMax() : $value;
+        $value = ( isset( $this->minimum ) && $value < $this->getMin() ) ? $this->getMin() : $value;
+        $value = ( isset( $this->maximum ) && $value > $this->getMax() ) ? $this->getMax() : $value;
 
         $this->value = (int) $value;
         return $this;
