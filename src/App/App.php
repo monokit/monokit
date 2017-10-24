@@ -242,3 +242,6 @@ Abstract Class App extends Entity
         return ( !$response instanceof Response ) ? new Response( $response ) : $response;
     }
 }
+
+
+date_default_timezone_set('Europe/Paris');
