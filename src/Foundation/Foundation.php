@@ -58,6 +58,14 @@ Abstract Class Foundation implements StringInterface
         return "[ " . get_class( $this ) . " ]";
     }
 
+    /**
+     * @param string $value
+     * @return string
+     */
+    public function preventDoubleQuote( $value )
+    {
+        return str_replace( "'" , "''" , $value );
+    }
 }
 
 define( "__BR__"        , "<BR>" );

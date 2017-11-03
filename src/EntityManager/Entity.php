@@ -161,13 +161,4 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
 
         return $method;
     }
-
-    /**
-     * @param string $property
-     * @return Entity
-     */
-    public function preventDoubleQuote( $property )
-    {
-        return $this->set( $property , str_replace( "'" , "''" , $this->get( $property ) ) );
-    }
 }
