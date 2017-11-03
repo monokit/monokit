@@ -32,8 +32,9 @@ Class UrlRequest extends Entity
     public function setUrl( $url )
     {
         // Supprime le dernier "/"
+        $url = str_replace( "//" , "/" , $url );
         $url = ( $url != "/" ) ? rtrim( $url , "/" ) : $url;
-        $this->url = str_replace( "//" , "/" , $url );;
+        $this->url = $url;
         return $this;
     }
 
@@ -119,6 +120,15 @@ Class UrlRequest extends Entity
     public function getParam( $key )
     {
         return $this->getParamsRegistry()->get( $key );
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function hasParam( $key )
+    {
+        return $this->getParamsRegistry()->has( $key );
     }
 
     /**
