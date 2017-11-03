@@ -32,7 +32,7 @@ Class EntityManagerMysqli extends EntityManager
      * @param boolean $status
      * @return EntityManagerMysqli
      */
-    public function setStatus($status)
+    public function setStatus( $status )
     {
         $this->status = $status;
         return $this;
