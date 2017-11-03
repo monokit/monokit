@@ -76,7 +76,7 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
     }
 
     /**
-     * @return Entity
+     * @return $this
      */
     public function setUniqueId()
     {
