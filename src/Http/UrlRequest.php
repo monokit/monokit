@@ -23,6 +23,10 @@ Class UrlRequest extends Entity
     {
         $this->setMethod( new Method() );
         $this->setParamsRegistry( new Registry() );
+
+        if ( $_posts = json_decode( file_get_contents("php://input") , true ) )
+            foreach ( $_posts AS $key => $value )
+                $this->setParam( $key , $value );
     }
 
     /**
