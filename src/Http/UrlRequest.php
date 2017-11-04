@@ -136,6 +136,14 @@ Class UrlRequest extends Entity
     }
 
     /**
+     * @return array
+     */
+    public function getParams()
+    {
+        return $this->getParamsRegistry()->toArray();
+    }
+
+    /**
      * @return bool
      */
     public function isJson()
