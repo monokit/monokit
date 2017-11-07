@@ -10,10 +10,6 @@ use MonoKit\EntityManager\Exception\EntityManagerMysqliException;
 
 Class EntityManagerMysqli extends EntityManager
 {
-    /** @var boolean */
-    protected $status = true;
-    /** @var string */
-    protected $message;
     /** @var MysqliService */
     private $MySqliService;
     /** @var string */
@@ -26,42 +22,6 @@ Class EntityManagerMysqli extends EntityManager
     public function __construct( MysqliService $mysqliService = null )
     {
         $this->setMysliService( $mysqliService );
-    }
-
-    /**
-     * @param boolean $status
-     * @return EntityManagerMysqli
-     */
-    public function setStatus( $status )
-    {
-        $this->status = $status;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param string $message
-     * @return EntityManagerMysqli
-     */
-    public function setMessage( $message )
-    {
-        $this->message = $message;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->message;
     }
 
     /**

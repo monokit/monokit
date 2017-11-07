@@ -14,6 +14,10 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     private $index = 0;
     /** @var array */
     protected $data = array();
+    /** @var boolean */
+    protected $status = true;
+    /** @var string */
+    protected $message;
 
     /**
      * @param EntityInterface $entity
@@ -144,6 +148,42 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     {
         $this->data = array();
         return $this;
+    }
+
+    /**
+     * @param boolean $status
+     * @return EntityManagerMysqli
+     */
+    public function setStatus( $status )
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $message
+     * @return EntityManagerMysqli
+     */
+    public function setMessage( $message )
+    {
+        $this->message = $message;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 
     /**
