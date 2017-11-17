@@ -58,7 +58,7 @@ Class ImageResource extends Entity
      * @param int $quality
      * @return ImageResource
      */
-    public function setQuality($quality)
+    public function setQuality( $quality )
     {
         $this->quality = (int) $quality;
         return $this;
