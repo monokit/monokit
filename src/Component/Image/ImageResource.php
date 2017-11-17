@@ -179,6 +179,7 @@ Class ImageResource extends Entity
     }
 
     /**
+     * @param string $filePath
      * @return ImageResource
      */
     public function save( $filePath )
