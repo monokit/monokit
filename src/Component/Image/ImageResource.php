@@ -18,7 +18,7 @@ Class ImageResource extends Entity
      */
     public function __construct( $filePath = null )
     {
-        $this->setImage( imagecreate( 100 , 100) );
+        $this->setImage( imagecreate( 100 , 100 ) );
 
         if ( !is_null($filePath) )
             $this->setImageFromFile( new File( $filePath ) );
@@ -80,7 +80,7 @@ Class ImageResource extends Entity
     public function resize( $width , $height )
     {
         $image = imagecreatetruecolor( (int) $width , (int) $height );
-                 imagecopyresampled( $image , $this->getImage(), 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
+                 imagecopyresampled( $image , $this->getImage(), 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight() );
 
         $this->setImage( $image );
 
