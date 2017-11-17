@@ -9,6 +9,8 @@ Class ImageResource extends Entity
 {
     /** @var resource */
     protected $image;
+    /** @var int */
+    protected $quality = 80;
 
     /**
      * ImageResource constructor.
@@ -33,14 +35,6 @@ Class ImageResource extends Entity
     }
 
     /**
-     * @return resource
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * @param File $file
      * @return ImageResource
      */
@@ -50,6 +44,32 @@ Class ImageResource extends Entity
             $this->image = imagecreatefromjpeg( $file->getFilePath() );
 
         return $this;
+    }
+
+    /**
+     * @return resource
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param int $quality
+     * @return ImageResource
+     */
+    public function setQuality($quality)
+    {
+        $this->quality = (int) $quality;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuality()
+    {
+        return $this->quality;
     }
 
     /**
@@ -163,7 +183,7 @@ Class ImageResource extends Entity
      */
     public function save( $filePath )
     {
-        imagejpeg( $this->getImage() , $filePath );
+        imagejpeg( $this->getImage() , $filePath , $this->quality );
         return $this;
     }
 }
