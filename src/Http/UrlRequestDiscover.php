@@ -20,6 +20,10 @@ Class UrlRequestDiscover extends UrlRequest
         if ( isset( $_SERVER["CONTENT_TYPE"] ) )
             $this->setContentType( $_SERVER["CONTENT_TYPE"] );
 
+        if ( $_posts = json_decode( file_get_contents("php://input") , true ) )
+            foreach ( $_posts AS $key => $value )
+                $this->setParam( $key , $value );
+
         foreach( $_REQUEST as $key => $value )
             $this->setParam( $key , $value );
     }
