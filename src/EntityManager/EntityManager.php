@@ -55,6 +55,24 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     }
 
     /**
+     * @param EntityManagerMeta $meta
+     * @return EntityManager
+     */
+    public function setMeta($meta)
+    {
+        $this->meta = $meta;
+        return $this;
+    }
+
+    /**
+     * @return EntityManagerMeta
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
      * @return Entity|null
      */
     public function getFirst()
