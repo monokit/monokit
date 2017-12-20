@@ -12,6 +12,10 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
 {
     /** @var int */
     private $index = 0;
+    /** @var string */
+    protected $title;
+    /** @var string */
+    protected $description;
     /** @var array */
     protected $data = array();
     /** @var boolean */
@@ -147,6 +151,42 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     public function removeAll()
     {
         $this->data = array();
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return EntityManager
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return EntityManager
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
         return $this;
     }
 
