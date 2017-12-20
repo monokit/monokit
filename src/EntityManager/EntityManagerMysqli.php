@@ -21,6 +21,7 @@ Class EntityManagerMysqli extends EntityManager
      */
     public function __construct( MysqliService $mysqliService = null )
     {
+        parent::__construct();
         $this->setMysliService( $mysqliService );
     }
 

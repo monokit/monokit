@@ -12,16 +12,18 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
 {
     /** @var int */
     private $index = 0;
-    /** @var string */
-    protected $title;
-    /** @var string */
-    protected $description;
+    /** @var EntityManagerMeta */
+    protected $meta;
     /** @var array */
     protected $data = array();
-    /** @var boolean */
-    protected $status = true;
-    /** @var string */
-    protected $message;
+
+    /**
+     * EntityManager constructor.
+     */
+    public function __construct()
+    {
+        $this->meta = new EntityManagerMeta();
+    }
 
     /**
      * @param EntityInterface $entity
@@ -155,12 +157,30 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getTitle()
+    public function toArray()
     {
-        return $this->title;
+        $arr = parent::toArray();
+        $arr['data'] = array();
+
+        foreach ( $this AS $Entity )
+            $arr['data'][] = $Entity->toArray();
+
+        return $arr;
     }
+}
+
+class EntityManagerMeta extends Entity
+{
+    /** @var string */
+    protected $title;
+    /** @var string */
+    protected $description;
+    /** @var boolean */
+    protected $status;
+    /** @var string */
+    protected $message;
 
     /**
      * @param string $title
@@ -175,9 +195,9 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     /**
      * @return string
      */
-    public function getDescription()
+    public function getTitle()
     {
-        return $this->description;
+        return $this->title;
     }
 
     /**
@@ -188,6 +208,14 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     {
         $this->description = $description;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
@@ -224,19 +252,5 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     public function getMessage()
     {
         return $this->message;
-    }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        $arr = parent::toArray();
-        $arr['data'] = array();
-
-        foreach ( $this AS $Entity )
-            $arr['data'][] = $Entity->toArray();
-
-        return $arr;
     }
 }
