@@ -17,8 +17,11 @@ use MonoKit\Controller\Exception\ControllerException;
 
 Abstract Class App extends Entity
 {
+    const MODE_DEV = "DEV";
+    const MODE_PRODUCTION = "PRODUCTION";
+
     /** @var string */
-    protected $mode = "PRODUCTION";
+    protected $mode = self::MODE_PRODUCTION;
     /** @var string */
     protected $name;
     /** @var Response */
@@ -124,11 +127,11 @@ Abstract Class App extends Entity
      * @param string $mode
      * @return App
      */
-    public function setMode( $mode = "PRODUCTION" )
+    public function setMode( $mode = self::MODE_PRODUCTION )
     {
         switch ( $this->mode = $mode )
         {
-            case "DEV":
+            case self::MODE_DEV:
                 ini_set( "display_startup_errors" , true );
                 ini_set( "display_errors" , true );
                 ini_set( "error_reporting" , E_ALL );
@@ -242,6 +245,5 @@ Abstract Class App extends Entity
         return ( !$response instanceof Response ) ? new Response( $response ) : $response;
     }
 }
-
 
 date_default_timezone_set('Europe/Paris');
