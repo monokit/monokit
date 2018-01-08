@@ -71,7 +71,6 @@ Class Response extends Foundation implements ResponseInterface
 
     const CONTENT_TYPE = "text/plain";
 
-
     /** @var int */
     protected $status;
     /** @var mixed */
@@ -79,6 +78,7 @@ Class Response extends Foundation implements ResponseInterface
 
     /**
      * Response constructor.
+     * @param null|mixed $content
      * @param int $status
      */
     public function __construct( $content = null , $status = self::HTTP_OK )
