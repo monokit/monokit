@@ -199,6 +199,10 @@ class EntityManagerMeta extends Entity
     protected $status;
     /** @var string */
     protected $message;
+    /** @var bool */
+    protected $enabled;
+    /** @var bool */
+    protected $editable;
 
     /**
      * @param string $title
@@ -270,5 +274,41 @@ class EntityManagerMeta extends Entity
     public function getMessage()
     {
         return $this->message;
+    }
+
+    /**
+     * @param boolean $enabled
+     * @return EntityManagerMeta
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param boolean $editable
+     * @return EntityManagerMeta
+     */
+    public function setEditable($editable)
+    {
+        $this->editable = $editable;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEditable()
+    {
+        return $this->editable;
     }
 }
