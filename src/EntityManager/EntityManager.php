@@ -282,7 +282,7 @@ class EntityManagerMeta extends Entity
      */
     public function setEnabled($enabled)
     {
-        $this->enabled = $enabled;
+        $this->enabled = ( $enabled == true || $enabled == 'true' ) ? true : false;;
         return $this;
     }
 
@@ -300,7 +300,7 @@ class EntityManagerMeta extends Entity
      */
     public function setEditable($editable)
     {
-        $this->editable = $editable;
+        $this->editable = ( $editable == true || $editable == 'true' ) ? true : false;;
         return $this;
     }
 
