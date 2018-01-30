@@ -13,9 +13,9 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     /** @var int */
     private $index = 0;
     /** @var array */
-    protected $data = array();
-    /** @var array */
     protected $meta;
+    /** @var array */
+    protected $data = array();
 
     /**
      * @param EntityInterface $entity
