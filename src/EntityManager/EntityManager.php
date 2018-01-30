@@ -12,18 +12,10 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
 {
     /** @var int */
     private $index = 0;
-    /** @var EntityManagerMeta */
-    protected $meta;
     /** @var array */
     protected $data = array();
-
-    /**
-     * EntityManager constructor.
-     */
-    public function __construct()
-    {
-        $this->meta = new EntityManagerMeta();
-    }
+    /** @var array */
+    protected $meta;
 
     /**
      * @param EntityInterface $entity
@@ -55,21 +47,22 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     }
 
     /**
-     * @param EntityManagerMeta $meta
+     * @param string $key
+     * @param mixed $value
      * @return EntityManager
      */
-    public function setMeta($meta)
+    public function setMeta( $key , $value = null )
     {
-        $this->meta = $meta;
+        $this->meta[$key] = $value;
         return $this;
     }
 
     /**
-     * @return EntityManagerMeta
+     * @return mixed
      */
-    public function getMeta()
+    public function getMeta( $key )
     {
-        return $this->meta;
+        return $this->meta[$key];
     }
 
     /**
@@ -186,129 +179,5 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
             $arr['data'][] = $Entity->toArray();
 
         return $arr;
-    }
-}
-
-class EntityManagerMeta extends Entity
-{
-    /** @var string */
-    protected $title;
-    /** @var string */
-    protected $description;
-    /** @var boolean */
-    protected $status;
-    /** @var string */
-    protected $message;
-    /** @var bool */
-    protected $enabled;
-    /** @var bool */
-    protected $editable;
-
-    /**
-     * @param string $title
-     * @return EntityManager
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $description
-     * @return EntityManager
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param boolean $status
-     * @return EntityManagerMysqli
-     */
-    public function setStatus( $status )
-    {
-        $this->status = $status;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param string $message
-     * @return EntityManagerMysqli
-     */
-    public function setMessage( $message )
-    {
-        $this->message = $message;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * @param boolean $enabled
-     * @return EntityManagerMeta
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = ( $enabled == true || $enabled == 'true' ) ? true : false;;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * @param boolean $editable
-     * @return EntityManagerMeta
-     */
-    public function setEditable($editable)
-    {
-        $this->editable = ( $editable == true || $editable == 'true' ) ? true : false;;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isEditable()
-    {
-        return $this->editable;
     }
 }

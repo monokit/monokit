@@ -27,7 +27,7 @@ Class Route extends Entity
      * @param string $pattern
      * @param string $method
      */
-    public function __construct( $name , $pattern = "/" , $method = "GET"  )
+    public function __construct( $name , $pattern = "/" , $method = Method::GET  )
     {
         $this->setName( $name );
         $this->setPattern( $pattern );

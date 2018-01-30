@@ -22,7 +22,7 @@ Abstract Class Controller extends Entity
      */
     public function indexAction()
     {
-        return new ResponseHtml( "<H1>It's Work!</H1>" );
+        return $this->html( "<H1>It's Work!</H1>" );
     }
 
     /**
@@ -46,14 +46,15 @@ Abstract Class Controller extends Entity
     }
 
     /**
-     * @param $viewFile
-     * @param mixed|null $data
-     * @return string
+     * @param string $viewFile
+     * @param mixed $data
+     * @param int $status
+     * @return ResponseHtml
      */
-    public function render( $viewFile , $data = null )
+    public function render( $viewFile , $data = null , $status = 200 )
     {
         $View = new ViewFile();
-        return new ResponseHtml( $View->render( $viewFile , $data ) );
+        return $this->html( $View->render( $viewFile , $data ) , $status );
     }
 
     /**
@@ -98,8 +99,6 @@ Abstract Class Controller extends Entity
      */
     public function error404()
     {
-        return new ResponseHtml( "<H1>Erreur 404</H1>" , 404 );
+        return $this->html( "<H1>Erreur 404</H1>" , 404 );
     }
-
-
 }

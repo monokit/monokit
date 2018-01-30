@@ -4,21 +4,21 @@ namespace MonoKit\Http;
 
 Class Method
 {
-    const __GET__       = "GET";
-    const __PUT__       = "PUT";
-    const __ANY__       = "ANY";
-    const __POST__      = "POST";
-    const __HEAD__      = "HEAD";
-    const __DELETE__    = "DELETE";
+    const GET    = "GET";
+    const PUT    = "PUT";
+    const ANY    = "ANY";
+    const POST   = "POST";
+    const HEAD   = "HEAD";
+    const DELETE = "DELETE";
 
     /** @var string */
-    protected $method = self::__GET__;
+    protected $method;
 
     /**
-     * MethodRequest constructor.
+     * Method constructor.
      * @param string $method
      */
-    public function __construct( $method = self::__GET__ )
+    public function __construct( $method = self::GET )
     {
         $this->setMethod( $method );
     }
@@ -31,16 +31,16 @@ Class Method
     {
         switch ( $method = strtoupper( $method ) )
         {
-            case self::__PUT__:
-            case self::__ANY__:
-            case self::__POST__:
-            case self::__HEAD__:
-            case self::__DELETE__:
+            case self::PUT:
+            case self::ANY:
+            case self::POST:
+            case self::HEAD:
+            case self::DELETE:
                 $this->method = $method;
                 return $this;
         }
 
-        $this->method = self::__GET__;
+        $this->method = self::GET;
         return $this;
     }
 
@@ -58,6 +58,6 @@ Class Method
      */
     public function is( $method )
     {
-        return ( $this->method == $method || $this->method == self::__ANY__ ) ? true : false;
+        return ( $this->method == $method || $this->method == self::ANY ) ? true : false;
     }
 }
