@@ -6,9 +6,10 @@ class SqlJoinTable extends SqlTable
 {
     /**
      * @param array $columnsName
-     * @return SqlTable
+     * @param bool $autoAlias
+     * @return SqlJoinTable
      */
-    public function setColumns( array $columnsName )
+    public function setColumns( array $columnsName , $autoAlias = true )
     {
         foreach( $columnsName AS $columnName )
         {
