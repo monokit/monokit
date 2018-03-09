@@ -170,14 +170,14 @@ class SqlTable extends Table
 
     /**
      * @param array $columnsName
+     * @param bool $autoAlias
      * @return SqlTable
      */
-    public function setColumns( array $columnsName )
+    public function setColumns( array $columnsName , $autoAlias = true )
     {
         foreach( $columnsName AS $columnName )
         {
-            $Column = new SqlColumn( $this->getAlias().__DOT__.$columnName );
-
+            $Column = ( $autoAlias ) ? new SqlColumn( $this->getAlias().__DOT__.$columnName ) : new SqlColumn( $columnName );
             $this->getColumnManager()->addColumn( $Column );
         }
 

@@ -48,11 +48,12 @@ class SqlSelect extends Sql
 
     /**
      * @param string $columns
+     * @param bool $autoAlias
      * @return SqlSelect
      */
-    public function setColumns( $columns )
+    public function setColumns( $columns , $autoAlias = true )
     {
-        $this->getSqlTable()->setColumns( explode( "," , $columns )) ;
+        $this->getSqlTable()->setColumns( explode( "," , $columns ) , $autoAlias ) ;
         return $this;
     }
 
@@ -62,7 +63,7 @@ class SqlSelect extends Sql
      * @param string $condition
      * @return SqlSelect
      */
-    public function setInnerJoin( $tableName , $columns , $condition)
+    public function setInnerJoin( $tableName , $columns , $condition )
     {
         $tableName = explode( " AS " , $tableName );
 
