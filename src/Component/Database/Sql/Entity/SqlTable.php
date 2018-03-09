@@ -156,11 +156,12 @@ class SqlTable extends Table
     /**
      * @param string $columnName
      * @param null $value
+     * @param bool $autoAlias
      * @return SqlTable
      */
-    public function setColumnValue( $columnName , $value = null )
+    public function setColumnValue( $columnName , $value = null , $autoAlias = true )
     {
-        $Column = new SqlColumn( $this->getAlias().__DOT__.$columnName );
+        $Column = ( $autoAlias ) ? new SqlColumn( $this->getAlias().__DOT__.$columnName ) : new SqlColumn( $columnName );
         $Column->setValue( $value );
 
         $this->getColumnManager()->addColumn( $Column );
