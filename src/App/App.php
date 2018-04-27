@@ -21,13 +21,22 @@ Abstract Class App extends Entity
     const MODE_PRODUCTION = "PRODUCTION";
 
     /** @var string */
-    protected $mode = self::MODE_PRODUCTION;
+    protected $mode;
     /** @var string */
     protected $name;
     /** @var Response */
     protected $response;
     /** @var mixed */
     protected $AppContent;
+
+    /**
+     * App constructor.
+     * @param string $mode
+     */
+    public function __construct( $mode = self::MODE_PRODUCTION )
+    {
+        $this->setMode( $mode );
+    }
 
     /**
      * @param string $key
@@ -240,7 +249,7 @@ Abstract Class App extends Entity
     {
         // ERROR 404
         if ( !$Route = $this->getRouteManager()->getRouteByUrlRequest( $this->getUrlRequest() ) )
-            return call_user_func( array( $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ ."AppController" , "error404" ) , array() );
+            return call_user_func( array( $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ ."AppController" , "error404" ) );
 
         $controller = $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ . $Route->getControllerName();
         $action = $Route->getActionName();

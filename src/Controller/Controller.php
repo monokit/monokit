@@ -97,7 +97,7 @@ Abstract Class Controller extends Entity
     /**
      * @return string
      */
-    public function error404()
+    static public function error404()
     {
         return new ResponseHtml( "<H1>Ooops, 404 not found...</H1>" , 404 );
     }
