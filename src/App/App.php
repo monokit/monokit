@@ -193,6 +193,16 @@ Abstract Class App extends Entity
     }
 
     /**
+     * @param string $content
+     * @return $this
+     */
+    public function setAppContent( $content )
+    {
+        $this->AppContent = $content;
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getAppContent()
@@ -207,17 +217,18 @@ Abstract Class App extends Entity
      */
     public function render( $viewFile )
     {
-        $response = $this->getResponse();
-        $response->getHeader();
+        if ( !$response = $this->getResponse() )
+            $response = new ResponseHtml();
 
         if ( $response instanceof ResponseHtml )
         {
-            $this->AppContent = $response->getContent();
+            $this->setAppContent( $response->getContent() );
 
             $View = new ViewFile();
             $response->setContent( $View->render( $viewFile , $this ) );
         }
 
+        $response->getHeader();
         $response->render();
     }
 

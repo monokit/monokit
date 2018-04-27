@@ -99,6 +99,6 @@ Abstract Class Controller extends Entity
      */
     public function error404()
     {
-        return $this->html( "<H1>Erreur 404</H1>" , 404 );
+        return new ResponseHtml( "<H1>Ooops, 404 not found...</H1>" , 404 );
     }
 }
