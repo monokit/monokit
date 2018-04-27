@@ -240,7 +240,7 @@ Abstract Class App extends Entity
     {
         // ERROR 404
         if ( !$Route = $this->getRouteManager()->getRouteByUrlRequest( $this->getUrlRequest() ) )
-            return call_user_func( array( $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ ."AppController" , "error404" ) , null );
+            return call_user_func( array( $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ ."AppController" , "error404" ) , array() );
 
         $controller = $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ . $Route->getControllerName();
         $action = $Route->getActionName();
