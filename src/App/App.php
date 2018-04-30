@@ -74,7 +74,7 @@ Abstract Class App extends Entity
             $route = new Route( $routeName );
             $route->serialize( $routeArray );
 
-            $this->getRouteManager()->add( $route );
+            $this->getRouteManager()->addRoute( $route );
         }
 
         return $this;
@@ -141,15 +141,15 @@ Abstract Class App extends Entity
         switch ( $this->mode = $mode )
         {
             case self::MODE_DEV:
-                ini_set( "display_startup_errors" , true );
-                ini_set( "display_errors" , true );
-                ini_set( "error_reporting" , E_ALL );
+                ini_set( "display_startup_errors"   , true );
+                ini_set( "display_errors"           , true );
+                ini_set( "error_reporting"          , E_ALL );
                 break;
 
             default:
-                ini_set( "display_startup_errors" , false );
-                ini_set( "display_errors" , false );
-                ini_set( "error_reporting" , false );
+                ini_set( "display_startup_errors"   , false );
+                ini_set( "display_errors"           , false );
+                ini_set( "error_reporting"          , false );
                 break;
         }
 

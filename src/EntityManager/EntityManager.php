@@ -21,7 +21,7 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
      * @param EntityInterface $entity
      * @return EntityManager
      */
-    public function add( EntityInterface $entity )
+    protected function add( EntityInterface $entity )
     {
         $this->data[] = $entity;
         return $this;
