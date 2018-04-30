@@ -24,8 +24,9 @@ class Directory extends Entity
      */
     public function setPath( $path )
     {
-        // Supprime le dernier "/"
+        // Supprime le dernier "/" & "\\"
         $path = rtrim( $path , __DS__ );
+        $path = rtrim( $path , "\\" );
 
         $this->path = $path;
         return $this;
