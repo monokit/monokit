@@ -62,10 +62,7 @@ Class EntityManagerMysqli extends EntityManager
         if ( !$result = $this->getMysqliService()->query( $this->getSql() ) )
             throw new SqlException( SqlException::ERROR_SQL , $this , $this->getSql() );
 
-        if ( $entity )
-            return $this->fetch( $result , $entity );
-
-        return $this;
+        return ( $entity ) ? $this->fetch( $result , $entity ) : $this;
     }
 
     /**
