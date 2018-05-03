@@ -165,6 +165,15 @@ Abstract Class App extends Entity
     }
 
     /**
+     * @param string $mode
+     * @return bool
+     */
+    public function isMode( $mode )
+    {
+        return ( $this->getMode() == $mode ) ? true : false ;
+    }
+
+    /**
      * @param string $name
      * @return App
      */
