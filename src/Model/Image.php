@@ -1,6 +1,6 @@
 <?php
 
-namespace MonoKit\Component\Image;
+namespace MonoKit\Model;
 
 use MonoKit\EntityManager\Entity;
 
