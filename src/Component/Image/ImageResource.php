@@ -8,7 +8,7 @@ use MonoKit\EntityManager\Entity;
 Class ImageResource extends Entity
 {
     /** @var resource */
-    protected $image;
+    protected $resource;
     /** @var int */
     protected $quality = 80;
 
@@ -18,19 +18,19 @@ Class ImageResource extends Entity
      */
     public function __construct( $filePath = null )
     {
-        $this->setImage( imagecreate( 100 , 100 ) );
+        $this->setResource( imagecreate( 100 , 100 ) );
 
         if ( !is_null($filePath) )
-            $this->setImageFromFile( new File( $filePath ) );
+            $this->setResourceFromFile( new File( $filePath ) );
     }
 
     /**
-     * @param resource $image
+     * @param resource $resource
      * @return ImageResource
      */
-    public function setImage( $image )
+    public function setResource( $resource )
     {
-        $this->image = $image;
+        $this->resource = $resource;
         return $this;
     }
 
@@ -38,10 +38,10 @@ Class ImageResource extends Entity
      * @param File $file
      * @return ImageResource
      */
-    public function setImageFromFile( File $file )
+    public function setResourceFromFile( File $file )
     {
         if ( $file->isFile() )
-            $this->image = imagecreatefromjpeg( $file->getFilePath() );
+            $this->resource = imagecreatefromjpeg( $file->getFilePath() );
 
         return $this;
     }
@@ -49,9 +49,9 @@ Class ImageResource extends Entity
     /**
      * @return resource
      */
-    public function getImage()
+    public function getResource()
     {
-        return $this->image;
+        return $this->resource;
     }
 
     /**
@@ -80,9 +80,9 @@ Class ImageResource extends Entity
     public function resize( $width , $height )
     {
         $image = imagecreatetruecolor( (int) $width , (int) $height );
-                 imagecopyresampled( $image , $this->getImage(), 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight() );
+                 imagecopyresampled( $image , $this->getResource(), 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight() );
 
-        $this->setImage( $image );
+        $this->setResource( $image );
 
         return $this;
     }
@@ -93,7 +93,7 @@ Class ImageResource extends Entity
      */
     public function rotate( $degrees )
     {
-        $this->setImage( imagerotate( $this->getImage() , -$degrees , 0 ) );
+        $this->setResource( imagerotate( $this->getResource() , -$degrees , 0 ) );
         return $this;
     }
 
@@ -118,8 +118,8 @@ Class ImageResource extends Entity
             $image = imagecreatetruecolor( $width , $height );
         }
 
-        imagecopyresampled( $image , $this->getImage(), 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
-        $this->setImage( $image );
+        imagecopyresampled( $image , $this->getResource(), 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
+        $this->setResource( $image );
 
         return $this;
     }
@@ -147,9 +147,9 @@ Class ImageResource extends Entity
         }
 
         $image = imagecreatetruecolor( $size , $size );
-        imagecopyresampled($image, $this->getImage(), 0, 0, $x, $y, $size, $size, $smallestSide, $smallestSide);
+        imagecopyresampled($image, $this->getResource(), 0, 0, $x, $y, $size, $size, $smallestSide, $smallestSide);
 
-        $this->setImage( $image );
+        $this->setResource( $image );
 
         return $this;
     }
@@ -159,7 +159,7 @@ Class ImageResource extends Entity
      */
     public function getWidth()
     {
-        return imagesx( $this->getImage() );
+        return imagesx( $this->getResource() );
     }
 
     /**
@@ -167,7 +167,7 @@ Class ImageResource extends Entity
      */
     public function getHeight()
     {
-        return imagesy( $this->getImage() );
+        return imagesy( $this->getResource() );
     }
 
     /**
@@ -184,7 +184,7 @@ Class ImageResource extends Entity
      */
     public function save( $filePath )
     {
-        imagejpeg( $this->getImage() , $filePath , $this->quality );
+        imagejpeg( $this->getResource() , $filePath , $this->quality );
         return $this;
     }
 }
