@@ -23,7 +23,7 @@ Class Coordinate extends Entity
      */
     public function setMail( $mail )
     {
-        $this->mail = ( filter_var($mail, FILTER_VALIDATE_EMAIL) ) ? $mail : null;
+        $this->mail = ( filter_var( $mail , FILTER_VALIDATE_EMAIL ) ) ? $mail : null;
         return $this;
     }
 
