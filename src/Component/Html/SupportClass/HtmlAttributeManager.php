@@ -6,7 +6,7 @@ use MonoKit\EntityManager\EntityManager;
 
 Class HtmlAttributeManager extends EntityManager
 {
-    public function add( HtmlAttribute $htmlAttribute )
+    public function addHtmlAttribute( HtmlAttribute $htmlAttribute )
     {
         if ( $_htmlAttribute = $this->find( "key" , $htmlAttribute->getKey() )->getFirst() )
         {

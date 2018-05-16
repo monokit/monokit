@@ -64,9 +64,9 @@ Abstract Class HtmlElement extends Entity implements HtmlInterface
      * @param HtmlElement $htmlElement
      * @return $this
      */
-    public function add( HtmlElement $htmlElement )
+    public function addHtmlElement( HtmlElement $htmlElement )
     {
-        $this->getHtmlElementManager()->add( $htmlElement );
+        $this->getHtmlElementManager()->addHtmlElement( $htmlElement );
         return $this;
     }
 
@@ -86,7 +86,7 @@ Abstract Class HtmlElement extends Entity implements HtmlInterface
      */
     protected function addHtmlAttribute( HtmlAttribute $htmlAttribute )
     {
-        $this->getHtmlAttributeManager()->add( $htmlAttribute );
+        $this->getHtmlAttributeManager()->addHtmlAttribute( $htmlAttribute );
         return $this;
     }
 

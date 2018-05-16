@@ -6,7 +6,7 @@ use MonoKit\EntityManager\EntityManager;
 
 Class HtmlElementManager extends EntityManager
 {
-    public function add( HtmlElement $htmlElement )
+    public function addHtmlElement( HtmlElement $htmlElement )
     {
         return parent::add( $htmlElement );
     }

@@ -87,6 +87,15 @@ Abstract Class Controller extends Entity
     }
 
     /**
+     * @param string $key
+     * @return mixed
+     */
+    public function getAppRegistry( $key )
+    {
+        return AppRegistry::AppRegistry( $key );
+    }
+
+    /**
      * @return UrlRequestDiscover
      */
     public function getUrlRequest()
