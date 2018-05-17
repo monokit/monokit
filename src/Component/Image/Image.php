@@ -1,6 +1,6 @@
 <?php
 
-namespace MonoKit\Model;
+namespace MonoKit\Component\Image;
 
 use MonoKit\EntityManager\Entity;
 
@@ -8,8 +8,10 @@ Class Image extends Entity
 {
     const SRC = "src";
     const MAX_SIZE = 960;
+
     const THUMB = "thumb";
     const THUMB_SIZE = 150;
+
     const SQUARE = "square";
     const SQUARE_SIZE = 450;
 

@@ -4,10 +4,8 @@ namespace MonoKit\Model;
 
 use MonoKit\EntityManager\Entity;
 
-Class Coordinate extends Entity
+Abstract Class Coordinate extends Entity
 {
-    const FIELDS = "Coordinate_mail AS 'Coordinate.mail', Coordinate_mobile AS 'Coordinate.mobile', Coordinate_phone AS 'Coordinate.phone', Coordinate_fax AS 'Coordinate.fax'";
-
     /** @var string */
     protected $mail;
     /** @var string */

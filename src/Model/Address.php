@@ -4,10 +4,8 @@ namespace MonoKit\Model;
 
 use MonoKit\EntityManager\Entity;
 
-Class Address extends Entity
+Abstract Class Address extends Entity
 {
-    const FIELDS = "Address_street AS 'Address.street', Address_zip AS 'Address.zip', Address_city AS 'Address.city'";
-
     /** @var string */
     protected $street;
     /** @var string */
