@@ -15,7 +15,7 @@ Class ResponseImageResource extends Response
      */
     public function __construct( ImageResource $imageResource, $status = self::HTTP_OK )
     {
-        parent::__construct( $imageResource->getImage() , $status );
+        parent::__construct( $imageResource->getResource() , $status );
     }
 
     /**
