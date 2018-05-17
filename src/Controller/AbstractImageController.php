@@ -2,9 +2,9 @@
 
 namespace MonoKit\Controller;
 
+use MonoKit\Component\Image\Image;
 use MonoKit\Component\Image\ImageResource;
 use MonoKit\Http\Response\ResponseImageResource;
-use MonoKit\Model\Image;
 
 Abstract Class AbstractImageController extends AbstractController
 {
