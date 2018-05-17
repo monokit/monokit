@@ -19,7 +19,9 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
         if ( is_null($value) )
             return null;
 
-        @list( $instanceName , $instanceProperty ) = explode( '_' , str_replace( '.' , '_' , $property ) , 2 );
+        $property = str_replace( '_' , '.' , $property );
+
+        @list( $instanceName , $instanceProperty ) = explode( '.' , $property , 2 );
 
         if ( !$methodSet = $this->getMethodSet( $instanceName ) )
             return false;
@@ -33,7 +35,7 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
                 $this->$methodSet( new $instance() );
         }
 
-        if ( strpos( $property , "_" ) )
+        if ( strpos( $property , "." ) )
             return $this->get( $instanceName )->set( $instanceProperty , $value );
 
         if ( is_array( $value ) && $this->get( $instanceName ) instanceof Entity )
@@ -63,8 +65,9 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
         }
 
         // SubEntity
-        if ( strpos( str_replace( '.' , '_' , $property ) , "_" ) )
+        if ( strpos( $property , "." ) )
         {
+            $property = str_replace( '.' , '_' , $property );
             list( $instanceName , $instanceProperty ) = explode( '_' , $property , 2 );
             return ( $this->get( $instanceName ) ) ? $this->get( $instanceName )->get( $instanceProperty ) : false;
         }
