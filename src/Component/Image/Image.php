@@ -21,6 +21,8 @@ Class Image extends Entity
     protected $thumb;
     /** @var string */
     protected $square;
+    /** @var string */
+    protected $caption;
 
     /**
      * Image constructor.
@@ -101,6 +103,24 @@ Class Image extends Entity
     public function getSquare()
     {
         return $this->square;
+    }
+
+    /**
+     * @param string $caption
+     * @return Image
+     */
+    public function setCaption($caption)
+    {
+        $this->caption = $caption;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCaption()
+    {
+        return $this->caption;
     }
 
     /**
