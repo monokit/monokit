@@ -4,14 +4,14 @@ namespace MonoKit\Model;
 
 use MonoKit\EntityManager\Entity;
 
-Abstract Class Link extends Entity
+Class Link extends Entity
 {
     /** @var string */
     protected $label;
     /** @var string */
     protected $description;
-    /** @var string */
-    protected $url;
+    /** @var Url */
+    protected $Url;
 
     /**
      * @param string $label
@@ -50,20 +50,20 @@ Abstract Class Link extends Entity
     }
 
     /**
-     * @param string $url
+     * @param Url $url
      * @return Link
      */
-    public function setUrl( $url )
+    public function setUrl( Url $url )
     {
-        $this->url = ( filter_var( $url , FILTER_VALIDATE_URL ) ) ? $url : null;
+        $this->Url = $url;
         return $this;
     }
 
     /**
-     * @return string
+     * @return Url
      */
     public function getUrl()
     {
-        return $this->url;
+        return $this->Url;
     }
 }

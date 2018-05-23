@@ -4,7 +4,7 @@ namespace MonoKit\Model;
 
 use MonoKit\EntityManager\Entity;
 
-Abstract Class Coordinate extends Entity
+Class Coordinate extends Entity
 {
     /** @var string */
     protected $mail;

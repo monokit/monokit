@@ -4,7 +4,7 @@ namespace MonoKit\Model;
 
 use MonoKit\EntityManager\Entity;
 
-Abstract Class Address extends Entity
+Class Address extends Entity
 {
     /** @var string */
     protected $street;
