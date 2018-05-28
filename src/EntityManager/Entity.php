@@ -53,6 +53,8 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
         if ( is_null($property) )
             return null;
 
+        $property = str_replace( '_' , '.' , $property );
+
         // Conditions
         if ( strpos( $property , ":" ) )
         {
@@ -64,11 +66,11 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
             return $this->get( end($properties) );
         }
 
+
         // SubEntity
         if ( strpos( $property , "." ) )
         {
-            $property = str_replace( '.' , '_' , $property );
-            list( $instanceName , $instanceProperty ) = explode( '_' , $property , 2 );
+            list( $instanceName , $instanceProperty ) = explode( '.' , $property , 2 );
             return ( $this->get( $instanceName ) ) ? $this->get( $instanceName )->get( $instanceProperty ) : false;
         }
 
