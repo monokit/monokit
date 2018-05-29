@@ -52,12 +52,20 @@ Class Person extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->getLastName() . __SPACE__ . $this->getFirstName();
+    }
+
+    /**
      * @param \DateTime $birthDate
      * @return Person
      */
     public function setBirthDate($birthDate)
     {
-        $this->birthDate = $birthDate;
+        $this->birthDate = new \DateTime( $birthDate );
         return $this;
     }
 
