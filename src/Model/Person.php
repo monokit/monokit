@@ -60,12 +60,12 @@ Class Person extends Entity
     }
 
     /**
-     * @param \DateTime $birthDate
+     * @param \DateTime|string $date
      * @return Person
      */
-    public function setBirthDate($birthDate)
+    public function setBirthDate( $date )
     {
-        $this->birthDate = new \DateTime( $birthDate );
+        $this->birthDate = ( is_a( $date , "DateTime" ) ) ? $date : new \DateTime( $date );
         return $this;
     }
 
