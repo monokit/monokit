@@ -2,7 +2,7 @@
 
 namespace MonoKit\Model;
 
-Class PersonContact extends Person
+Class ContactPerson extends Person
 {
     /** @var Address */
     protected $Address;
@@ -11,7 +11,7 @@ Class PersonContact extends Person
 
     /**
      * @param Address $Address
-     * @return PersonContact
+     * @return ContactPerson
      */
     public function setAddress( Address $Address )
     {
@@ -29,7 +29,7 @@ Class PersonContact extends Person
 
     /**
      * @param Coordinate $Coordinate
-     * @return PersonContact
+     * @return ContactPerson
      */
     public function setCoordinate( Coordinate $Coordinate )
     {
