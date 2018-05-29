@@ -9,9 +9,15 @@ Class Address extends Entity
     /** @var string */
     protected $street;
     /** @var string */
+    protected $streetNumber;
+    /** @var string */
     protected $zip;
     /** @var string */
     protected $city;
+    /** @var string */
+    protected $region;
+    /** @var Country */
+    protected $Country;
 
     /**
      * @param string $street
@@ -29,6 +35,24 @@ Class Address extends Entity
     public function getStreet()
     {
         return $this->street;
+    }
+
+    /**
+     * @param string $streetNumber
+     * @return Address
+     */
+    public function setStreetNumber($streetNumber)
+    {
+        $this->streetNumber = $streetNumber;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStreetNumber()
+    {
+        return $this->streetNumber;
     }
 
     /**
@@ -67,4 +91,39 @@ Class Address extends Entity
         return $this->city;
     }
 
+    /**
+     * @param string $region
+     * @return Address
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param Country $Country
+     * @return Address
+     */
+    public function setCountry( Country $Country)
+    {
+        $this->Country = $Country;
+        return $this;
+    }
+
+    /**
+     * @return Country
+     */
+    public function getCountry()
+    {
+        return $this->Country;
+    }
 }
