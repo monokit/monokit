@@ -7,13 +7,13 @@ use MonoKit\EntityManager\Entity;
 Class Image extends Entity
 {
     const SRC = "src";
-    const MAX_SIZE = 960;
+    const SRC_SIZE = 1024;
 
     const THUMB = "thumb";
-    const THUMB_SIZE = 150;
+    const THUMB_SIZE = 128;
 
     const SQUARE = "square";
-    const SQUARE_SIZE = 450;
+    const SQUARE_SIZE = 256;
 
     /** @var string */
     protected $src;
@@ -37,13 +37,13 @@ Class Image extends Entity
     }
 
     /**
-     * @param string $src
+     * @param string $imagePath
      * @param bool $microtimeEnabled
      * @return Image
      */
-    public function setSrc( $src , $microtimeEnabled = false )
+    public function setSrc( $imagePath , $microtimeEnabled = false )
     {
-        $this->src = $src . "/src";
+        $this->src = $imagePath . __DS__ . self::SRC;
 
         if ( $microtimeEnabled )
             $this->src .= "?{$this->getMicrotime()}";
@@ -60,13 +60,13 @@ Class Image extends Entity
     }
 
     /**
-     * @param string $thumb
+     * @param string $imagePath
      * @param bool $microtimeEnabled
      * @return Image
      */
-    public function setThumb( $thumb , $microtimeEnabled = false )
+    public function setThumb( $imagePath , $microtimeEnabled = false )
     {
-        $this->thumb = $thumb . "/thumb";
+        $this->thumb = $imagePath . __DS__ . self::THUMB;
 
         if ( $microtimeEnabled )
             $this->thumb .= "?{$this->getMicrotime()}";
@@ -83,13 +83,13 @@ Class Image extends Entity
     }
 
     /**
-     * @param string $square
+     * @param string $imagePath
      * @param bool $microtimeEnabled
      * @return Image
      */
-    public function setSquare( $square , $microtimeEnabled = false )
+    public function setSquare( $imagePath , $microtimeEnabled = false )
     {
-        $this->square = $square . "/square";
+        $this->square = $imagePath . __DS__ . self::SQUARE;
 
         if ( $microtimeEnabled )
             $this->square .= "?{$this->getMicrotime()}";
