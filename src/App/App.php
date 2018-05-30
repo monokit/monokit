@@ -12,7 +12,7 @@ use MonoKit\Routing\RouteManager;
 use MonoKit\Component\File\File;
 use MonoKit\Component\File\Exception\FileException;
 use MonoKit\Component\Service\Interfaces\ServiceInterface;
-use MonoKit\Controller\AbstractController;
+use MonoKit\Controller\Controller;
 use MonoKit\Controller\Exception\ControllerException;
 
 Abstract Class App extends Entity
@@ -55,7 +55,7 @@ Abstract Class App extends Entity
      */
     public function setRouteManager( RouteManager $routeManager )
     {
-        AppRegistry::AppRegistry( AppRegistry::APPLICATION_ROUTES , $routeManager );
+        $this->AppRegistry( AppRegistry::APPLICATION_ROUTES , $routeManager );
         return $this;
     }
 
@@ -258,9 +258,9 @@ Abstract Class App extends Entity
     {
         // ERROR 404
         if ( !$Route = $this->getRouteManager()->getRouteByUrlRequest( $this->getUrlRequest() ) )
-            return call_user_func( array( $this->getClassNamespace() . __NSS__ . AbstractController::CONTROLLER_DIRECTORY . __NSS__ ."AppController" , "error404" ) );
+            return call_user_func( array( $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ ."AppController" , "error404" ) );
 
-        $controller = $this->getClassNamespace() . __NSS__ . AbstractController::CONTROLLER_DIRECTORY . __NSS__ . $Route->getControllerName();
+        $controller = $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ . $Route->getControllerName();
         $action = $Route->getActionName();
 
         if ( !class_exists( $controller ) )

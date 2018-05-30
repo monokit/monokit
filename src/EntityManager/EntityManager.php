@@ -21,7 +21,7 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
      * @param EntityInterface $entity
      * @return EntityManager
      */
-    protected function add( EntityInterface $entity )
+    final protected function add( EntityInterface $entity )
     {
         $this->data[] = $entity;
         return $this;
@@ -70,10 +70,7 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
      */
     public function getFirst()
     {
-        if ( isset( $this->data[0] ) )
-            return $this->data[0];
-
-        return null;
+        return ( isset( $this->data[0] ) ) ? $this->data[0] : null;
     }
 
     /**
@@ -81,7 +78,7 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
      */
     public function getLast()
     {
-        return $this->data[ $this->count() - 1 ];
+        return ( isset( $this->data[ $this->count() - 1 ] ) ) ? $this->data[ $this->count() - 1 ] : null;
     }
 
     /**
@@ -90,7 +87,7 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
      */
     public function current()
     {
-        return $this->data[ $this->index ];
+        return ( isset( $this->data[ $this->index ] ) ) ? $this->data[ $this->index ] : null;
     }
 
     /**

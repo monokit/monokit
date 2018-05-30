@@ -11,7 +11,7 @@ use MonoKit\Http\UrlRequestDiscover;
 use MonoKit\Routing\Route;
 use MonoKit\View\ViewFile;
 
-Abstract Class AbstractController extends Entity
+Abstract Class Controller extends Entity
 {
     Const CONTROLLER_DIRECTORY          = "Controller";
     Const CONTROLLER_SUFFIX             = "Controller";

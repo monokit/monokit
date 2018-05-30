@@ -6,7 +6,7 @@ use MonoKit\Component\Image\Image;
 use MonoKit\Component\Image\ImageResource;
 use MonoKit\Http\Response\ResponseImageResource;
 
-Abstract Class AbstractImageController extends AbstractController
+Abstract Class ImageController extends Controller
 {
     /**
      * @param string $imagePath
