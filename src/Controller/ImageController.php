@@ -9,13 +9,13 @@ use MonoKit\Http\Response\ResponseImageResource;
 Abstract Class ImageController extends Controller
 {
     /**
-     * @param string $imagePath
+     * @param string $filePath
      * @param string $type
      * @return ResponseImageResource
      */
-    protected function getImageResource( $imagePath , $type = Image::SRC )
+    protected function getImageResourceFromFilePath( $filePath , $type = Image::SRC )
     {
-        $ImageResource = new ImageResource( $imagePath );
+        $ImageResource = new ImageResource( $filePath );
 
         switch ( $type )
         {
@@ -28,7 +28,7 @@ Abstract Class ImageController extends Controller
                 break;
 
             default:
-                $ImageResource->setMaxSize( Image::MAX_SIZE );
+                $ImageResource->setMaxSize( Image::SRC_SIZE );
         }
 
         return new ResponseImageResource( $ImageResource );
