@@ -87,7 +87,7 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
      */
     public function current()
     {
-        return ( isset( $this->data[ $this->index ] ) ) ? $this->data[ $this->index ] : null;
+        return ( $this->valid() ) ? $this->data[ $this->index ] : null;
     }
 
     /**
