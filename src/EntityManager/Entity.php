@@ -16,6 +16,9 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
      */
     public function set( $property , $value = null , $defaultValue = null )
     {
+        if ( is_null($value) && is_null($defaultValue) )
+            return false;
+
         $value = ( is_null( $value )) ? $defaultValue : $value;
 
         $property = str_replace( '_' , '.' , $property );
