@@ -68,12 +68,11 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
             return $this->get( end($properties) );
         }
 
-
         // SubEntity
         if ( strpos( $property , "." ) )
         {
             list( $instanceName , $instanceProperty ) = explode( '.' , $property , 2 );
-            return ( $this->get( $instanceName ) ) ? $this->get( $instanceName )->get( $instanceProperty ) : false;
+            return ( $this->get( $instanceName ) ) ? $this->get( $instanceName )->get( $instanceProperty ) : null;
         }
 
         if ( $method = $this->getMethodGet( $property ) )
