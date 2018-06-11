@@ -9,12 +9,14 @@ Class File extends Entity
 {
     /** @var string */
     protected $filePath;
+    /** @var string */
+    protected $content;
 
     /**
      * File constructor.
-     * @param string $filePath
+     * @param string|null $filePath
      */
-    public function __construct( $filePath )
+    public function __construct( $filePath = null )
     {
         $this->setFilePath( $filePath );
     }
@@ -41,6 +43,32 @@ Class File extends Entity
     public function getFilePath()
     {
         return $this->filePath;
+    }
+
+    /**
+     * @param string $content
+     * @return File
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileContent()
+    {
+        return file_get_contents( $this->getFilePath() );
     }
 
     /**
@@ -123,12 +151,11 @@ Class File extends Entity
     /**
      * The date that the file on the local disk was last modified.
      *
-     * @example $File->getModificationDate(); // 2013-06-14
-     * @return string
+     * @return int
      */
     public function getModificationDate()
     {
-        return date( "Y-m-d" , filemtime( $this->getFilePath() ) );
+        return filemtime( $this->getFilePath() );
     }
 
     /**
@@ -184,39 +211,8 @@ Class File extends Entity
     }
 
     /**
-     * Duplique le fichier.
-     *
-     * @example $File->duplicate( 'nouveau_nom.ext' );
-     * @param string $newName Nom du fichier avec extension
-     * @return File
-     */
-    public function duplicate( $newName )
-    {
-        if ( !$this->isFile() )
-            return false;
-
-        copy( $this->getFilePath() , $newName );
-
-        return $this;
-    }
-
-    /**
-     * Efface un fichier.
-     *
-     * @example $File->remove();
-     * @return boolean
-     */
-    public function remove()
-    {
-        if ( !$this->isFile() )
-            return false;
-
-        return unlink( $this->getFilePath() );
-    }
-
-    /**
      * @param string|null $fileName
-     * @return bool
+     * @return File
      * @throws FileException
      */
     public function save( $fileName = null )
@@ -231,7 +227,7 @@ Class File extends Entity
             throw new FileException( FileException::ERROR_PERMISSION , $this , dirname( $this->getFilePath() ) );
 
         $handle = fopen( $this->getFilePath() , 'w' );
-        //fwrite( $handle , $this->content );
+        fwrite( $handle , $this->getContent() );
         fclose( $handle );
 
         return $this;

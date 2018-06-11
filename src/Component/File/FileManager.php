@@ -28,4 +28,29 @@ Class FileManager extends EntityManager
 
         return $this;
     }
+
+    /**
+     * @param File $file
+     * @param string $newName
+     * @return bool
+     */
+    public function duplicateFile( File $file , $newName )
+    {
+        if ( !$file->isFile() )
+            return false;
+
+        return copy( $file->getFilePath() , $newName );
+    }
+
+    /**
+     * @param File $file
+     * @return bool
+     */
+    public function removeFile( File $file )
+    {
+        if ( !$file->isFile() )
+            return false;
+
+        return unlink( $file->getFilePath() );
+    }
 }
