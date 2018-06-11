@@ -75,6 +75,25 @@ Abstract Class Foundation implements StringInterface
     {
         return ($value === true || $value === "true") ? true : false;
     }
+
+    /**
+     * @param string|bool $value
+     * @return bool
+     */
+    static function boolean2string( $value )
+    {
+        return ( static::boolean($value) === true ) ? "true" : "false";
+    }
+
+    /**
+     * @param string|bool $value
+     * @return bool
+     */
+    static function string2boolean( $value )
+    {
+        return ( static::boolean($value) === true ) ? true : false;
+    }
+
 }
 
 define( "__BR__"        , "<BR>" );
