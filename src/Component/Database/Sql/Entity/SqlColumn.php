@@ -43,6 +43,9 @@ class SqlColumn extends Column implements StringInterface
      */
     public function setValue( $value = null )
     {
+        if ( is_bool( $value ) )
+            $value = ( $value === true ) ? "true" : "false";
+
         if ( is_string( $value ) )
             $value = "'{$value}'";
 

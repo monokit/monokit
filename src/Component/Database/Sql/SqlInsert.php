@@ -26,6 +26,8 @@ class SqlInsert extends Sql implements SqlInterface
      */
     public function setValue( $column , $value = null  )
     {
+        $value = ( empty($value) || is_null( $value ) ) ? null : $value;
+
         if ( $value instanceof Entity )
             $value = $value->get( $column );
 
