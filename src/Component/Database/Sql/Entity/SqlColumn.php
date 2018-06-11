@@ -3,7 +3,6 @@
 namespace MonoKit\Component\Database\Sql\Entity;
 
 use MonoKit\Component\Database\Entity\Column;
-use MonoKit\EntityManager\Entity;
 use MonoKit\Foundation\Interfaces\StringInterface;
 
 class SqlColumn extends Column implements StringInterface
@@ -43,6 +42,9 @@ class SqlColumn extends Column implements StringInterface
      */
     public function setValue( $value = null )
     {
+        if ( is_bool( $value ) )
+            $value = ( $value === true ) ? "true" : "false";
+
         if ( is_string( $value ) )
             $value = "'{$value}'";
 
