@@ -23,7 +23,7 @@ class SqlInsert extends Sql implements SqlInterface
      * @param string $column
      * @param mixed|null $value
      * @param mixed|null $default
-     * @return SqlInsert
+     * @return $this
      */
     public function setValue( $column , $value = null , $default = null )
     {
