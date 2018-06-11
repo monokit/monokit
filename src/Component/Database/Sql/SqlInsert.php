@@ -4,6 +4,7 @@ namespace MonoKit\Component\Database\Sql;
 
 use MonoKit\Component\Database\Sql\Entity\SqlTable;
 use MonoKit\Component\Database\Sql\Interfaces\SqlInterface;
+use MonoKit\EntityManager\Entity;
 
 class SqlInsert extends Sql implements SqlInterface
 {
@@ -27,6 +28,9 @@ class SqlInsert extends Sql implements SqlInterface
     public function setValue( $column , $value = null , $default = null )
     {
         $value = ( empty($value) || is_null( $value ) ) ? $default : $value;
+
+        if ( $value instanceof Entity )
+            $value = $value->get( $column );
 
         $this->getSqlTable()->setColumnValue( $column , $value );
         return $this;

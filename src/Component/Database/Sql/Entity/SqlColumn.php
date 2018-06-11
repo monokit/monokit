@@ -3,6 +3,7 @@
 namespace MonoKit\Component\Database\Sql\Entity;
 
 use MonoKit\Component\Database\Entity\Column;
+use MonoKit\EntityManager\Entity;
 use MonoKit\Foundation\Interfaces\StringInterface;
 
 class SqlColumn extends Column implements StringInterface
