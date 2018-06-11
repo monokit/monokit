@@ -72,7 +72,7 @@ Class EntityManagerMysqli extends EntityManager
     protected function fetch( \mysqli_result $result , EntityInterface $entity = null )
     {
         while( $data = $result->fetch_assoc() )
-            $this->add( $entity->getClone()->serialize( $data ) );
+            $this->add( $entity->getClone()->map( $data ) );
 
         return $this;
     }

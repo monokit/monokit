@@ -2,7 +2,9 @@
 
 namespace MonoKit\Http;
 
-Class Method
+use MonoKit\EntityManager\Entity;
+
+Class Method extends Entity
 {
     const GET    = "GET";
     const PUT    = "PUT";

@@ -28,5 +28,5 @@ Interface EntityInterface
      * @param array $array
      * @return $this
      */
-    public function serialize( array $array );
+    public function map( array $array );
 }

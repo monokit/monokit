@@ -7,18 +7,19 @@ use MonoKit\Http\Response\Response;
 use MonoKit\Http\Response\ResponseHtml;
 use MonoKit\Http\UrlRequestDiscover;
 use MonoKit\Routing\Route;
-use MonoKit\View\ViewFile;
 use MonoKit\Routing\RouteManager;
 use MonoKit\Component\File\File;
+use MonoKit\Component\Registry\Registry;
 use MonoKit\Component\File\Exception\FileException;
 use MonoKit\Component\Service\Interfaces\ServiceInterface;
 use MonoKit\Controller\Controller;
 use MonoKit\Controller\Exception\ControllerException;
+use MonoKit\View\ViewFile;
 
 Abstract Class App extends Entity
 {
-    const MODE_DEV = "DEV";
-    const MODE_PRODUCTION = "PRODUCTION";
+    const MODE_DEV          = "DEV";
+    const MODE_PRODUCTION   = "PRODUCTION";
 
     /** @var string */
     protected $mode;
@@ -35,18 +36,16 @@ Abstract Class App extends Entity
      */
     public function __construct( $mode = self::MODE_PRODUCTION )
     {
+        $this->getUrlRequest();
         $this->setMode( $mode );
     }
 
     /**
-     * @param string $key
-     * @param null $value
-     * @param null $defaultValue
-     * @return mixed
+     * @return Registry
      */
-    public function AppRegistry( $key = AppRegistry::APPLICATION , $value = null , $defaultValue = null )
+    public function getAppRegistry()
     {
-        return AppRegistry::AppRegistry( $key , $value , $defaultValue );
+        return AppRegistry::AppRegistry();
     }
 
     /**
@@ -55,7 +54,7 @@ Abstract Class App extends Entity
      */
     public function setRouteManager( RouteManager $routeManager )
     {
-        $this->AppRegistry( AppRegistry::APPLICATION_ROUTES , $routeManager );
+        $this->getAppRegistry()->set( AppRegistry::APPLICATION_ROUTES , $routeManager );
         return $this;
     }
 
@@ -72,7 +71,7 @@ Abstract Class App extends Entity
         foreach( parse_ini_file( $iniFile->getFilePath() , true ) AS $routeName => $routeArray )
         {
             $route = new Route( $routeName );
-            $route->serialize( $routeArray );
+            $route->map( $routeArray );
 
             $this->getRouteManager()->addRoute( $route );
         }
@@ -95,7 +94,8 @@ Abstract Class App extends Entity
      */
     public function getRouteManager()
     {
-        return AppRegistry::AppRegistry( AppRegistry::APPLICATION_ROUTES );
+        return $this->getAppRegistry()
+                    ->get( AppRegistry::APPLICATION_ROUTES );
     }
 
     /**
@@ -104,7 +104,8 @@ Abstract Class App extends Entity
      */
     public function addService( ServiceInterface $service )
     {
-        return $this->AppRegistry( AppRegistry::APPLICATION_SERVICE.__DOT__.$service->getName() , $service );
+        return $this->getAppRegistry()
+                    ->set( AppRegistry::APPLICATION_SERVICE.__DOT__.$service->getName() , $service );
     }
 
     /**
@@ -113,7 +114,8 @@ Abstract Class App extends Entity
      */
     public function getServiceByName( $serviceName )
     {
-        return $this->AppRegistry( AppRegistry::APPLICATION_SERVICE.__DOT__.$serviceName );
+        return $this->getAppRegistry()
+                    ->get( AppRegistry::APPLICATION_SERVICE.__DOT__.$serviceName );
     }
 
     /**
@@ -121,7 +123,8 @@ Abstract Class App extends Entity
      */
     public function getSqlDatabaseHistory()
     {
-        return $this->AppRegistry( AppRegistry::APPLICATION_DATABASE_SQL );
+        return $this->getAppRegistry()
+                    ->get( AppRegistry::APPLICATION_DATABASE_SQL );
     }
 
     /**
@@ -170,7 +173,7 @@ Abstract Class App extends Entity
      */
     public function isMode( $mode )
     {
-        return ( $this->getMode() == $mode ) ? true : false ;
+        return ( $this->getMode() === $mode ) ? true : false ;
     }
 
     /**
@@ -256,8 +259,10 @@ Abstract Class App extends Entity
      */
     protected function getResponse()
     {
+        $UrlRequest = $this->getUrlRequest();
+
         // ERROR 404
-        if ( !$Route = $this->getRouteManager()->getRouteByUrlRequest( $this->getUrlRequest() ) )
+        if ( !$Route = $this->getRouteManager()->getRouteByUrlRequest( $UrlRequest ) )
             return call_user_func( array( $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ ."AppController" , "error404" ) );
 
         $controller = $this->getClassNamespace() . __NSS__ . Controller::CONTROLLER_DIRECTORY . __NSS__ . $Route->getControllerName();
@@ -269,7 +274,7 @@ Abstract Class App extends Entity
         if ( !method_exists( $controller , $action ) )
             throw new ControllerException( ControllerException::ERROR_METHOD , $controller , $action );
 
-        $response = call_user_func_array( array( new $controller() , $action ) , $Route->getParameters( $this->getUrlRequest() ) );
+        $response = call_user_func_array( array( new $controller() , $action ) , $Route->getParameters( $UrlRequest ) );
 
         return ( !$response instanceof Response ) ? new Response( $response ) : $response;
     }

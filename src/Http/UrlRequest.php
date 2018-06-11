@@ -2,6 +2,7 @@
 
 namespace MonoKit\Http;
 
+use MonoKit\App\AppRegistry;
 use MonoKit\EntityManager\Entity;
 use MonoKit\Component\Registry\Registry;
 
@@ -22,7 +23,6 @@ Class UrlRequest extends Entity
     public function __construct()
     {
         $this->setMethod( new Method() );
-        $this->setParamsRegistry( new Registry() );
     }
 
     /**
@@ -83,21 +83,11 @@ Class UrlRequest extends Entity
     }
 
     /**
-     * @param Registry $paramsRegistry
-     * @return UrlRequest
-     */
-    public function setParamsRegistry( Registry $paramsRegistry )
-    {
-        $this->ParamsRegistry = $paramsRegistry;
-        return $this;
-    }
-
-    /**
      * @return Registry
      */
     public function getParamsRegistry()
     {
-        return $this->ParamsRegistry;
+        return AppRegistry::AppRegistry( AppRegistry::APPLICATION_REQUEST );
     }
 
     /**
