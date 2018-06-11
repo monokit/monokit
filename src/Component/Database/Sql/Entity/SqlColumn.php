@@ -48,9 +48,10 @@ class SqlColumn extends Column implements StringInterface
         if ( is_string( $value ) )
             $value = "'{$value}'";
 
-        $value = str_replace( "'" , "''" , $value );
+        if ( is_array( $value ) )
+            $value = @implode( "," , $value );
 
-        $this->value = $value;
+        $this->value = str_replace( "'" , "''" , $value );
         return $this;
     }
 
