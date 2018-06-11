@@ -45,11 +45,11 @@ class SqlColumn extends Column implements StringInterface
         if ( is_bool( $value ) )
             $value = ( $value === true ) ? "true" : "false";
 
-        if ( is_string( $value ) )
-            $value = "'{$value}'";
-
         if ( is_array( $value ) )
             $value = @implode( "," , $value );
+
+        if ( is_string( $value ) )
+            $value = "'{$value}'";
 
         $this->value = $value;
         return $this;
