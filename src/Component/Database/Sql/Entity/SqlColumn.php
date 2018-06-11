@@ -49,8 +49,6 @@ class SqlColumn extends Column implements StringInterface
         if ( is_array( $value ) )
             $value = @implode( "," , $value );
 
-        if ( is_bool( $value ) )
-            $value = ( $value === true ) ? "'true'" : "'false'";
 
         $this->value = $value;
         return $this;
