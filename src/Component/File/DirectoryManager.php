@@ -55,4 +55,20 @@ Class DirectoryManager extends EntityManager
 
         return $this;
     }
+
+    /**
+     * @param Directory $directory
+     * @return DirectoryManager
+     */
+    public function removeDirectory( Directory $directory )
+    {
+        $files = array_diff( scandir( $directory->getPath() ) , array('.','..') );
+
+        foreach ($files as $file)
+            ( is_dir( $directory . __DS__ .$file ) ) ? $this->delete( $directory . __DS__ . $file ) : unlink( $directory . __DS__ . $file );
+
+        rmdir( $directory );
+
+        return $this;
+    }
 }

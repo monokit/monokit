@@ -13,8 +13,11 @@ class Directory extends Entity
      * Directory constructor.
      * @param string $path
      */
-    public function __construct( $path )
+    public function __construct( $path = null )
     {
+        if ( is_null( $path ) )
+            $path = dirname(".");
+
        $this->setPath( $path );
     }
 
@@ -50,25 +53,6 @@ class Directory extends Entity
 
     /**
      * @param string $dirName
-     * @param int $mode
-     * @param bool|true $recursive
-     * @return bool
-     */
-    public function create( $dirName , $mode = 0777 , $recursive = true )
-    {
-        $this->setPath( $this->getPath() . __DS__ . $dirName );
-
-        if ( $this->isDir() )
-            return false;
-
-        $result = mkdir( $this->getPath() , $mode , $recursive );
-                  chmod( $this->getPath() , $mode );
-
-        return $result;
-    }
-
-    /**
-     * @param string $dirName
      * @return bool
      */
     public function rename( $dirName )
@@ -81,17 +65,12 @@ class Directory extends Entity
     }
 
     /**
-     * @param string $dir
-     * @return bool
+     * @return DirectoryManager
      */
-    public function delete( $dir )
+    public function getDirectoryList()
     {
-        $files = array_diff( scandir( $dir ) , array('.','..') );
-
-        foreach ($files as $file)
-            ( is_dir( $dir . __DS__ .$file ) ) ? $this->delete( $dir . __DS__ . $file ) : unlink( $dir . __DS__ . $file );
-
-        return rmdir( $dir );
+        $DirectoryManager = new DirectoryManager();
+        return $DirectoryManager->getDirectoryFromDirectory( $this );
     }
 
     /**
@@ -104,11 +83,36 @@ class Directory extends Entity
     }
 
     /**
-     * @return DirectoryManager
+     * @param string $dirName
+     * @param int $mode
+     * @param bool $recursive
+     * @return Directory
      */
-    public function getDirectoryList()
+    public function create( $dirName , $mode = 0777 , $recursive = true )
     {
-        $DirectoryManager = new DirectoryManager();
-        return $DirectoryManager->getDirectoryFromDirectory( $this );
+        if ( is_dir( $this->getPath() . __DS__ . $dirName) )
+            return false;
+
+        $result = mkdir( $this->getPath() . __DS__ . $dirName , $mode , $recursive );
+        chmod( $this->getPath() . __DS__ . $dirName , $mode );
+
+        return $this;
     }
+
+    /**
+     * @param string $dir
+     * @return Directory
+     */
+    public function delete( $dirName )
+    {
+        $files = array_diff( scandir( $dirName ) , array('.','..') );
+
+        foreach ($files as $file)
+            ( is_dir( $dirName . __DS__ .$file ) ) ? $this->delete( $dirName . __DS__ . $file ) : unlink( $dirName . __DS__ . $file );
+
+        rmdir( $dirName );
+
+        return $this;
+    }
+
 }
