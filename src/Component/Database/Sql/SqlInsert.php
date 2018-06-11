@@ -27,7 +27,6 @@ class SqlInsert extends Sql implements SqlInterface
     public function setValue( $column , $value = null , $default = null )
     {
         $value = ( empty($value) || is_null( $value ) ) ? $default : $value;
-        $value = $this->preventDoubleQuote( $value );
 
         $this->getSqlTable()->setColumnValue( $column , $value );
         return $this;
