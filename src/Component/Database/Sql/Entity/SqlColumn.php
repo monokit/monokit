@@ -38,19 +38,19 @@ class SqlColumn extends Column implements StringInterface
     }
 
     /**
-     * @param $value
+     * @param mixed $value
      * @return SqlColumn
      */
     public function setValue( $value = null )
     {
-        if ( is_bool( $value ) )
-            $value = ( $value === true ) ? "true" : "false";
-
         if ( is_string( $value ) )
             $value = "'{$value}'";
 
         if ( is_array( $value ) )
             $value = @implode( "," , $value );
+
+        if ( is_bool( $value ) )
+            $value = ( $value === true ) ? "'true'" : "'false'";
 
         $this->value = $value;
         return $this;
