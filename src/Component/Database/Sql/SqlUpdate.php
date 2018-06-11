@@ -43,11 +43,10 @@ class SqlUpdate extends SqlInsert
         $columnValue = array();
 
         foreach( $this->getSqlTable()->getColumnManager() as $column )
-            $columnValue[] = (is_null( $column->getValue() )) ? "{$column->getField()} = NULL" : "{$column->getField()} = {$column->getValue()}";
+            $columnValue[] = (is_null( $column->getValue() )) ? "{$column->getField()} = NULL" : "{$column->getField()} = {$this->preventDoubleQuote($column->getValue())}";
 
         return sprintf("UPDATE %s SET %s %s",    $this->getSqlTable()->toString(),
                                                  implode( ", " , $columnValue ) ,
                                                  $this->getSqlTable()->getCondition() );
-
     }
 }

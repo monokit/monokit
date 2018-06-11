@@ -40,7 +40,7 @@ class SqlInsert extends Sql implements SqlInterface
         $columnValue = array();
 
         foreach( $this->getSqlTable()->getColumnManager() as $column )
-            $columnValue[] = (is_null( $column->getValue() )) ? "{$column->getField()} = NULL" : "{$column->getField()} = {$column->getValue()}";
+            $columnValue[] = (is_null( $column->getValue() )) ? "{$column->getField()} = NULL" : "{$column->getField()} = {$this->preventDoubleQuote($column->getValue())}";
 
         return sprintf("INSERT INTO %s SET %s", $this->getSqlTable()->toString(), implode( ", " , $columnValue ) );
     }
