@@ -14,10 +14,9 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
      * @param mixed $value
      * @return Entity
      */
-    public function set( $property , $value = null )
+    public function set( $property , $value = null , $defaultValue = null )
     {
-        if ( is_null($value) )
-            return null;
+        $value = ( is_null( $value )) ? $defaultValue : $value;
 
         $property = str_replace( '_' , '.' , $property );
 
@@ -39,7 +38,7 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
             return $this->get( $instanceName )->set( $instanceProperty , $value );
 
         if ( is_array( $value ) && $this->get( $instanceName ) instanceof Entity )
-            return $this->get( $instanceName )->serialize( $value );
+            return $this->get( $instanceName )->map( $value );
 
         return $this->$methodSet( $value );
     }
@@ -113,7 +112,7 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
      * @param array|null $properties
      * @return Entity
      */
-    public function serialize( array $properties = array() )
+    public function map( array $properties = array() )
     {
         foreach ( $properties AS $property => $value )
             $this->set( $property , $value );
