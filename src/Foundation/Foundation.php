@@ -62,9 +62,18 @@ Abstract Class Foundation implements StringInterface
      * @param string $value
      * @return string
      */
-    public function preventDoubleQuote( $value )
+    static public function preventDoubleQuote( $value )
     {
         return str_replace( "'" , "''" , $value );
+    }
+
+    /**
+     * @param string|bool $value
+     * @return bool
+     */
+    static function boolean( $value )
+    {
+        return ($value === true || $value === "true") ? true : false;
     }
 }
 
