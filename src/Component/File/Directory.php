@@ -2,6 +2,7 @@
 
 namespace MonoKit\Component\File;
 
+use MonoKit\Component\File\Exception\DirectoryException;
 use MonoKit\EntityManager\Entity;
 
 class Directory extends Entity
@@ -87,20 +88,23 @@ class Directory extends Entity
      * @param int $mode
      * @param bool $recursive
      * @return Directory
+     * @throws DirectoryException
      */
     public function create( $dirName , $mode = 0777 , $recursive = true )
     {
         if ( is_dir( $this->getPath() . __DS__ . $dirName) )
             return false;
 
-        $result = mkdir( $this->getPath() . __DS__ . $dirName , $mode , $recursive );
+        if ( !@mkdir( $this->getPath() . __DS__ . $dirName , $mode , $recursive ) )
+            throw new DirectoryException( DirectoryException::ERROR_PERMISSION , $this , dirname( $dirName ) );
+
         chmod( $this->getPath() . __DS__ . $dirName , $mode );
 
         return $this;
     }
 
     /**
-     * @param string $dir
+     * @param string $dirName
      * @return Directory
      */
     public function delete( $dirName )

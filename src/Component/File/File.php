@@ -2,6 +2,7 @@
 
 namespace MonoKit\Component\File;
 
+use MonoKit\Component\File\Exception\DirectoryException;
 use MonoKit\EntityManager\Entity;
 use MonoKit\Component\File\Exception\FileException;
 
@@ -221,10 +222,10 @@ Class File extends Entity
             $this->setFilePath( $fileName );
 
         if ( !is_dir( dirname( $this->getFilePath() ) ) )
-            throw new FileException( FileException::ERROR_LOADDING_DIR , $this , dirname( $this->getFilePath() ) );
+            throw new FileException( DirectoryException::ERROR_LOADDING_DIR , $this , dirname( $this->getFilePath() ) );
 
         if ( !is_writable( dirname( $this->getFilePath() ) ) )
-            throw new FileException( FileException::ERROR_PERMISSION , $this , dirname( $this->getFilePath() ) );
+            throw new FileException( DirectoryException::ERROR_PERMISSION , $this , dirname( $this->getFilePath() ) );
 
         $handle = fopen( $this->getFilePath() , 'w' );
         fwrite( $handle , $this->getContent() );
