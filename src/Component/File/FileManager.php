@@ -41,7 +41,7 @@ Class FileManager extends EntityManager
             return false;
 
         @copy( $file->getFilePath() , $newName );
-        @chmod( $file->getFilePath() , $mode );
+        @chmod( $newName , $mode );
 
         return $this;
     }
