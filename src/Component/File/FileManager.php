@@ -32,14 +32,18 @@ Class FileManager extends EntityManager
     /**
      * @param File $file
      * @param string $newName
-     * @return bool
+     * @param int $mode
+     * @return bool|void
      */
-    public function duplicateFile( File $file , $newName )
+    public function duplicateFile( File $file , $newName , $mode = 0777 )
     {
         if ( !$file->isFile() )
             return false;
 
-        return copy( $file->getFilePath() , $newName );
+        @copy( $file->getFilePath() , $newName );
+        @chmod( $file->getFilePath() , $mode );
+
+        return $this;
     }
 
     /**

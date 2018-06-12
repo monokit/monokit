@@ -193,18 +193,17 @@ Class File extends Entity
     }
 
     /**
-     * Renomme le fichier.
-     *
-     * @example $File->rename( 'nouveau_nom.ext' );
-     * @param string $newName Nom du fichier avec extension
-     * @return File
+     * @param string $newName
+     * @param int $mode
+     * @return $this|bool
      */
-    public function rename( $newName )
+    public function rename( $newName , $mode = 0777 )
     {
         if ( !$this->isFile() )
             return false;
 
         rename( $this->getFilePath() , $newName );
+        @chmod( $this->getFilePath() , $mode );
 
         $this->setFilePath( $newName );
 
@@ -212,11 +211,12 @@ Class File extends Entity
     }
 
     /**
-     * @param string|null $fileName
-     * @return File
+     * @param null $fileName
+     * @param int $mode
+     * @return $this
      * @throws FileException
      */
-    public function save( $fileName = null )
+    public function save( $fileName = null , $mode = 0777 )
     {
         if ( !is_null( $fileName) )
             $this->setFilePath( $fileName );
@@ -230,6 +230,8 @@ Class File extends Entity
         $handle = fopen( $this->getFilePath() , 'w' );
         fwrite( $handle , $this->getContent() );
         fclose( $handle );
+
+        @chmod( $this->getFilePath() , $mode );
 
         return $this;
     }
