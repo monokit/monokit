@@ -247,8 +247,8 @@ class SqlSelect extends Sql
                                                             $this->getSqlTable()->toString(),
                                                             implode(__SPACE__, $joinTableArray),
                                                             $this->getSqlTable()->getCondition(),
-                                                            $this->getSqlTable()->getOrder(),
                                                             $this->getSqlTable()->getGroup(),
+                                                            $this->getSqlTable()->getOrder(),
                                                             ( $this->getLimit() ) ? "LIMIT {$this->getLimit()}" : '');
 
     }
