@@ -165,18 +165,17 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     }
 
     /**
+     * @param bool $displayAsNull
      * @return array
      */
-    public function toArray()
+    public function toArray( $displayAsNull = false )
     {
-        $arr = parent::toArray();
+        $arr = parent::toArray( $displayAsNull );
         $arr['data'] = array();
 
         foreach ( $this AS $Entity )
-            $arr['data'][] = $Entity->toArray();
+            $arr['data'][] = $Entity->toArray( $displayAsNull );
 
         return $arr;
     }
-
-
 }

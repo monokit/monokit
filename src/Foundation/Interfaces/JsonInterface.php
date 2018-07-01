@@ -4,5 +4,9 @@ namespace MonoKit\Foundation\Interfaces;
 
 interface JsonInterface
 {
-    public function toJson();
+    /**
+     * @param bool $displayAsNull
+     * @return mixed
+     */
+    public function toJson( $displayAsNull = false );
 }

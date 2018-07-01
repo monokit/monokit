@@ -2,7 +2,4 @@
 
 namespace MonoKit\Foundation\Interfaces;
 
-Interface CountInterface extends \Countable
-{
-
-}
+Interface CountInterface extends \Countable {}

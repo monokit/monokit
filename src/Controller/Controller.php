@@ -37,12 +37,13 @@ Abstract Class Controller extends Entity
 
     /**
      * @param mixed $data
+     * @param bool $displayAsNull
      * @param int $status
      * @return ResponseJson
      */
-    public function json( $data = null , $status = 200 )
+    public function json( $data = null , $displayAsNull = false , $status = 200 )
     {
-        return new ResponseJson( $data , $status );
+        return new ResponseJson( $data , $displayAsNull , $status );
     }
 
     /**
