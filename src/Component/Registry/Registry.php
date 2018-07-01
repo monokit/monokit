@@ -3,12 +3,12 @@
 namespace MonoKit\Component\Registry;
 
 use MonoKit\EntityManager\Entity;
+use MonoKit\EntityManager\Interfaces\EntityInterface;
 use MonoKit\Foundation\Interfaces\ArrayInterface;
-use MonoKit\Foundation\Interfaces\JsonInterface;
 use MonoKit\Component\Registry\Exception\RegistryException;
 use MonoKit\Component\Registry\Interfaces\RegistryInterface;
 
-Class Registry extends Entity implements RegistryInterface, ArrayInterface, JsonInterface
+Class Registry extends Entity implements RegistryInterface, ArrayInterface
 {
     /** @var array */
     protected $data = array();
@@ -75,16 +75,12 @@ Class Registry extends Entity implements RegistryInterface, ArrayInterface, Json
     }
 
     /**
+     * @param bool $displayAsNull
      * @return array
      */
-    public function toArray()
+    public function toArray( $displayAsNull = false )
     {
         return $this->listArray( $this->data );
-    }
-
-    public function toJson()
-    {
-        return json_encode( $this->toArray() );
     }
 
     /**
@@ -94,7 +90,7 @@ Class Registry extends Entity implements RegistryInterface, ArrayInterface, Json
     protected function listArray( array $arr )
     {
         foreach( $arr as $key => $value )
-            $arr[$key] = (is_array($value)) ? $this->listArray($value) : (( $value instanceof Entity ) ? $value->toArray() : $value);
+            $arr[$key] = (is_array($value)) ? $this->listArray($value) : (( $value instanceof EntityInterface ) ? $value->toArray() : $value);
 
         return $arr;
     }
