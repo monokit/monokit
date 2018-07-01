@@ -80,17 +80,18 @@ Class Registry extends Entity implements RegistryInterface, ArrayInterface
      */
     public function toArray( $displayAsNull = false )
     {
-        return $this->listArray( $this->data );
+        return $this->listArray( $this->data , $displayAsNull );
     }
 
     /**
      * @param array $arr
+     * @param bool $displayAsNull
      * @return array
      */
-    protected function listArray( array $arr )
+    protected function listArray( array $arr , $displayAsNull = false )
     {
         foreach( $arr as $key => $value )
-            $arr[$key] = (is_array($value)) ? $this->listArray($value) : (( $value instanceof EntityInterface ) ? $value->toArray() : $value);
+            $arr[$key] = (is_array($value)) ? $this->listArray( $value , $displayAsNull ) : (( $value instanceof EntityInterface ) ? $value->toArray( $displayAsNull ) : $value);
 
         return $arr;
     }
