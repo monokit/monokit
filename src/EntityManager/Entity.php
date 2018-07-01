@@ -12,11 +12,12 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
     /**
      * @param string $property
      * @param mixed $value
-     * @return Entity
+     * @param mixed $defaultValue
+     * @return bool
      */
     public function set( $property , $value = null , $defaultValue = null )
     {
-        $value = ( is_null( $value )) ? $defaultValue : $value;
+        $value = ( is_null( $value ) ) ? $defaultValue : $value;
 
         if ( is_null( $value ) )
             return false;
@@ -123,25 +124,27 @@ Abstract Class Entity extends Foundation implements EntityInterface, ArrayInterf
     }
 
     /**
+     * @param bool $displayAsNull
      * @return array
      */
-    public function toArray()
+    public function toArray( $displayAsNull = false )
     {
         $arr = array();
 
         foreach ( get_object_vars($this) AS $key => $value )
-            if ( !is_null($value) )
+            if ( $displayAsNull || !is_null($value) )
                 $arr[$key] = ( $value instanceof Entity ) ? $value->toArray() : $value;
 
         return $arr;
     }
 
     /**
+     * @param bool $displayAsNull
      * @return string
      */
-    public function toJson()
+    public function toJson( $displayAsNull = false )
     {
-        return json_encode( $this->toArray() );
+        return json_encode( $this->toArray( $displayAsNull ) );
     }
 
     /**
