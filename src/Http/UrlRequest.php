@@ -2,7 +2,6 @@
 
 namespace MonoKit\Http;
 
-use MonoKit\App\AppRegistry;
 use MonoKit\EntityManager\Entity;
 use MonoKit\Component\Registry\Registry;
 
@@ -23,6 +22,7 @@ Class UrlRequest extends Entity
     public function __construct()
     {
         $this->setMethod( new Method() );
+        $this->setParamsRegistry( new Registry() );
     }
 
     /**
@@ -83,20 +83,30 @@ Class UrlRequest extends Entity
     }
 
     /**
+     * @param Registry $paramsRegistry
+     * @return UrlRequest
+     */
+    public function setParamsRegistry( Registry $paramsRegistry)
+    {
+        $this->ParamsRegistry = $paramsRegistry;
+        return $this;
+    }
+
+    /**
      * @return Registry
      */
     public function getParamsRegistry()
     {
-        return AppRegistry::AppRegistry( AppRegistry::APPLICATION_REQUEST );
+        return $this->ParamsRegistry;
     }
 
     /**
      * @param string $key
-     * @param string|null $value
-     * @return $this
+     * @param mixed $value
+     * @return UrlRequest
      * @throws \MonoKit\Component\Registry\Exception\RegistryException
      */
-    public function setParam( $key , $value = null )
+    public function setParameter( $key , $value = null )
     {
         $this->getParamsRegistry()->set( $key , $value );
         return $this;
@@ -107,7 +117,7 @@ Class UrlRequest extends Entity
      * @return mixed
      * @throws \MonoKit\Component\Registry\Exception\RegistryException
      */
-    public function getParam( $key )
+    public function getParameter( $key )
     {
         return $this->getParamsRegistry()->get( $key );
     }
@@ -116,15 +126,25 @@ Class UrlRequest extends Entity
      * @param string $key
      * @return bool
      */
-    public function hasParam( $key )
+    public function hasParameter( $key )
     {
         return $this->getParamsRegistry()->has( $key );
     }
 
     /**
+     * @param array $array
+     * @return UrlRequest
+     */
+    public function setParameters( array $array )
+    {
+        $this->ParamsRegistry->map( $array );
+        return $this;
+    }
+
+    /**
      * @return array
      */
-    public function getParams()
+    public function getParameters()
     {
         return $this->getParamsRegistry()->toArray();
     }

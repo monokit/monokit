@@ -3,11 +3,10 @@
 namespace MonoKit\Http\Response;
 
 use MonoKit\Foundation\Interfaces\JsonInterface;
+use MonoKit\Http\Header;
 
 Class ResponseJson extends Response
 {
-    const CONTENT_TYPE = "application/json";
-
     /**
      * ResponseJson constructor.
      * @param mixed $content
@@ -21,5 +20,7 @@ Class ResponseJson extends Response
             : json_encode( $content );
 
         parent::__construct( $content , $status );
+
+        $this->addHeader( new Header( "Content-Type" , "application/json" ) );
     }
 }

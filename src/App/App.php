@@ -36,7 +36,6 @@ Abstract Class App extends Entity
      */
     public function __construct( $mode = self::MODE_PRODUCTION )
     {
-        $this->getUrlRequest();
         $this->setMode( $mode );
     }
 
@@ -249,7 +248,7 @@ Abstract Class App extends Entity
             $response->setContent( $View->render( $viewFile , $this ) );
         }
 
-        $response->getHeader();
+        $response->getHeaders();
         $response->render();
     }
 

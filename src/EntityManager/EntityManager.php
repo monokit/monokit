@@ -6,9 +6,8 @@ use MonoKit\EntityManager\Interfaces\EntityInterface;
 use MonoKit\EntityManager\Interfaces\EntityManagerInterface;
 use MonoKit\Foundation\Interfaces\ArrayInterface;
 use MonoKit\Foundation\Interfaces\CountInterface;
-use MonoKit\Foundation\Interfaces\JsonInterface;
 
-Class EntityManager extends Entity implements EntityManagerInterface, ArrayInterface , CountInterface, JsonInterface
+Class EntityManager extends Entity implements EntityManagerInterface, ArrayInterface , CountInterface
 {
     /** @var int */
     private $index = 0;
@@ -156,15 +155,6 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
     }
 
     /**
-     * @return EntityManager
-     */
-    public function removeAll()
-    {
-        $this->data = array();
-        return $this;
-    }
-
-    /**
      * @param bool $displayAsNull
      * @return array
      */
@@ -178,4 +168,14 @@ Class EntityManager extends Entity implements EntityManagerInterface, ArrayInter
 
         return $arr;
     }
+
+    /**
+     * @return EntityManager
+     */
+    public function removeAll()
+    {
+        $this->data = array();
+        return $this;
+    }
+
 }

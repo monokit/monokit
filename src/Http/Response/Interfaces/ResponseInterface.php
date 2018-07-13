@@ -6,6 +6,5 @@ interface ResponseInterface
 {
     public function setContent();
     public function getContent();
-    public function getHeader();
     public function render();
 }

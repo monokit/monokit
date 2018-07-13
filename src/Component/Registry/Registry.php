@@ -22,9 +22,6 @@ Class Registry extends Entity implements RegistryInterface, ArrayInterface
      */
     public function set( $key , $value = null , $defaultValue = null )
     {
-        if ( empty( $key ) )
-            throw new RegistryException( RegistryException::ERROR_EMPTY_KEY , $this );
-
         $m = &$this->data;
 
         foreach ( explode( __DOT__ , strtoupper($key) ) as $registryKey )
@@ -44,9 +41,6 @@ Class Registry extends Entity implements RegistryInterface, ArrayInterface
      */
     public function get( $key )
     {
-        if ( empty( $key ) )
-            throw new RegistryException( RegistryException::ERROR_EMPTY_KEY , $this );
-
         $m = $this->data;
 
         foreach ( explode( __DOT__ , strtoupper($key) ) as $k )
@@ -91,7 +85,7 @@ Class Registry extends Entity implements RegistryInterface, ArrayInterface
     protected function listArray( array $arr , $displayAsNull = false )
     {
         foreach( $arr as $key => $value )
-            $arr[$key] = (is_array($value)) ? $this->listArray( $value , $displayAsNull ) : (( $value instanceof EntityInterface ) ? $value->toArray( $displayAsNull ) : $value);
+            $arr[$key] = ( is_array( $value ) ) ? $this->listArray( $value , $displayAsNull ) : (( $value instanceof EntityInterface ) ? $value->toArray( $displayAsNull ) : $value);
 
         return $arr;
     }

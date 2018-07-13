@@ -22,9 +22,10 @@ Class UrlRequestDiscover extends UrlRequest
 
         if ( $_posts = json_decode( file_get_contents("php://input") , true ) )
             foreach ( $_posts AS $key => $value )
-                $this->setParam( $key , $value );
+                $this->setParameter( $key , $value );
 
         foreach( $_REQUEST as $key => $value )
-            $this->setParam( $key , $value );
+            $this->setParameter( $key , $value );
+
     }
 }

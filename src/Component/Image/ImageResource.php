@@ -7,8 +7,13 @@ use MonoKit\EntityManager\Entity;
 
 Class ImageResource extends Entity
 {
+    const TYPE_JPG = "JPG";
+    const TYPE_PNG = "PNG";
+
     /** @var resource */
     protected $resource;
+    /** @var string */
+    protected $resourceImageType = "jpg";
     /** @var int */
     protected $quality = 80;
 
@@ -41,7 +46,20 @@ Class ImageResource extends Entity
     public function setResourceFromFile( File $file )
     {
         if ( $file->isFile() )
-            $this->resource = imagecreatefromjpeg( $file->getFilePath() );
+        {
+            switch ( $file->getExtension() )
+            {
+                case "jpg":
+                    $this->resourceImageType = self::TYPE_JPG;
+                    $this->resource = imagecreatefromjpeg( $file->getFilePath() );
+                    break;
+
+                case "png":
+                    $this->resourceImageType = self::TYPE_PNG;
+                    $this->resource = imagecreatefrompng( $file->getFilePath() );
+                    break;
+            }
+        }
 
         return $this;
     }
@@ -52,6 +70,15 @@ Class ImageResource extends Entity
     public function getResource()
     {
         return $this->resource;
+    }
+
+    /**
+     * @param string $imageType
+     * @return bool
+     */
+    public function isImageType( $imageType )
+    {
+        return ( $this->resourceImageType == $imageType );
     }
 
     /**
@@ -184,7 +211,17 @@ Class ImageResource extends Entity
      */
     public function save( $filePath )
     {
-        imagejpeg( $this->getResource() , $filePath , $this->quality );
+        switch ( $this->resourceImageType )
+        {
+            case self::TYPE_PNG:
+                imagepng( $this->getResource() , $filePath , 1 );
+                break;
+
+            default:
+                imagejpeg( $this->getResource() , $filePath , $this->quality );
+                break;
+        }
+
         return $this;
     }
 }

@@ -32,7 +32,7 @@ Class RouteManager extends EntityManager
     public function getRouteByUrlRequest( UrlRequest $urlRequest )
     {
         foreach( $this AS $route )
-            if ( $this->comparePattern( $route , $urlRequest ) && $this->compareMethod( $route , $urlRequest ) )
+            if ( $route->getMethod()->is( $urlRequest->getMethod()->getMethod() ) && $this->comparePattern( $route , $urlRequest ) )
                 return $route;
 
         return null;
@@ -48,14 +48,5 @@ Class RouteManager extends EntityManager
         return preg_match( $route->getPattern() , $urlRequest->getUrl() );
     }
 
-    /**
-     * @param Route $route
-     * @param UrlRequest $urlRequest
-     * @return bool
-     */
-    public function compareMethod( Route $route , UrlRequest $urlRequest )
-    {
-        return $route->getMethod()->is( $urlRequest->getMethod()->getMethod() );
-    }
 
 }
