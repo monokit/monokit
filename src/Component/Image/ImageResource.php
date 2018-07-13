@@ -107,7 +107,9 @@ Class ImageResource extends Entity
     public function resize( $width , $height )
     {
         $image = imagecreatetruecolor( (int) $width , (int) $height );
-                 imagecopyresampled( $image , $this->getResource(), 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight() );
+
+        imagealphablending( $image, false );
+        imagecopyresampled( $image , $this->getResource(), 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight() );
 
         $this->setResource( $image );
 
@@ -145,6 +147,7 @@ Class ImageResource extends Entity
             $image = imagecreatetruecolor( $width , $height );
         }
 
+        imagealphablending( $image, false );
         imagecopyresampled( $image , $this->getResource(), 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
         $this->setResource( $image );
 
@@ -174,6 +177,7 @@ Class ImageResource extends Entity
         }
 
         $image = imagecreatetruecolor( $size , $size );
+        imagealphablending($image, false);
         imagecopyresampled($image, $this->getResource(), 0, 0, $x, $y, $size, $size, $smallestSide, $smallestSide);
 
         $this->setResource( $image );
