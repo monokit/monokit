@@ -80,14 +80,15 @@ class SqlSelect extends Sql
      * @param string $tableName
      * @param string $columns
      * @param string $condition
+     * @param boolean $autoAlias
      * @return SqlSelect
      */
-    public function setLeftJoin( $tableName , $columns , $condition )
+    public function setLeftJoin( $tableName , $columns , $condition , $autoAlias = true )
     {
         $tableName = explode( " AS " , $tableName );
 
         $LeftJoinTable = new SqlLeftJoinTable( $tableName[0] , end($tableName) );
-        $LeftJoinTable->setColumns( explode( "," , $columns ) );
+        $LeftJoinTable->setColumns( explode( "," , $columns ) , $autoAlias );
         $LeftJoinTable->setCondition( $condition );
 
         $this->getJoinTableManager()->addSqlTable( $LeftJoinTable );

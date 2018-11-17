@@ -13,7 +13,8 @@ class SqlJoinTable extends SqlTable
     {
         foreach( $columnNames AS $columnName )
         {
-            $columnName = $this->getAlias().__DOT__.$columnName;
+            if ( $autoAlias )
+                $columnName = $this->getAlias().__DOT__.$columnName;
 
             if ( strpos( $columnName , " AS " ) )
             {
