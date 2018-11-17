@@ -5,13 +5,13 @@ namespace MonoKit\Component\Database\Sql\Entity;
 class SqlJoinTable extends SqlTable
 {
     /**
-     * @param array $columnsName
+     * @param array $columnNames
      * @param bool $autoAlias
      * @return SqlJoinTable
      */
-    public function setColumns( array $columnsName , $autoAlias = true )
+    public function setColumns( array $columnNames , $autoAlias = true )
     {
-        foreach( $columnsName AS $columnName )
+        foreach( $columnNames AS $columnName )
         {
             $columnName = $this->getAlias().__DOT__.$columnName;
 
